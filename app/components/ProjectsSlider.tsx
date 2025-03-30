@@ -1,0 +1,61 @@
+"use client";
+
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+import { useEffect, useRef } from "react";
+
+const projects = [
+  {
+    title: "顧客管理システム",
+    description: "React＋Supabaseで構築",
+    image: "/project1.jpg",
+  },
+  {
+    title: "業務自動化ツール",
+    description: "VBAとPythonで構築",
+    image: "/project2.jpg",
+  },
+  {
+    title: "採用管理サイト",
+    description: "Next.jsとShadcnを使用",
+    image: "/project3.jpg",
+  },
+];
+
+export function ProjectsSlider() {
+  const [sliderRef, instanceRef] = useKeenSlider({
+    loop: true,
+    mode: "snap",
+    slides: { perView: 1, spacing: 16 },
+    renderMode: "performance",
+    created(s) {
+      setInterval(() => {
+        s.next();
+      }, 4000);
+    },
+  });
+
+  return (
+    <section id="projects" className="py-16 bg-white">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-3xl font-bold mb-8">実績紹介</h2>
+        <div ref={sliderRef} className="keen-slider">
+          {projects.map((project, i) => (
+            <div
+              key={i}
+              className="keen-slider__slide bg-gray-100 rounded p-6 shadow"
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-48 object-cover rounded mb-4"
+              />
+              <h3 className="text-xl font-semibold">{project.title}</h3>
+              <p className="text-sm text-gray-600">{project.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
