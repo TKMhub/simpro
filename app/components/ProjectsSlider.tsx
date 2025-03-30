@@ -2,12 +2,13 @@
 
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import { useEffect, useRef } from "react";
+import Image from "next/image";
+// import { useEffect, useRef } from "react";
 
 const projects = [
   {
     title: "顧客管理システム",
-    description: "React＋Supabaseで構築",
+    description: "React+Supabaseで構築",
     image: "/project1.jpg",
   },
   {
@@ -23,7 +24,7 @@ const projects = [
 ];
 
 export function ProjectsSlider() {
-  const [sliderRef, instanceRef] = useKeenSlider({
+  const [sliderRef] = useKeenSlider({
     loop: true,
     mode: "snap",
     slides: { perView: 1, spacing: 16 },
@@ -45,7 +46,7 @@ export function ProjectsSlider() {
               key={i}
               className="keen-slider__slide bg-gray-100 rounded p-6 shadow"
             >
-              <img
+              <Image
                 src={project.image}
                 alt={project.title}
                 className="w-full h-48 object-cover rounded mb-4"
