@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import {
   NavigationMenu,
@@ -7,6 +6,8 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
+import SimproSvg from "@/public/Simplo_gray_main_sub.svg";
+import Image from "next/image";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,7 +28,13 @@ export function Header() {
     >
       <div className="container mx-auto flex items-center justify-between px-4">
         <Link href="/" className="text-xl font-bold">
-          Simpro
+          <Image
+            src={SimproSvg}
+            alt="Simpro Logo"
+            width={100}
+            height={40}
+            priority
+          />
         </Link>
 
         <NavigationMenu>

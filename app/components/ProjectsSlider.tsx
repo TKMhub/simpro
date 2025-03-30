@@ -1,25 +1,25 @@
 "use client";
-
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
+import SimproJpeg from "@/public/Simplo_gray_main_sub.jpg";
 // import { useEffect, useRef } from "react";
 
 const projects = [
   {
     title: "顧客管理システム",
     description: "React+Supabaseで構築",
-    image: "/project1.jpg",
+    image: SimproJpeg,
   },
   {
     title: "業務自動化ツール",
     description: "VBAとPythonで構築",
-    image: "/project2.jpg",
+    image: SimproJpeg,
   },
   {
     title: "採用管理サイト",
     description: "Next.jsとShadcnを使用",
-    image: "/project3.jpg",
+    image: SimproJpeg,
   },
 ];
 
