@@ -5,38 +5,39 @@ import {
   Zap,
   MonitorCog,
   IterationCcw,
+  University,
 } from "lucide-react";
 
 const services = [
   {
     icon: <Code size={32} />,
     title: "Webサイト構築",
-    description: "React, Next.js を用いた高品質なWebサイトを開発します。",
+    description: "React, Next.js を用いたWebサイトを開発します。",
   },
   {
     icon: <MonitorCog size={32} />,
     title: "Webシステム開発",
-    description: "React, Next.js を用いた高品質なWebアプリを開発します。",
+    description: "React, Next.js を用いたWebアプリを開発します。",
   },
   {
     icon: <LayoutDashboard size={32} />,
     title: "業務自動化支援",
-    description: "Excelマクロや業務フローの自動化で作業効率を向上します。",
+    description: "Excelマクロで業務フローの自動化を実現します。",
   },
   {
     icon: <IterationCcw size={32} />,
     title: "システム運用保守支援",
-    description: "IT導入・DX戦略の立案から実行支援まで対応します。",
+    description: "ITシステムの運用や保守を対応します。",
   },
   {
-    icon: <LayoutDashboard size={32} />,
+    icon: <University size={32} />,
     title: "スキルレクチャー",
-    description: "WebサイトやWebアプリの作成方法をレクチャーします。",
+    description: "サイトやアプリの作成方法をレクチャーします。",
   },
   {
     icon: <Zap size={32} />,
     title: "ITコンサルティング",
-    description: "IT導入・DX戦略の立案から実行支援まで対応します。",
+    description: "DX戦略の立案から実行支援まで対応します。",
   },
 ];
 
