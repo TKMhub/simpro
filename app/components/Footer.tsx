@@ -25,22 +25,6 @@ export function Footer() {
           >
             <Github className="w-5 h-5" />
           </Link>
-          {/* <Link
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <Instagram className="w-5 h-5" />
-          </Link> */}
-          {/* <Link
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <Youtube className="w-5 h-5" />
-          </Link> */}
         </div>
       </div>
     </footer>
