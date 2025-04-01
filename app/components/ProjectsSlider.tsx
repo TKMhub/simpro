@@ -7,18 +7,18 @@ import SimproJpeg from "@/public/Simplo_gray_main_sub.jpg";
 
 const projects = [
   {
-    title: "顧客管理システム",
-    description: "React+Supabaseで構築",
+    title: "プリケーションテンプレート",
+    description: "Next.js+Supabaseで構築",
+    image: SimproJpeg,
+  },
+  {
+    title: "Webサイトテンプレート",
+    description: "Next.js+Supabaseで構築",
     image: SimproJpeg,
   },
   {
     title: "業務自動化ツール",
-    description: "VBAとPythonで構築",
-    image: SimproJpeg,
-  },
-  {
-    title: "採用管理サイト",
-    description: "Next.jsとShadcnを使用",
+    description: "VBAで構築",
     image: SimproJpeg,
   },
 ];
@@ -49,7 +49,7 @@ export function ProjectsSlider() {
               <Image
                 src={project.image}
                 alt={project.title}
-                className="w-full h-48 object-cover rounded mb-4"
+                className="w-full h-48 object-cover rounded my-8 md:max-w-2xl md:mx-auto md:h-[400px]"
               />
               <h3 className="text-xl font-semibold">{project.title}</h3>
               <p className="text-sm text-gray-600">{project.description}</p>

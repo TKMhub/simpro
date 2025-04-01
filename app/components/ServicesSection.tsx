@@ -21,7 +21,7 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section id="services" className="py-16 bg-gray-100">
+    <section id="services" className="py-16 bg-gray-100  min-h-screen">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-8">サービス紹介</h2>
         <div className="grid md:grid-cols-3 gap-8">

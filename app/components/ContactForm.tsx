@@ -33,6 +33,9 @@ export function ContactForm() {
     <section id="contact" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4 max-w-xl">
         <h2 className="text-3xl font-bold text-center mb-8">お問い合わせ</h2>
+        <p className="text-center my-5">
+          現在こちらの機能は開放しておりません。
+        </p>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <Input
             placeholder="お名前"
