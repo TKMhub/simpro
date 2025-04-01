@@ -1,9 +1,20 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Code, LayoutDashboard, Zap } from "lucide-react";
+import {
+  Code,
+  LayoutDashboard,
+  Zap,
+  MonitorCog,
+  IterationCcw,
+} from "lucide-react";
 
 const services = [
   {
     icon: <Code size={32} />,
+    title: "Webサイト構築",
+    description: "React, Next.js を用いた高品質なWebサイトを開発します。",
+  },
+  {
+    icon: <MonitorCog size={32} />,
     title: "Webシステム開発",
     description: "React, Next.js を用いた高品質なWebアプリを開発します。",
   },
@@ -11,6 +22,16 @@ const services = [
     icon: <LayoutDashboard size={32} />,
     title: "業務自動化支援",
     description: "Excelマクロや業務フローの自動化で作業効率を向上します。",
+  },
+  {
+    icon: <IterationCcw size={32} />,
+    title: "システム運用保守支援",
+    description: "IT導入・DX戦略の立案から実行支援まで対応します。",
+  },
+  {
+    icon: <LayoutDashboard size={32} />,
+    title: "スキルレクチャー",
+    description: "WebサイトやWebアプリの作成方法をレクチャーします。",
   },
   {
     icon: <Zap size={32} />,
@@ -30,7 +51,7 @@ export function ServicesSection() {
               key={index}
               className="transition-transform transform hover:scale-105 cursor-pointer"
             >
-              <CardContent className="p-6 flex flex-col items-center gap-4">
+              <CardContent className="p-7 flex flex-col items-center gap-4">
                 {service.icon}
                 <CardTitle>{service.title}</CardTitle>
                 <p className="text-sm text-gray-600">{service.description}</p>
