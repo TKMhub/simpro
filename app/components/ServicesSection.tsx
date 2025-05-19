@@ -44,7 +44,7 @@ const services = [
 export function ServicesSection() {
   return (
     <section
-      id="service"
+      id="services"
       className="min-h-screen bg-gray-100 flex items-center justify-center"
     >
       <div className="container mx-auto px-4 text-center">
