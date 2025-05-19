@@ -18,8 +18,10 @@ export function HeroSection() {
           Simproへようこそ。
         </h1>
         <div className="text-base md:text-xl px-4 py-2 rounded flex">
-          <span className="bold text-xl simpro-blue">・</span>
-          <p>誰しも分かりやすく、使いやすいアプリやツールを提供します。</p>
+          <span className="bold text-xl text-blue-700">・</span>
+          <p className="bold text-xl">
+            誰しも分かりやすく、使いやすいアプリやツールを提供します。
+          </p>
         </div>
       </motion.section>
     </>
