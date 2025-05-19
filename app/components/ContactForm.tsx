@@ -30,7 +30,10 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-16 bg-gray-50">
+    <section
+      id="contact"
+      className="min-h-screen bg-gray-100 flex items-center justify-center"
+    >
       <div className="container mx-auto px-4 max-w-xl">
         <h2 className="text-3xl font-bold text-center mb-8">お問い合わせ</h2>
         <p className="text-center my-5">

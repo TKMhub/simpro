@@ -37,7 +37,10 @@ export function ProjectsSlider() {
   });
 
   return (
-    <section id="projects" className="py-16 bg-white">
+    <section
+      id="projects"
+      className="min-h-screen bg-white flex items-center justify-center"
+    >
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-8">実績紹介</h2>
         <div ref={sliderRef} className="keen-slider">

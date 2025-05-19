@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 
 export function HeroSection() {
   return (
-    <>
+    <section id="top" className="min-h-screen flex items-center justify-center">
       <motion.section
-        className="font-bold h-[60vh] md:h-[80vh] bg-cover bg-center flex flex-col items-center justify-center text-center px-4"
+        className="bg-cover bg-center flex flex-col text-center px-4"
         style={{ backgroundImage: "url('/hero-bg.jpg')" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -17,13 +17,13 @@ export function HeroSection() {
           <br />
           Simproへようこそ。
         </h1>
-        <div className="text-base md:text-xl px-4 py-2 rounded flex">
-          <span className="bold text-xl text-blue-700">・</span>
-          <p className="bold text-xl">
+        <div className="text-base md:text-xl px-4 py-2 rounded flex items-center gap-2">
+          <span className="text-xl text-blue-700 font-bold">・</span>
+          <p className="text-xl font-semibold">
             誰しも分かりやすく、使いやすいアプリやツールを提供します。
           </p>
         </div>
       </motion.section>
-    </>
+    </section>
   );
 }
