@@ -8,11 +8,11 @@ import {
 import Link from "next/link";
 import SimproSvg from "@/public/Simplo_gray_main_sub.svg";
 import Image from "next/image";
-import { Menu, X } from "lucide-react"; // ← ハンバーガーアイコン
+import { Menu, X } from "lucide-react";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false); // ← メニュー開閉用
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +25,7 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 bg-white transition-all duration-300 shadow ${
-        scrolled ? "py-2" : "py-4"
+        scrolled ? "py-4" : "py-6"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
@@ -62,34 +62,39 @@ export function Header() {
 
         {/* モバイル用ハンバーガー */}
         <div className="md:hidden">
-          <button onClick={() => setMenuOpen(!menuOpen)}>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="transition-transform duration-200"
+          >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* モバイル用メニュー */}
-      {menuOpen && (
-        <div className="md:hidden bg-white px-6 pb-4 shadow">
-          <ul className="space-y-4">
-            <li>
-              <Link href="#services" onClick={() => setMenuOpen(false)}>
-                サービス
-              </Link>
-            </li>
-            <li>
-              <Link href="#projects" onClick={() => setMenuOpen(false)}>
-                実績
-              </Link>
-            </li>
-            <li>
-              <Link href="#contact" onClick={() => setMenuOpen(false)}>
-                お問い合わせ
-              </Link>
-            </li>
-          </ul>
-        </div>
-      )}
+      {/* モバイルメニュー with アニメーション */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          menuOpen ? "max-h-60 opacity-100 py-4" : "max-h-0 opacity-0 py-0"
+        } bg-white px-6`}
+      >
+        <ul className="space-y-4 text-base">
+          <li>
+            <Link href="#services" onClick={() => setMenuOpen(false)}>
+              サービス
+            </Link>
+          </li>
+          <li>
+            <Link href="#projects" onClick={() => setMenuOpen(false)}>
+              実績
+            </Link>
+          </li>
+          <li>
+            <Link href="#contact" onClick={() => setMenuOpen(false)}>
+              お問い合わせ
+            </Link>
+          </li>
+        </ul>
+      </div>
     </header>
   );
 }
