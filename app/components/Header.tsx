@@ -57,6 +57,11 @@ export function Header() {
                 お問い合わせ
               </Link>
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/blog" className="hover:underline">
+                Blog
+              </Link>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
 
