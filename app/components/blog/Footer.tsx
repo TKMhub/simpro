@@ -2,15 +2,12 @@ import { Facebook, X, Youtube } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white text-sm mt-16">
+    <footer className="bg-neutral-800  text-white text-sm mt-16">
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="flex flex-col lg:flex-row justify-between gap-10">
           {/* ロゴと社名 */}
           <div className="space-y-2">
-            <div className="bg-white inline-block px-2 py-1">
-              <span className="text-black font-bold text-xs">classmethod</span>
-            </div>
-            <p className="text-gray-400">クラスメソッド株式会社</p>
+            <p className="text-gray-400 text-3xl">Simpro</p>
           </div>
 
           {/* カテゴリ群 */}
@@ -47,7 +44,7 @@ export function Footer() {
 
         {/* 下部のソーシャルリンク */}
         <div className="flex justify-between items-center border-t border-gray-700 mt-10 pt-6 text-xs text-gray-400">
-          <p>© Classmethod, Inc. All rights reserved.</p>
+          <p>© Simpro, Inc. All rights reserved.</p>
           <div className="flex gap-4">
             <Facebook size={16} />
             <X size={16} />

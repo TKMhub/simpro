@@ -5,7 +5,7 @@ const categories = ["Skill", "Book", "Job", "Life", "Design"];
 
 export function CategoryNav() {
   return (
-    <nav className="bg-black w-full py-3">
+    <nav className="bg-neutral-800 w-full py-3">
       <ul className="flex justify-center gap-8">
         {categories.map((category) => (
           <li key={category}>

@@ -29,8 +29,8 @@ export function BlogGrid() {
   };
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <section className="mx-auto px-6 py-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6">
         {allBlogs.slice(0, visibleCount).map((blog, index) => (
           <BlogCard
             key={index}
