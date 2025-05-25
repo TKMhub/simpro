@@ -15,8 +15,8 @@ export function BlogCard({
 }: // imageUrl = "/placeholder.png", // 仮画像
 BlogCardProps) {
   return (
-    <div className="bg-white shadow-md rounded-md overflow-hidden">
-      <div className="relative h-40 w-full bg-gray-300">
+    <div className="bg-white shadow-md rounded-sm overflow-hidden">
+      <div className="relative h-50 w-full bg-gray-300">
         <Image src={imageUrl} alt={title} fill className="object-cover" />
       </div>
       <div className="px-4 py-3">

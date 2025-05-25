@@ -7,7 +7,7 @@ export function Footer() {
         <div className="flex flex-col lg:flex-row justify-between gap-10">
           {/* ロゴと社名 */}
           <div className="space-y-2">
-            <p className="text-gray-400 text-3xl">Simpro</p>
+            <p className="text-gray-400 text-5xl">Simpro</p>
           </div>
 
           {/* カテゴリ群 */}
