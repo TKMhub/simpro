@@ -6,12 +6,12 @@ import { BlogPost } from "@/types/blog";
 
 export default async function HomePage() {
   const posts: BlogPost[] = await getPublishedArticles();
+  console.log("posts", posts);
 
   return (
     <>
       <BlogGrid />
       <div className="max-w-3xl mx-auto py-12">
-        <h1 className="text-3xl font-bold mb-6">Simpro Blog</h1>
         {posts.map((post) => (
           <div key={post.id} className="mb-8">
             <h2 className="text-xl font-semibold">

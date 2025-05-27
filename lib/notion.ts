@@ -13,6 +13,7 @@ function isFullBlockObject(block: unknown): block is BlockObjectResponse {
 
 export async function getPublishedArticles(): Promise<BlogPost[]> {
   const parentId = process.env.NOTION_PARENT_PAGE_ID!;
+
   const children = await notion.blocks.children.list({ block_id: parentId });
 
   const pages = children.results.filter(
@@ -23,7 +24,10 @@ export async function getPublishedArticles(): Promise<BlogPost[]> {
   const articles = await Promise.all(
     pages.map(async (page): Promise<BlogPost | null> => {
       const blocks = await notion.blocks.children.list({ block_id: page.id });
-
+      console.log(
+        `🔍 Page ID ${page.id} blocks:`,
+        blocks.results.map((b) => (isFullBlockObject(b) ? b.type : "unknown"))
+      );
       const headerDb = blocks.results.find(
         (b): b is BlockObjectResponse =>
           isFullBlockObject(b) && b.type === "child_database"
