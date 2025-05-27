@@ -5,13 +5,15 @@ import { getPublishedArticles } from "@/lib/notion";
 import { BlogPost } from "@/types/blog";
 
 export default async function HomePage() {
-  const posts: BlogPost[] = await getPublishedArticles();
+  const posts =
+    // : BlogPost[]
+    await getPublishedArticles();
   console.log("posts", posts);
 
   return (
     <>
       <BlogGrid />
-      <div className="max-w-3xl mx-auto py-12">
+      {/* <div className="max-w-3xl mx-auto py-12">
         {posts.map((post) => (
           <div key={post.id} className="mb-8">
             <h2 className="text-xl font-semibold">
@@ -23,7 +25,7 @@ export default async function HomePage() {
             </p>
           </div>
         ))}
-      </div>
+      </div> */}
     </>
   );
 }
