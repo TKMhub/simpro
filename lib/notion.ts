@@ -23,13 +23,14 @@ export async function getPublishedArticles(): Promise<BlogPost[]> {
 
   return response.results.map((page: any) => {
     const title = page.properties.title?.title?.[0]?.plain_text ?? "No title";
-
+    console.log(page);
     return {
       id: page.id,
       title,
       slug: page.properties.slug?.rich_text?.[0]?.plain_text ?? "",
       category: page.properties.category?.select?.name ?? "Uncategorized",
       tags: page.properties.tags?.multi_select?.map((t: any) => t.name) ?? [],
+      author: page.properties.author?.rich_text?.[0]?.plain_text ?? "anonymous",
       publishedAt: page.properties.publishedAt?.date?.start ?? "",
     };
   });

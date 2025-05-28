@@ -10,7 +10,7 @@ export default async function HomePage() {
   const blogs = posts.map((post) => ({
     title: post.title,
     date: post.publishedAt,
-    author: "Taku", // ← Notionに著者情報があれば取得してここに
+    author: post.author,
     imageUrl: undefined,
   }));
 
