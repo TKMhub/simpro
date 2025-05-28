@@ -9,55 +9,11 @@ type Blog = {
   imageUrl?: string;
 };
 
-const allBlogs: Blog[] = [
-  // 仮データ（本番はAPIやDBから取得）
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-  { title: "タイトル", date: "2025.5.23", author: "Taku" },
-];
+interface BlogGridProps {
+  blogs: Blog[];
+}
 
-export function BlogGrid() {
+export function BlogGrid({ blogs }: BlogGridProps) {
   const [visibleCount, setVisibleCount] = useState(8);
 
   const handleLoadMore = () => {
@@ -68,7 +24,7 @@ export function BlogGrid() {
     <section className="mx-auto px-6 py-8">
       <div>
         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {allBlogs.slice(0, visibleCount).map((blog, index) => (
+          {blogs.slice(0, visibleCount).map((blog, index) => (
             <BlogCard
               key={index}
               title={blog.title}
@@ -79,7 +35,7 @@ export function BlogGrid() {
           ))}
         </div>
 
-        {visibleCount < allBlogs.length && (
+        {visibleCount < blogs.length && (
           <div className="text-center mt-8">
             <button
               onClick={handleLoadMore}
