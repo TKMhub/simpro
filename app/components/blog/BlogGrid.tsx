@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { BlogCard } from "./BlogCard";
+import Link from "next/link";
 
 type Blog = {
   title: string;
@@ -25,13 +26,15 @@ export function BlogGrid({ blogs }: BlogGridProps) {
       <div>
         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {blogs.slice(0, visibleCount).map((blog, index) => (
-            <BlogCard
-              key={index}
-              title={blog.title}
-              date={blog.date}
-              author={blog.author}
-              imageUrl={blog.imageUrl}
-            />
+            <Link href={`/blog/${encodeURIComponent(blog.title)}`} key={index}>
+              <BlogCard
+                key={index}
+                title={blog.title}
+                date={blog.date}
+                author={blog.author}
+                imageUrl={blog.imageUrl}
+              />
+            </Link>
           ))}
         </div>
 
