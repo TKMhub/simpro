@@ -1,5 +1,5 @@
 import { getPublishedArticles, getPageContentByTitle } from "@/lib/notion";
-import { BlockObjectResponse } from "@notionhq/client";
+import { renderBlock } from "@/components/NotionRenderer";
 
 export default async function BlogDetailPage({
   params,
@@ -9,13 +9,12 @@ export default async function BlogDetailPage({
   const posts = await getPublishedArticles();
   const post = posts.find((p) => p.title === decodeURIComponent(params.slug));
 
-  if (!post)
-    return <div className="p-4 text-red-500">記事が見つかりません</div>;
+  if (!post) return <div>記事が見つかりません</div>;
 
-  const content = await getPageContentByTitle(post.title); // タイトルからNotionページを探す
+  const content = await getPageContentByTitle(post.title);
 
   return (
-    <div className="max-w-3xl mx-auto py-12 prose">
+    <div className="max-w-3xl mx-auto py-12 prose dark:prose-invert">
       <h1>{post.title}</h1>
       <p className="text-sm text-gray-500">
         {post.publishedAt} | {post.author}
@@ -24,21 +23,11 @@ export default async function BlogDetailPage({
         {post.category} | {post.tags.join(", ")}
       </p>
 
-      {content.map((block) => {
-        if (!isFullBlock(block)) return null; // ← 型を絞り込む
-        if (block.type === "paragraph") {
-          return (
-            <p key={block.id}>
-              {block.paragraph.rich_text.map((t: any) => t.plain_text).join("")}
-            </p>
-          );
-        }
-        return null;
-      })}
+      <article>
+        {content.map((block) => (
+          <div key={block.id}>{renderBlock(block)}</div>
+        ))}
+      </article>
     </div>
   );
-}
-
-function isFullBlock(block: any): block is BlockObjectResponse {
-  return block && "type" in block;
 }
