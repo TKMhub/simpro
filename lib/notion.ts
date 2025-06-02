@@ -26,7 +26,6 @@ export async function getPublishedArticles(): Promise<BlogPost[]> {
 
   return response.results.map((page: any) => {
     const title = page.properties.title?.title?.[0]?.plain_text ?? "No title";
-    console.log(page);
     return {
       id: page.id,
       title,
