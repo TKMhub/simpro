@@ -1,5 +1,5 @@
+import { renderBlock } from "@/app/components/blog/NotionRenderer";
 import { getPublishedArticles, getPageContentByTitle } from "@/lib/notion";
-import { renderBlock } from "@/components/NotionRenderer";
 
 export default async function BlogDetailPage({
   params,

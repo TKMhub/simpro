@@ -39,36 +39,60 @@ export async function getPublishedArticles(): Promise<BlogPost[]> {
 }
 
 // 子ページの title に一致する Notion ページの本文を取得
-export async function getPageContentByTitle(title: string) {
-  const parentPageId = process.env.NOTION_PARENT_PAGE_ID!;
+// export async function getPageContentByTitle(title: string) {
+//   const parentPageId = process.env.NOTION_PARENT_PAGE_ID!;
 
-  // 親ページ配下のブロックを取得し、タイトル一致の子ページを探す
+//   // 親ページ配下のブロックを取得し、タイトル一致の子ページを探す
+//   const children = await notion.blocks.children.list({
+//     block_id: parentPageId,
+//   });
+
+//   const matchingPage = children.results.find((block) => {
+//     return (
+//       isFullBlockObject(block) &&
+//       block.type === "child_page" &&
+//       block.child_page?.title === title
+//     );
+//   });
+
+//   if (!matchingPage || !("id" in matchingPage)) {
+//     throw new Error(`No matching child page found for title: ${title}`);
+//   }
+
+//   const pageId = matchingPage.id;
+
+//   // 該当ページの本文（ブロック）を取得
+//   const blocks = await notion.blocks.children.list({ block_id: pageId });
+
+//   return blocks.results.filter(isFullBlockObject);
+// }
+
+// function isFullBlockObject(
+//   block: BlockObjectResponse | { [key: string]: any }
+// ): block is BlockObjectResponse {
+//   return block && "type" in block;
+// }
+
+export async function getPageContentByTitle(
+  title: string
+): Promise<BlockObjectResponse[]> {
+  const parentPageId = process.env.NOTION_PARENT_PAGE_ID!;
   const children = await notion.blocks.children.list({
     block_id: parentPageId,
   });
 
-  const matchingPage = children.results.find((block) => {
-    return (
-      isFullBlockObject(block) &&
-      block.type === "child_page" &&
-      block.child_page?.title === title
-    );
+  const match = children.results.find(
+    (b) =>
+      "type" in b &&
+      b.type === "child_page" &&
+      (b as any).child_page.title === title
+  );
+
+  if (!match) throw new Error("該当する記事ページが見つかりません");
+
+  const content = await notion.blocks.children.list({
+    block_id: match.id,
   });
 
-  if (!matchingPage || !("id" in matchingPage)) {
-    throw new Error(`No matching child page found for title: ${title}`);
-  }
-
-  const pageId = matchingPage.id;
-
-  // 該当ページの本文（ブロック）を取得
-  const blocks = await notion.blocks.children.list({ block_id: pageId });
-
-  return blocks.results.filter(isFullBlockObject);
-}
-
-function isFullBlockObject(
-  block: BlockObjectResponse | { [key: string]: any }
-): block is BlockObjectResponse {
-  return block && "type" in block;
+  return content.results as BlockObjectResponse[];
 }
