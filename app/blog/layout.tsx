@@ -24,10 +24,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div>
       <HeaderBlog />
       <main className="mt-[130px]">{children}</main>
       <Footer />
-    </>
+    </div>
   );
 }
