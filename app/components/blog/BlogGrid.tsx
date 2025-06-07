@@ -22,7 +22,7 @@ export function BlogGrid({ blogs }: BlogGridProps) {
   };
 
   return (
-    <section className="mx-auto px-6 py-8">
+    <section className="mx-auto">
       <div>
         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {blogs.slice(0, visibleCount).map((blog, index) => (
