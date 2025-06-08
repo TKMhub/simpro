@@ -1,9 +1,6 @@
 import { BlogPost } from "@/types/blog";
 import { Client } from "@notionhq/client";
-import {
-  BlockObjectResponse,
-  QueryDatabaseResponse,
-} from "@notionhq/client/build/src/api-endpoints";
+import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
@@ -75,7 +72,7 @@ export async function getPublishedArticles(): Promise<BlogPost[]> {
 
 export async function getPageContentByTitle(
   title: string
-): Promise<BlockObjectResponse[]> {
+): Promise<BlockObjectResponse[] | String> {
   const parentPageId = process.env.NOTION_PARENT_PAGE_ID!;
   const children = await notion.blocks.children.list({
     block_id: parentPageId,
@@ -88,8 +85,9 @@ export async function getPageContentByTitle(
       (b as any).child_page.title === title
   );
 
-  if (!match) throw new Error("該当する記事ページが見つかりません");
-
+  if (!match) {
+    return "404";
+  }
   const content = await notion.blocks.children.list({
     block_id: match.id,
   });
