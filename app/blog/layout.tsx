@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { HeaderBlog } from "../components/HeaderBlog";
 import { Footer } from "../components/blog/Footer";
 

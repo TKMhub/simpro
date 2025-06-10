@@ -26,12 +26,9 @@ export default async function BlogDetailPage({
       throw new Error("記事内容の取得に失敗しました。");
     }
     content = fetched;
-  } catch (_) {
-    return (
-      <div className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <UiMessage variant="error" title="記事が見つかりません" />
-      </div>
-    );
+  } catch (err) {
+    console.log(err);
+    throw new Error("記事内容の取得に失敗しました。");
   }
 
   return (
