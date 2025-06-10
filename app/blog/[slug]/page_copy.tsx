@@ -12,7 +12,7 @@ export default async function BlogDetailPage({
   if (!post)
     return <div className="p-4 text-red-500">記事が見つかりません</div>;
 
-  const content = await getPageContentByTitle(post.title); // タイトルからNotionページを探す
+  const content = await getPageContentByTitle(post.title);
 
   return (
     <div className="max-w-3xl mx-auto py-12 prose">
@@ -25,7 +25,7 @@ export default async function BlogDetailPage({
       </p>
 
       {content.map((block) => {
-        if (!isFullBlock(block)) return null; // ← 型を絞り込む
+        if (!isFullBlock(block)) return null;
         if (block.type === "paragraph") {
           return (
             <p key={block.id}>
