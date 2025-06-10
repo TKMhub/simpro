@@ -3,7 +3,6 @@ import { getPublishedArticles, getPageContentByTitle } from "@/lib/notion";
 import { Badge } from "@/components/ui/badge";
 import { tagColors } from "@/lib/utils/tag_color";
 import { CalendarIcon, UserCircleIcon } from "lucide-react";
-import { UiMessage } from "@/app/components/common/UiMessage";
 import { BlockObjectResponse } from "@notionhq/client";
 
 export default async function BlogDetailPage({
