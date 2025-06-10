@@ -49,7 +49,7 @@ export function renderBlock(block: BlockObjectResponse) {
         block.image.type === "file"
           ? block.image.file.url
           : block.image.external.url;
-      return <img src={url} alt="Notion image" className="w-full my-4" />;
+      return <Image src={url} alt="Notion image" className="w-full my-4" />;
 
     default:
       return (

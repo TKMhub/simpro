@@ -72,7 +72,7 @@ export async function getPublishedArticles(): Promise<BlogPost[]> {
 
 export async function getPageContentByTitle(
   title: string
-): Promise<BlockObjectResponse[] | String> {
+): Promise<BlockObjectResponse[] | string> {
   const parentPageId = process.env.NOTION_PARENT_PAGE_ID!;
   const children = await notion.blocks.children.list({
     block_id: parentPageId,
