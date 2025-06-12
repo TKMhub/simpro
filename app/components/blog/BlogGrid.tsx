@@ -8,6 +8,7 @@ type Blog = {
   date: string;
   author: string;
   imageUrl?: string;
+  tags?: string[];
 };
 
 interface BlogGridProps {
@@ -21,6 +22,8 @@ export function BlogGrid({ blogs }: BlogGridProps) {
     setVisibleCount((prev) => prev + 16);
   };
 
+  console.log(blogs);
+
   return (
     <div className="mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -32,6 +35,7 @@ export function BlogGrid({ blogs }: BlogGridProps) {
               date={blog.date}
               author={blog.author}
               imageUrl={blog.imageUrl}
+              tags={blog.tags}
             />
           </Link>
         ))}
