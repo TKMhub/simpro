@@ -3,7 +3,6 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
 import SimproJpeg from "@/public/Simplo_gray_main_sub.jpg";
-// import { useEffect, useRef } from "react";
 
 const projects = [
   {

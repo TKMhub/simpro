@@ -1,4 +1,3 @@
-// app/blog/page.tsx
 import { getPublishedArticles } from "@/lib/notion";
 import { BlogPost } from "@/types/blog";
 import { BlogGrid } from "../components/blog/BlogGrid";

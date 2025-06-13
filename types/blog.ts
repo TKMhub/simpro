@@ -1,5 +1,5 @@
 export type BlogPost = {
-  title: string; //ユニーク
+  title: string;
   category: string;
   tags: string[];
   author: string;

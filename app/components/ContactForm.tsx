@@ -19,7 +19,6 @@ export function ContactForm() {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = () => {
-    // const onSubmit = (data: FormData) => {
     setLoading(true);
     setTimeout(() => {
       toast.success("お問い合わせありがとうございます！");

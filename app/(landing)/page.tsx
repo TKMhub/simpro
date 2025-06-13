@@ -1,4 +1,3 @@
-// app/page.tsx
 import { Header } from "@/app/components/Header";
 import { HeroSection } from "@/app/components/HeroSection";
 import { ServicesSection } from "@/app/components/ServicesSection";
