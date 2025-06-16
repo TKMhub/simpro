@@ -3,6 +3,5 @@ export const tagColors: Record<string, string> = {
   "Vue.js": "bg-green-100 text-green-800 border border-green-300",
   "TypeScript": "bg-blue-100 text-blue-800 border border-blue-300",
   "React": "bg-cyan-100 text-cyan-800 border border-cyan-300",
-  // それ以外はグレー
   default: "bg-muted text-muted-foreground border border-border",
 };
