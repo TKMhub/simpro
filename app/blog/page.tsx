@@ -13,6 +13,7 @@ export default async function HomePage() {
 
   const blogs = posts.map((post) => ({
     title: post.title,
+    category: post.category,
     date: post.publishedAt,
     author: post.author,
     imageUrl: undefined,
