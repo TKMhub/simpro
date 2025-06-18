@@ -2,6 +2,12 @@ import { getPublishedArticles } from "@/lib/notion";
 import { BlogPost } from "@/types/blog";
 import { BlogGrid } from "../components/blog/BlogGrid";
 
+interface BlogPageProps {
+  searchParams?: {
+    category?: string;
+  };
+}
+
 export default async function HomePage() {
   const posts: BlogPost[] = await getPublishedArticles();
 
