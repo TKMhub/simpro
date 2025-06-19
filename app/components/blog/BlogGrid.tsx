@@ -5,6 +5,7 @@ import Link from "next/link";
 
 type Blog = {
   title: string;
+  category: string;
   date: string;
   author: string;
   imageUrl?: string;
@@ -21,8 +22,6 @@ export function BlogGrid({ blogs }: BlogGridProps) {
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 16);
   };
-
-  console.log(blogs);
 
   return (
     <div className="mx-auto">

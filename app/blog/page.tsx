@@ -9,9 +9,9 @@ interface BlogPageProps {
 }
 
 export default async function HomePage() {
-  const posts: BlogPost[] = await getPublishedArticles();
+  const allPosts: BlogPost[] = await getPublishedArticles();
 
-  const blogs = posts.map((post) => ({
+  const blogs = allPosts.map((post) => ({
     title: post.title,
     category: post.category,
     date: post.publishedAt,

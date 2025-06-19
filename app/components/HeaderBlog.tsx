@@ -113,7 +113,7 @@ export function HeaderBlog() {
           {categories.map((category) => (
             <li key={category}>
               <Link
-                href={`/category/${category.toLowerCase()}`}
+                href={`/blog/category/${category}`}
                 className="text-white text-lg tracking-wide hover:underline transition"
               >
                 {category}
