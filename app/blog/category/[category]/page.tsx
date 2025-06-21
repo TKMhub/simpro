@@ -9,16 +9,12 @@ interface Params {
     category: string;
   };
 }
-export const dynamic = "force-dynamic";
+
 export default async function CategoryPage({ params }: Params) {
   const allPosts: BlogPost[] = await getPublishedArticles();
   const category = decodeURIComponent(params.category);
-  console.log("カテゴリ:", category);
 
   const filtered = allPosts.filter((post) => post.category === category);
-
-  console.log("filtered");
-  console.log(filtered);
 
   if (filtered.length === 0) {
     notFound(); // 404返す
