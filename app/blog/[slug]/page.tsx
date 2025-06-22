@@ -1,5 +1,6 @@
 import { renderBlock } from "@/app/components/blog/NotionRenderer";
 import { Breadcrumbs } from "@/app/components/blog/Breadcrumbs";
+import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
 import { getPublishedArticles, getPageContentByTitle } from "@/lib/notion";
 import { Badge } from "@/components/ui/badge";
 import { tagColors } from "@/lib/utils/tag_color";
@@ -33,77 +34,62 @@ export default async function BlogDetailPage({
   }
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: `${baseUrl}/`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Blog",
-        item: `${baseUrl}/blog`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: post.category,
-        item: `${baseUrl}/blog/category/${encodeURIComponent(post.category)}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 4,
-        name: post.title,
-      },
-    ],
-  };
+
+  const breadcrumbItems = [
+    { name: "Home", url: `${baseUrl}/` },
+    { name: "Blog", url: `${baseUrl}/blog` },
+    {
+      name: post.category,
+      url: `${baseUrl}/blog/category/${encodeURIComponent(post.category)}`,
+    },
+    { name: post.title },
+  ];
+
+  const jsonLd = generateBreadcrumbJsonLd(breadcrumbItems);
 
   return (
-    <div className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div className="px-20 py-4 mt-8">
       <Breadcrumbs category={post.category} title={post.title} />
-      <Script id="breadcrumb-jsonld" type="application/ld+json">
-        {JSON.stringify(jsonLd)}
-      </Script>
-      <header className="mb-8 border-b pb-6">
-        <div className="flex justify-between">
-          <h1 className="text-3xl font-bold text-gray-900">{post.title}</h1>
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <CalendarIcon className="w-4 h-4" />
-            <p>{post.publishedAt}</p>
+      <div className="max-w-3xl mx-auto py-12">
+        <Script id="breadcrumb-jsonld" type="application/ld+json">
+          {JSON.stringify(jsonLd)}
+        </Script>
+        <header className="mb-8 border-b pb-6">
+          <div className="flex justify-between">
+            <h1 className="text-3xl font-bold text-gray-900">{post.title}</h1>
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <CalendarIcon className="w-4 h-4" />
+              <p>{post.publishedAt}</p>
+            </div>
           </div>
-        </div>
-        <div className="flex items-center justify-between flex-wrap gap-4 y-3 text-sm text-gray-600">
-          <div className="flex items-center gap-2 p-3">
-            <UserCircleIcon className="w-4 h-4" />
-            <span>{post.author}</span>
+          <div className="flex items-center justify-between flex-wrap gap-4 y-3 text-sm text-gray-600">
+            <div className="flex items-center gap-2 p-3">
+              <UserCircleIcon className="w-4 h-4" />
+              <span>{post.author}</span>
+            </div>
           </div>
-        </div>
-        <div className="mt-1 text-sm text-gray-500 flex flex-wrap items-center gap-2">
-          <div className="flex flex-wrap gap-1">
-            {post.tags.map((tag) => (
-              <Badge
-                key={tag}
-                className={`rounded-full px-3 py-1 text-xs font-medium ${
-                  tagColors[tag] || tagColors.default
-                }`}
-              >
-                {tag}
-              </Badge>
-            ))}
+          <div className="mt-1 text-sm text-gray-500 flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap gap-1">
+              {post.tags.map((tag) => (
+                <Badge
+                  key={tag}
+                  className={`rounded-full px-3 py-1 text-xs font-medium ${
+                    tagColors[tag] || tagColors.default
+                  }`}
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <article className="prose dark:prose-invert max-w-none">
-        {content.map((block) => (
-          <div key={block.id}>{renderBlock(block)}</div>
-        ))}
-      </article>
+        <article className="prose dark:prose-invert max-w-none">
+          {content.map((block) => (
+            <div key={block.id}>{renderBlock(block)}</div>
+          ))}
+        </article>
+      </div>
     </div>
   );
 }

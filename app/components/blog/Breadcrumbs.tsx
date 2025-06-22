@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -9,35 +10,64 @@ import {
 } from "@/components/ui/breadcrumb";
 
 interface BreadcrumbsProps {
-  category: string;
-  title: string;
+  category?: string;
+  title?: string;
 }
 
+type Crumb = {
+  name: string;
+  href?: string;
+};
+
 export function Breadcrumbs({ category, title }: BreadcrumbsProps) {
+  const items: Crumb[] = [
+    { name: "Home", href: "/" },
+    { name: "Blog", href: "/blog" },
+  ];
+
+  if (category) {
+    items.push({
+      name: category,
+      href: `/blog/category/${encodeURIComponent(category.toLowerCase())}`,
+    });
+  }
+
+  if (title) {
+    items.push({ name: title });
+  }
+
   return (
-    <Breadcrumb className="mb-4 px-4 sm:px-0 text-sm sm:text-base">
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/">Home</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/blog">Blog</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href={`/blog/category/${encodeURIComponent(category)}`}>{category}</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{title}</BreadcrumbPage>
-        </BreadcrumbItem>
+    <Breadcrumb className="mb-6 px-4 sm:px-0 text-sm text-muted-foreground">
+      <BreadcrumbList className="flex flex-wrap items-center gap-x-1 gap-y-1 sm:gap-x-2">
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1;
+
+          return (
+            <div key={index} className="flex items-center">
+              <BreadcrumbItem>
+                {item.href && !isLast ? (
+                  <BreadcrumbLink asChild>
+                    <Link
+                      href={item.href}
+                      className="hover:text-primary hover:underline transition-colors capitalize"
+                    >
+                      {item.name}
+                    </Link>
+                  </BreadcrumbLink>
+                ) : (
+                  <BreadcrumbPage className="font-medium capitalize">
+                    {item.name}
+                  </BreadcrumbPage>
+                )}
+              </BreadcrumbItem>
+              {!isLast && (
+                <BreadcrumbSeparator>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </BreadcrumbSeparator>
+              )}
+            </div>
+          );
+        })}
       </BreadcrumbList>
     </Breadcrumb>
   );
