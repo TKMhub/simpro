@@ -33,7 +33,6 @@ export default async function CategoryPage({ params }: Params) {
     <>
       <HeaderBlog />
       <main className="container mx-auto pt-40 px-4">
-        <h1 className="text-2xl mb-4">カテゴリ: {category}</h1>
         <BlogGrid blogs={blogs} />
       </main>
     </>
