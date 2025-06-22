@@ -1,9 +1,11 @@
 import { renderBlock } from "@/app/components/blog/NotionRenderer";
+import { Breadcrumbs } from "@/app/components/blog/Breadcrumbs";
 import { getPublishedArticles, getPageContentByTitle } from "@/lib/notion";
 import { Badge } from "@/components/ui/badge";
 import { tagColors } from "@/lib/utils/tag_color";
 import { CalendarIcon, UserCircleIcon } from "lucide-react";
 import { BlockObjectResponse } from "@notionhq/client";
+import Script from "next/script";
 
 export default async function BlogDetailPage({
   params,
@@ -30,8 +32,43 @@ export default async function BlogDetailPage({
     throw new Error("記事内容の取得に失敗しました。");
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `${baseUrl}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${baseUrl}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.category,
+        item: `${baseUrl}/blog/category/${encodeURIComponent(post.category)}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: post.title,
+      },
+    ],
+  };
+
   return (
     <div className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs category={post.category} title={post.title} />
+      <Script id="breadcrumb-jsonld" type="application/ld+json">
+        {JSON.stringify(jsonLd)}
+      </Script>
       <header className="mb-8 border-b pb-6">
         <div className="flex justify-between">
           <h1 className="text-3xl font-bold text-gray-900">{post.title}</h1>
