@@ -6,13 +6,7 @@ import { Breadcrumbs } from "@/app/components/blog/Breadcrumbs";
 import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
 import Script from "next/script";
 
-interface Params {
-  params: {
-    category: string;
-  };
-}
-
-export default async function CategoryPage({ params }: Params) {
+export default async function CategoryPage({ params }: any) {
   const allPosts: BlogPost[] = await getPublishedArticles();
   const category = decodeURIComponent(params.category);
 

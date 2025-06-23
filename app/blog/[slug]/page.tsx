@@ -8,11 +8,7 @@ import { CalendarIcon, UserCircleIcon } from "lucide-react";
 import { BlockObjectResponse } from "@notionhq/client";
 import Script from "next/script";
 
-export default async function BlogDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function BlogDetailPage({ params }: any) {
   const slug = decodeURIComponent(params.slug);
 
   const posts = await getPublishedArticles();
