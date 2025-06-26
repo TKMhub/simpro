@@ -25,7 +25,7 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 bg-white transition-all duration-300 shadow ${
-        scrolled ? "py-4" : "py-6"
+        scrolled ? "py-2" : "py-4"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
