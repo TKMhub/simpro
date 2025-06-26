@@ -98,6 +98,11 @@ export function Header() {
               お問い合わせ
             </Link>
           </li>
+          <li>
+            <Link href="#contact" onClick={() => setMenuOpen(false)}>
+              Blog
+            </Link>
+          </li>
         </ul>
       </div>
     </header>
