@@ -17,22 +17,22 @@ const services = [
   {
     icon: <MonitorCog size={32} />,
     title: "Webシステム開発",
-    description: "React, Next.js を用いたWebアプリを開発します。",
+    description: "業務に即したWebアプリを構築します。",
   },
   {
     icon: <LayoutDashboard size={32} />,
     title: "業務自動化支援",
-    description: "Excelマクロで業務フローの自動化を実現します。",
+    description: "Excelマクロなどで業務を効率化します。",
   },
   {
     icon: <IterationCcw size={32} />,
     title: "システム運用保守支援",
-    description: "ITシステムの運用や保守を対応します。",
+    description: "ITシステムの運用・保守もお任せください。",
   },
   {
     icon: <University size={32} />,
     title: "スキルレクチャー",
-    description: "サイトやアプリの作成方法をレクチャーします。",
+    description: "初心者向けにアプリ開発をわかりやすく解説。",
   },
   {
     icon: <Zap size={32} />,
@@ -45,20 +45,26 @@ export function ServicesSection() {
   return (
     <section
       id="services"
-      className="min-h-screen bg-gray-100 flex items-center justify-center"
+      className="bg-gradient-to-b from-white via-gray-50 to-gray-100 py-20"
     >
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold mb-8">サービス紹介</h2>
-        <div className="grid md:grid-cols-3 gap-8">
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-12">
+          サービス紹介
+        </h2>
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {services.map((service, index) => (
             <Card
               key={index}
-              className="transition-transform transform hover:scale-105 cursor-pointer"
+              className="bg-white shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200 rounded-xl hover:scale-[1.02]"
             >
-              <CardContent className="p-7 flex flex-col items-center gap-4">
-                {service.icon}
-                <CardTitle>{service.title}</CardTitle>
-                <p className="text-sm text-gray-600">{service.description}</p>
+              <CardContent className="p-6 flex flex-col items-center gap-4">
+                <div className="text-blue-600">{service.icon}</div>
+                <CardTitle className="text-lg font-semibold text-gray-800">
+                  {service.title}
+                </CardTitle>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  {service.description}
+                </p>
               </CardContent>
             </Card>
           ))}

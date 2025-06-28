@@ -15,7 +15,7 @@ export function HeroSection() {
   return (
     <section
       id="top"
-      className="relative min-h-[calc(100vh-64px)] pt-[64px] flex items-center justify-center px-4"
+      className="relative min-h-[calc(100vh-64px)] pt-[64px] flex items-center justify-center px-4 bg-gradient-to-b from-white via-gray-50 to-gray-100"
     >
       {/* 左側モーションアイコン（デスクトップのみ表示） */}
       <motion.div
@@ -75,7 +75,9 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
         >
-          ITツール制作 × 業務改善支援で、あなたのビジネスにスピードと効率を。
+          ITツール制作 × 業務改善支援で、
+          <br />
+          あなたのビジネスにスピードと効率をお届けします。
         </motion.p>
 
         {/* 特徴アイコン */}
