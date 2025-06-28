@@ -43,14 +43,24 @@ export function ProjectsSlider() {
           disableOnInteraction: false,
         }}
         initialSlide={0}
-        slidesPerView={3}
         centeredSlides={true}
         spaceBetween={20}
         loop={false}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        }}
       >
         {projects.map((project, index) => (
           <SwiperSlide key={index}>
-            <div className="bg-white rounded-2xl  p-6 w-full transition duration-300 hover:scale-[1.02]">
+            <div className="bg-white border border-gray-200 shadow-md rounded-2xl p-6 w-full transition duration-300 mx-2">
               <Image
                 src={project.image}
                 alt={project.title}
@@ -64,14 +74,14 @@ export function ProjectsSlider() {
                 {project.tags.map((tag, idx) => (
                   <span
                     key={idx}
-                    className="bg-indigo-100 text-indigo-700 text-xs px-3 py-1 rounded-full"
+                    className="bg-blue-100 text-blue-600 text-xs px-3 py-1 rounded-full"
                   >
                     #{tag}
                   </span>
                 ))}
               </div>
               <div className="text-left">
-                <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-600 text-white text-sm hover:bg-indigo-700 transition">
+                <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 text-white text-sm transition">
                   詳細を見る →
                 </button>
               </div>
