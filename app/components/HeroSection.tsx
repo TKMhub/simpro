@@ -1,8 +1,6 @@
 "use client";
-
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
   Zap,
   LayoutDashboard,
@@ -114,22 +112,6 @@ export function HeroSection() {
               </div>
             </CardContent>
           </Card>
-        </motion.div>
-
-        {/* CTAボタン */}
-        <motion.div
-          className="mt-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.3 }}
-        >
-          <Button
-            size="lg"
-            className="bg-blue-600 text-white hover:bg-blue-700"
-            asChild
-          >
-            <a href="#services">サービスを見る</a>
-          </Button>
         </motion.div>
       </motion.div>
     </section>
