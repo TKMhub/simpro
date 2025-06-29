@@ -8,13 +8,13 @@ import SimproJpeg from "@/public/Simplo_gray_main_sub.jpg";
 
 const projects = [
   {
-    title: "アプリケーションテンプレート",
+    title: "アプリケーションテンプレ",
     description: "Next.js + Supabase で構築された業務用テンプレートです。",
     tags: ["Next.js", "Supabase", "TypeScript"],
     image: SimproJpeg,
   },
   {
-    title: "Webサイトテンプレート",
+    title: "Webサイトテンプレ",
     description: "静的＆動的なページに対応し、SEOとUIを強化した構成です。",
     tags: ["TailwindCSS", "SEO", "レスポンシブ"],
     image: SimproJpeg,

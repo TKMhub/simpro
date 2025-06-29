@@ -69,7 +69,7 @@ export function ContactForm() {
                   rows={10}
                   {...register("message", { required: true })}
                 />
-                <div className="flex items-start gap-2">
+                <div className="flex justify-center items-center gap-2">
                   <Checkbox
                     id="agree"
                     {...register("agree", { required: true })}

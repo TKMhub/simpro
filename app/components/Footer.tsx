@@ -4,9 +4,9 @@ export function Footer() {
   return (
     <footer className="bg-neutral-800  text-white text-sm ">
       <div className="max-w-7xl mx-auto px-4 py-10">
-        <div className="flex flex-col lg:flex-row justify-between gap-10">
+        <div className="flex flex-col lg:flex-row justify-between gap-10 space-x-52">
           {/* ロゴと社名 */}
-          <div className="space-y-2">
+          <div className="space-y-4">
             <p className="text-gray-400 text-5xl">Simpro</p>
           </div>
 
@@ -15,15 +15,30 @@ export function Footer() {
             {[
               {
                 title: "主なカテゴリ",
-                items: ["AWS事例", "AWS導入", "Amazon Cognito", "S3", "EC2"],
+                items: [
+                  "業務自動化",
+                  "システム開発",
+                  "個人開発",
+                  "キャリア構築",
+                  "デザイン",
+                ],
               },
               {
-                title: "注目のテーマ",
-                items: ["生成AI", "ChatGPT", "RAG", "Python", "GitHub"],
+                title: "トピック",
+                items: ["ChatGPT", "VBA", "Next.js", "Supabase", "Notion"],
               },
               {
-                title: "プロダクト・サービス",
-                items: ["Google Cloud", "LINE", "Tableau", "Notion"],
+                title: "使用技術",
+                items: [
+                  "Next.js",
+                  "Supabase",
+                  "TypeScript",
+                  "Tailwind CSS",
+                  "Shadcn UI",
+                  "Prisma",
+                  "Notion",
+                  // "Stripe",
+                ],
               },
             ].map((col, idx) => (
               <div key={idx}>
@@ -40,7 +55,7 @@ export function Footer() {
 
         {/* 下部のソーシャルリンク */}
         <div className="flex justify-between items-center border-t border-gray-700 mt-10 pt-6 text-xs text-gray-400">
-          <p>© 2025 Simpro – Created by taku. All rights reserved.</p>
+          <p>© Simpro - All rights reserved.</p>
           <div className="flex gap-4">
             {/* <Facebook size={16} /> */}
             <FaInstagram size={20} className="hover:text-white transition" />
