@@ -31,7 +31,7 @@ export function ProjectsSlider() {
   return (
     <section
       id="projects"
-      className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-gray-200 py-20"
+      className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-gray-200 py-20 px-4"
     >
       <h2 className="text-4xl font-extrabold text-center mb-12">実績紹介</h2>
 
@@ -57,10 +57,11 @@ export function ProjectsSlider() {
             slidesPerView: 3,
           },
         }}
+        className=""
       >
         {projects.map((project, index) => (
           <SwiperSlide key={index}>
-            <div className="bg-white border border-gray-200 shadow-md rounded-2xl p-6 w-full transition duration-300 mx-2">
+            <div className="bg-white border border-gray-200 shadow-md rounded-2xl p-6 w-full transition duration-300">
               <Image
                 src={project.image}
                 alt={project.title}

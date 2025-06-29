@@ -2,11 +2,11 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import {
   Code,
   LayoutDashboard,
-  Zap,
   MonitorCog,
   IterationCcw,
   University,
 } from "lucide-react";
+import { FaPaintbrush } from "react-icons/fa6";
 
 const services = [
   {
@@ -35,9 +35,9 @@ const services = [
     description: "初心者向けにアプリ開発をわかりやすく解説。",
   },
   {
-    icon: <Zap size={32} />,
-    title: "ITコンサルティング",
-    description: "DX戦略の立案から実行支援まで対応します。",
+    icon: <FaPaintbrush size={32} />,
+    title: "ロゴデザイン",
+    description: "ブランドイメージに合ったロゴをデザインします。",
   },
 ];
 
