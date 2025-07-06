@@ -15,7 +15,7 @@ export function HeroSection() {
   return (
     <section
       id="top"
-      className="relative min-h-[calc(100vh-64px)] pt-[64px] flex items-center justify-center px-4 bg-gradient-to-b from-white via-gray-50 to-gray-100"
+      className="relative min-h-[calc(100vh-64px)] py-[64px] flex items-center justify-center px-4 bg-gradient-to-b from-white via-gray-50 to-gray-100"
     >
       {/* 左側モーションアイコン（デスクトップのみ表示） */}
       <motion.div
