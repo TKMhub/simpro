@@ -4,7 +4,7 @@ import { BookOpenText, Newspaper } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-// 仮のデータ。実際はNotion APIなどから取得してください。
+// 仮のデータ
 const articles = [
   {
     title: "業務改善の第一歩とは？",
