@@ -1,35 +1,50 @@
 "use client";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { BookOpenText, Newspaper } from "lucide-react";
+import { BookOpenText } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-// 仮のデータ
-const articles = [
-  {
-    title: "業務改善の第一歩とは？",
-    description: "Excelマクロから始める業務効率化の実践手法を紹介。",
-    date: "2024-06-01",
-    image: "/images/sample1.jpg",
-    slug: "improvement-start",
-  },
-  {
-    title: "プロジェクトマネジメント超入門",
-    description: "現場で使えるPMスキルとドキュメント管理のコツを伝授。",
-    date: "2024-06-15",
-    image: "/images/sample2.jpg",
-    slug: "pm-beginners",
-  },
-  {
-    title: "プログラミング初心者がつまずく5つの壁",
-    description: "初学者にありがちな罠とその乗り越え方。",
-    date: "2024-07-01",
-    image: "/images/sample3.jpg",
-    slug: "beginner-walls",
-  },
-];
+type Article = {
+  title: string;
+  slug: string;
+  description?: string; // Notionには無いので省略または対応するプロパティ追加
+  date: string;
+  image?: string; // 現状Notion側で画像がないので optional
+};
 
 export function BlogIntroSection() {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [visibleCount, setVisibleCount] = useState(6); // 初期は6件表示
+
+  // 画面サイズによって表示数を調整（スマホは2件）
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 640;
+      setVisibleCount(isMobile ? 2 : 6);
+    };
+    handleResize(); // 初期実行
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const res = await fetch("/api/articles");
+      const data = await res.json();
+      // description や image がない場合は適当に補完
+      const filled = data.map((a: any) => ({
+        title: a.title,
+        slug: a.slug,
+        description: "Simproブログ記事です。",
+        date: a.publishedAt,
+        image: "/images/sample1.jpg",
+      }));
+      setArticles(filled);
+    };
+    fetchArticles();
+  }, []);
+
   return (
     <section
       id="blogIntro"
@@ -42,7 +57,6 @@ export function BlogIntroSection() {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        {/* 見出し */}
         <div className="flex justify-center items-center gap-2 text-blue-600">
           <BookOpenText size={28} />
           <span className="text-sm font-medium tracking-wide uppercase">
@@ -57,9 +71,8 @@ export function BlogIntroSection() {
           実践的なノウハウをシンプルに解説する情報ブログです。
         </p>
 
-        {/* ブログ記事カード */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {articles.map((article, i) => (
+          {articles.slice(0, visibleCount).map((article, i) => (
             <motion.div
               key={i}
               className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition"
@@ -68,10 +81,10 @@ export function BlogIntroSection() {
               transition={{ delay: i * 0.1 }}
               viewport={{ once: true }}
             >
-              <Link href="/blog">
+              <Link href={`/blog/${article.slug}`}>
                 <div className="w-full h-40 relative">
                   <Image
-                    src={article.image}
+                    src={article.image || "/images/sample1.jpg"}
                     alt={article.title}
                     fill
                     className="object-cover"
@@ -88,7 +101,7 @@ export function BlogIntroSection() {
             </motion.div>
           ))}
         </div>
-        {/* CTA */}
+
         <Link
           href="/blog"
           className="inline-block bg-blue-600 text-white px-6 py-2 rounded-xl font-medium hover:bg-blue-700 transition"
