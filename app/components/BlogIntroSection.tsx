@@ -38,7 +38,7 @@ export function BlogIntroSection() {
         slug: a.slug,
         description: "Simproブログ記事です。",
         date: a.publishedAt,
-        image: "/images/sample1.jpg",
+        image: "/Simplo_gray_main_sub.jpg",
       }));
       setArticles(filled);
     };
@@ -84,7 +84,7 @@ export function BlogIntroSection() {
               <Link href={`/blog/${article.slug}`}>
                 <div className="w-full h-40 relative">
                   <Image
-                    src={article.image || "/images/sample1.jpg"}
+                    src={article.image || "public/Simplo_gray_main_sub.jpg"}
                     alt={article.title}
                     fill
                     className="object-cover"
