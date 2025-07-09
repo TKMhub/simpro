@@ -109,7 +109,7 @@ export function ToolIntroSection() {
               className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ duration: 1.6, ease: "easeOut" }}
               viewport={{ once: true }}
             >
               <Link href={`/tools/${tool.slug}`}>

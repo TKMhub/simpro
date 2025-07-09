@@ -54,7 +54,7 @@ export function BlogIntroSection() {
         className="max-w-5xl mx-auto text-center space-y-10"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 1.6, ease: "easeOut" }}
         viewport={{ once: true }}
       >
         <div className="flex justify-center items-center gap-2 text-blue-600">
