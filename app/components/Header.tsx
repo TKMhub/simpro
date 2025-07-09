@@ -62,6 +62,11 @@ export function Header() {
                 Blog
               </Link>
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/tool" className="hover:underline">
+                Tool
+              </Link>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
 
@@ -99,8 +104,13 @@ export function Header() {
             </Link>
           </li>
           <li>
-            <Link href="#contact" onClick={() => setMenuOpen(false)}>
+            <Link href="/blog" onClick={() => setMenuOpen(false)}>
               Blog
+            </Link>
+          </li>
+          <li>
+            <Link href="/Tool" onClick={() => setMenuOpen(false)}>
+              Tool
             </Link>
           </li>
         </ul>
