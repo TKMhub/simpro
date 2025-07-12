@@ -31,7 +31,7 @@ export function ToolCard({ tool }: { tool: Tool }) {
           ))}
         </div>
         <Link
-          href={`/tools/${tool.slug}`}
+          href={`/tool/${tool.slug}`}
           className="inline-block mt-2 text-sm text-blue-600 hover:underline"
         >
           ダウンロード

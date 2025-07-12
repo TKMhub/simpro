@@ -112,7 +112,7 @@ export function ToolIntroSection() {
               transition={{ duration: 1.6, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <Link href={`/tools/${tool.slug}`}>
+              <Link href={`/tool/${tool.slug}`}>
                 <div className="w-full h-40 relative">
                   <Image
                     src={tool.image}
@@ -137,7 +137,7 @@ export function ToolIntroSection() {
 
         {/* CTA */}
         <Link
-          href="/tools"
+          href="/tool"
           className="inline-block mt-6 bg-green-600 text-white px-6 py-2 rounded-xl font-medium hover:bg-green-700 transition"
         >
           ツール一覧を見る
