@@ -6,6 +6,7 @@ import { ContactForm } from "@/app/components/ContactForm";
 import { Footer } from "@/app/components/Footer";
 import { BlogIntroSection } from "../components/BlogIntroSection";
 import { ToolIntroSection } from "../components/ToolIntroSection";
+import { TemplateIntroSection } from "../components/TemplateIntroSection";
 
 export default function Home() {
   return (
@@ -20,8 +21,10 @@ export default function Home() {
       <ProjectsSlider />
       {/* ブログ紹介 */}
       <BlogIntroSection />
-      {/* 自動kツール配布紹介 */}
+      {/* 自動ツール配布紹介 */}
       <ToolIntroSection />
+      {/* Webテンプレート配布紹介 */}
+      <TemplateIntroSection />
       {/* お問い合わせフォーム */}
       <ContactForm />
       {/* フッター */}
