@@ -67,11 +67,11 @@ export function Header() {
                 Tool
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem>
+            {/* <NavigationMenuItem>
               <Link href="/template" className="hover:underline">
                 Template
               </Link>
-            </NavigationMenuItem>
+            </NavigationMenuItem> */}
           </NavigationMenuList>
         </NavigationMenu>
 
@@ -118,11 +118,11 @@ export function Header() {
               Tool
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/template" onClick={() => setMenuOpen(false)}>
               Template
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </header>

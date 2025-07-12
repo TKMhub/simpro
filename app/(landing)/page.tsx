@@ -24,7 +24,7 @@ export default function Home() {
       {/* 自動ツール配布紹介 */}
       <ToolIntroSection />
       {/* Webテンプレート配布紹介 */}
-      <TemplateIntroSection />
+      {/* <TemplateIntroSection /> */}
       {/* お問い合わせフォーム */}
       <ContactForm />
       {/* フッター */}
