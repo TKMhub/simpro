@@ -7,4 +7,6 @@ export type Tool = {
   author: string;
   tags: string[];
   slug: string;
+  buttonType: "download" | "link";
+  buttonUrl: string;
 };
