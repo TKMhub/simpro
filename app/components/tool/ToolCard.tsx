@@ -2,10 +2,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Tool } from "@/types/tool";
+import { tagColors } from "@/lib/utils/tag_color";
 
 export function ToolCard({ tool }: { tool: Tool }) {
   return (
-    <div className="rounded-xl shadow bg-white overflow-hidden">
+    <Link
+      href={`/tool/${tool.slug}`}
+      className="block rounded-xl shadow bg-white overflow-hidden hover:shadow-md transition"
+    >
       <Image
         src={tool.imageUrl}
         alt={tool.title}
@@ -14,7 +18,9 @@ export function ToolCard({ tool }: { tool: Tool }) {
         className="w-full h-48 object-cover"
       />
       <div className="p-4 space-y-2">
-        <h3 className="text-lg font-semibold">{tool.title}</h3>
+        <h3 className="text-lg font-semibold">
+          {tool.title}（{tool.category}）
+        </h3>
         <p className="text-sm text-gray-600">{tool.description}</p>
         <div className="flex justify-between text-xs text-gray-500">
           <span>{tool.date}</span>
@@ -24,19 +30,18 @@ export function ToolCard({ tool }: { tool: Tool }) {
           {tool.tags.map((tag) => (
             <span
               key={tag}
-              className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full"
+              className={`text-xs px-2 py-1 rounded-full ${
+                tagColors[tag] || tagColors.default
+              }`}
             >
               {tag}
             </span>
           ))}
         </div>
-        <Link
-          href={`/tools/${tool.slug}`}
-          className="inline-block mt-2 text-sm text-blue-600 hover:underline"
-        >
-          ダウンロード
-        </Link>
+        <span className="inline-block mt-2 text-sm text-blue-600 hover:underline">
+          詳細はこちら
+        </span>
       </div>
-    </div>
+    </Link>
   );
 }

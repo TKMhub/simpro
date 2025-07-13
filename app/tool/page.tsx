@@ -1,7 +1,7 @@
 import { getPublishedTools } from "@/lib/tool";
 import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
 import Script from "next/script";
-import { Breadcrumbs } from "../components/blog/Breadcrumbs";
+import { ToolBreadcrumbs } from "../components/tool/ToolBreadcrumbs";
 import { ToolGrid } from "../components/tool/ToolGrid";
 
 export default async function ToolsPage() {
@@ -9,7 +9,7 @@ export default async function ToolsPage() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
   const breadcrumbItems = [
     { name: "Home", url: `${baseUrl}/` },
-    { name: "Tools", url: `${baseUrl}/tools` },
+    { name: "Tools", url: `${baseUrl}/tool` },
   ];
   const jsonLd = generateBreadcrumbJsonLd(breadcrumbItems);
 
@@ -19,7 +19,7 @@ export default async function ToolsPage() {
         {JSON.stringify(jsonLd)}
       </Script>
 
-      <Breadcrumbs />
+      <ToolBreadcrumbs />
       <h1 className="py-4 mt-8 text-2xl text-gray-800">ツール一覧</h1>
       <div className="py-2">
         <ToolGrid tools={tools} />
