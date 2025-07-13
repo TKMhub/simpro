@@ -9,8 +9,10 @@ export async function getPublishedTools(): Promise<Tool[]> {
       date: "2025-07-10",
       imageUrl: "/Simplo_gray_main_sub.jpg",
       author: "taku",
-      tags: ["VBA", "請求書"],
+      tags: ["請求書", "自動化", "業務効率化"],
       slug: "invoice-generator",
+      buttonType: "download",
+      buttonUrl: "/dummy/invoice-generator.zip",
     },
     {
       title: "日報自動化ツール",
@@ -21,6 +23,8 @@ export async function getPublishedTools(): Promise<Tool[]> {
       author: "taku",
       tags: ["Excel", "自動化"],
       slug: "daily-report-automation",
+      buttonType: "download",
+      buttonUrl: "/dummy/daily-report-automation.zip",
     },
     {
       title: "スプレッドシート整理GAS",
@@ -31,6 +35,8 @@ export async function getPublishedTools(): Promise<Tool[]> {
       author: "taku",
       tags: ["GAS"],
       slug: "spreadsheet-organizer",
+      buttonType: "link",
+      buttonUrl: "https://example.com/spreadsheet-organizer",
     },
     {
       title: "Markdown to HTML ツール",
@@ -41,6 +47,8 @@ export async function getPublishedTools(): Promise<Tool[]> {
       author: "taku",
       tags: ["Web"],
       slug: "markdown-html-converter",
+      buttonType: "link",
+      buttonUrl: "https://example.com/markdown-html-converter",
     },
     {
       title: "ファイル整理バッチ",
@@ -51,6 +59,8 @@ export async function getPublishedTools(): Promise<Tool[]> {
       author: "taku",
       tags: ["bat"],
       slug: "file-organizer-batch",
+      buttonType: "download",
+      buttonUrl: "/dummy/file-organizer-batch.zip",
     },
   ];
 }

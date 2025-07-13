@@ -34,7 +34,9 @@ export default async function ToolDetailPage({ params }: { params: { slug: strin
         </Script>
         <header className="mb-8 border-b pb-6">
           <div className="flex justify-between">
-            <h1 className="text-3xl font-bold text-gray-900">{tool.title}</h1>
+            <h1 className="text-3xl font-bold text-gray-900">
+              {tool.title}（{tool.category}）
+            </h1>
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <CalendarIcon className="w-4 h-4" />
               <p>{tool.date}</p>
@@ -63,6 +65,26 @@ export default async function ToolDetailPage({ params }: { params: { slug: strin
           <Image src={tool.imageUrl} alt={tool.title} width={600} height={400} className="w-full h-64 object-cover" />
         </div>
         <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{tool.description}</p>
+        <div className="mt-6 text-center">
+          {tool.buttonType === "download" ? (
+            <a
+              href={tool.buttonUrl}
+              className="inline-block bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+              download
+            >
+              ダウンロード
+            </a>
+          ) : (
+            <a
+              href={tool.buttonUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition"
+            >
+              リンク
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );
