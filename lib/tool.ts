@@ -62,6 +62,36 @@ export async function getPublishedTools(): Promise<Tool[]> {
       buttonType: "download",
       buttonUrl: "/dummy/file-organizer-batch.zip",
     },
+    {
+      title: "スプレッドシート整理GAS",
+      category: "Gas",
+      description: "大量データを自動整理するGASスクリプト。",
+      date: "2025-07-08",
+      imageUrl: "/Simplo_gray_main_sub.jpg",
+      author: "taku",
+      tags: ["GAS"],
+      slug: "spreadsheet-organizer",
+    },
+    {
+      title: "Markdown to HTML ツール",
+      category: "Webツール",
+      description: "Markdownをブラウザ上でHTMLに変換。",
+      date: "2025-07-07",
+      imageUrl: "/Simplo_gray_main_sub.jpg",
+      author: "taku",
+      tags: ["Web"],
+      slug: "markdown-html-converter",
+    },
+    {
+      title: "ファイル整理バッチ",
+      category: "Executable File",
+      description: "指定フォルダ内のファイルを自動で整理。",
+      date: "2025-07-06",
+      imageUrl: "/Simplo_gray_main_sub.jpg",
+      author: "taku",
+      tags: ["bat"],
+      slug: "file-organizer-batch",
+    },
   ];
 }
 
