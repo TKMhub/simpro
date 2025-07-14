@@ -62,6 +62,7 @@ export async function getPublishedTools(): Promise<Tool[]> {
       buttonType: "download",
       buttonUrl: "/dummy/file-organizer-batch.zip",
     },
+    // ↓ 重複データも修正
     {
       title: "スプレッドシート整理GAS",
       category: "Gas",
@@ -70,7 +71,9 @@ export async function getPublishedTools(): Promise<Tool[]> {
       imageUrl: "/Simplo_gray_main_sub.jpg",
       author: "taku",
       tags: ["GAS"],
-      slug: "spreadsheet-organizer",
+      slug: "spreadsheet-organizer-2", // ← slug を一意に変更
+      buttonType: "link",
+      buttonUrl: "https://example.com/spreadsheet-organizer",
     },
     {
       title: "Markdown to HTML ツール",
@@ -80,7 +83,9 @@ export async function getPublishedTools(): Promise<Tool[]> {
       imageUrl: "/Simplo_gray_main_sub.jpg",
       author: "taku",
       tags: ["Web"],
-      slug: "markdown-html-converter",
+      slug: "markdown-html-converter-2",
+      buttonType: "link",
+      buttonUrl: "https://example.com/markdown-html-converter",
     },
     {
       title: "ファイル整理バッチ",
@@ -90,7 +95,9 @@ export async function getPublishedTools(): Promise<Tool[]> {
       imageUrl: "/Simplo_gray_main_sub.jpg",
       author: "taku",
       tags: ["bat"],
-      slug: "file-organizer-batch",
+      slug: "file-organizer-batch-2",
+      buttonType: "download",
+      buttonUrl: "/dummy/file-organizer-batch.zip",
     },
   ];
 }

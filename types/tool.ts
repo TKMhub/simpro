@@ -7,6 +7,6 @@ export type Tool = {
   author: string;
   tags: string[];
   slug: string;
-  buttonType: "download" | "link";
+  buttonType: "download" | "link" | ""; // 空も許容
   buttonUrl: string;
 };
