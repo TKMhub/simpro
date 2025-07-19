@@ -1,7 +1,7 @@
-const SUPABASE_URL = process.env.SUPABASE_URL!;
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
-import { Contents } from '@/types/contents';
+import { Contents } from "@/types/contents";
 
 async function supabaseFetch<T>(path: string, params: string) {
   const url = `${SUPABASE_URL}/rest/v1/${path}?${params}`;
@@ -10,7 +10,7 @@ async function supabaseFetch<T>(path: string, params: string) {
       apikey: SUPABASE_SERVICE_ROLE_KEY,
       Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
     },
-    cache: 'no-store',
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error(`Supabase fetch failed: ${res.status}`);
@@ -20,17 +20,19 @@ async function supabaseFetch<T>(path: string, params: string) {
 
 export async function getPublishedContents(): Promise<Contents[]> {
   const params = new URLSearchParams({
-    select: '*',
-    isPublished: 'eq.true',
+    select: "*",
+    isPublished: "eq.true",
   }).toString();
-  return supabaseFetch<Contents[]>('Contents', params);
+  return supabaseFetch<Contents[]>("Contents", params);
 }
 
-export async function getContentById(id: number): Promise<Contents | undefined> {
+export async function getContentById(
+  id: number
+): Promise<Contents | undefined> {
   const params = new URLSearchParams({
-    select: '*',
+    select: "*",
     id: `eq.${id}`,
   }).toString();
-  const data = await supabaseFetch<Contents[]>('Contents', params);
+  const data = await supabaseFetch<Contents[]>("Contents", params);
   return data[0];
 }
