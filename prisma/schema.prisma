@@ -1,15 +1,51 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+// schema.prisma
 generator client {
   provider = "prisma-client-js"
-  output   = "../lib/generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum ContentsType {
+  TOOL
+  TEMPLATE
+}
+
+enum DeliveryType {
+  FILE
+  URL
+}
+
+model User {
+  id        String   @id @default(uuid()) // Supabase Auth の user.id と同一想定
+  name      String?
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  contentss Contents[] // ユーザーが投稿したツール
+}
+
+model Contents {
+  id            Int          @id @default(autoincrement())
+  title         String
+  document      String
+  type          ContentsType
+  deliveryType  DeliveryType
+  url           String?
+  filePath      String?
+  description   String?
+  category      String
+  tags          String[]
+  starRating    Int          @default(0)
+  downloadCount Int          @default(0)
+  isPublished   Boolean      @default(false)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
 }
