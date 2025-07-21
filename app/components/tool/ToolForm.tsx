@@ -101,7 +101,7 @@ export function ToolForm({ defaultValues, id }: Props) {
       document: data.document,
       type: "TOOL",
       category: data.category,
-      tags: data.tags ? data.tags.split(/\s*,\s*/) : [],
+      tags: data.tags,
       description: data.description || null,
       deliveryType: data.deliveryType,
       url: safeUrl,
@@ -127,7 +127,6 @@ export function ToolForm({ defaultValues, id }: Props) {
       router.push("/tool");
     } else {
       alert("送信に失敗しました");
-      console.error("送信失敗");
     }
   };
 
