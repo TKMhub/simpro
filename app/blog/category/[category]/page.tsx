@@ -6,9 +6,10 @@ import { Breadcrumbs } from "@/app/components/blog/Breadcrumbs";
 import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
 import Script from "next/script";
 
-export default async function CategoryPage({ params }: any) {
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> | { category: string } }) {
   const allPosts: BlogPost[] = await getPublishedArticles();
-  const category = decodeURIComponent(params.category);
+  const { category: raw } = await params;
+  const category = decodeURIComponent(raw);
 
   const filtered = allPosts.filter((post) => post.category === category);
 

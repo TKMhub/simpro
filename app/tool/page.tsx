@@ -3,6 +3,8 @@ import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
 import Script from "next/script";
 import { ToolBreadcrumbs } from "../components/tool/ToolBreadcrumbs";
 import { ToolGrid } from "../components/tool/ToolGrid";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function ToolsPage() {
   const tools = await getPublishedTools();
@@ -20,7 +22,12 @@ export default async function ToolsPage() {
       </Script>
 
       <ToolBreadcrumbs />
-      <h1 className="py-4 mt-8 text-2xl text-gray-800">ツール一覧</h1>
+      <div className="flex items-center justify-between py-4 mt-8">
+        <h1 className="text-2xl text-gray-800">ツール一覧</h1>
+        <Link href="/tool/new">
+          <Button size="sm">新規登録</Button>
+        </Link>
+      </div>
       <div className="py-2">
         <ToolGrid tools={tools} />
       </div>
