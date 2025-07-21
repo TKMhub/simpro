@@ -9,7 +9,13 @@ import * as z from "zod";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
@@ -80,7 +86,7 @@ export function ToolForm({ defaultValues, id }: Props) {
 
   useEffect(() => {
     if (!defaultValues?.document) {
-      form.setValue("document", `tool-${crypto.randomUUID()}`);
+      form.setValue("document", `${crypto.randomUUID()}`);
     }
   }, [defaultValues?.document, form]);
 
@@ -120,7 +126,10 @@ export function ToolForm({ defaultValues, id }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 max-w-md mx-auto">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4 max-w-md mx-auto"
+      >
         <FormField
           control={form.control}
           name="title"
@@ -246,7 +255,10 @@ export function ToolForm({ defaultValues, id }: Props) {
           render={({ field }) => (
             <FormItem className="flex flex-row items-center gap-2">
               <FormControl>
-                <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
               </FormControl>
               <FormLabel>公開する</FormLabel>
             </FormItem>
