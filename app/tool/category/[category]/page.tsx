@@ -5,8 +5,13 @@ import { ToolBreadcrumbs } from "@/app/components/tool/ToolBreadcrumbs";
 import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
 import Script from "next/script";
 
-export default async function ToolCategoryPage({ params }: { params: { category: string } }) {
-  const category = decodeURIComponent(params.category);
+export default async function ToolCategoryPage({
+  params,
+}: {
+  params: Promise<{ category: string }> | { category: string };
+}) {
+  const { category: raw } = await params;
+  const category = decodeURIComponent(raw);
   const tools = await getToolsByCategory(category);
 
   if (tools.length === 0) {

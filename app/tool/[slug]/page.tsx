@@ -8,8 +8,13 @@ import Image from "next/image";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 
-export default async function ToolDetailPage({ params }: { params: { slug: string } }) {
-  const slug = decodeURIComponent(params.slug);
+export default async function ToolDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }> | { slug: string };
+}) {
+  const { slug: raw } = await params;
+  const slug = decodeURIComponent(raw);
   const tool = await getToolBySlug(slug);
 
   if (!tool) {
