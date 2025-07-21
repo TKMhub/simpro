@@ -74,8 +74,12 @@ async function supabaseRequest<T>(
   return body ? ((await res.json()) as T) : (undefined as T);
 }
 
-export async function createContent(data: Partial<Contents>): Promise<Contents> {
-  const result = await supabaseRequest<Contents[]>("POST", "Contents", "", [data]);
+export async function createContent(
+  data: Partial<Contents>
+): Promise<Contents> {
+  const result = await supabaseRequest<Contents[]>("POST", "Contents", "", [
+    data,
+  ]);
   return result[0];
 }
 
@@ -84,7 +88,12 @@ export async function updateContent(
   data: Partial<Contents>
 ): Promise<Contents> {
   const params = new URLSearchParams({ id: `eq.${id}` }).toString();
-  const result = await supabaseRequest<Contents[]>("PATCH", "Contents", params, data);
+  const result = await supabaseRequest<Contents[]>(
+    "PATCH",
+    "Contents",
+    params,
+    data
+  );
   return result[0];
 }
 
@@ -94,22 +103,24 @@ export async function deleteContent(id: number): Promise<void> {
 }
 
 export async function uploadFile(
-  file: ArrayBuffer | Buffer,
+  file: ArrayBuffer,
   filename: string,
   contentType: string
 ): Promise<string> {
   const uniqueName = `${randomUUID()}-${filename}`;
   const url = `${SUPABASE_URL}/storage/v1/object/${SUPABASE_BUCKET}/${uniqueName}`;
 
+  const blob = new Blob([file], { type: contentType });
+
   const res = await fetch(url, {
-    method: "POST",
+    method: "PUT",
     headers: {
       apikey: SUPABASE_SERVICE_ROLE_KEY,
       Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
       "Content-Type": contentType,
       "x-upsert": "true",
     },
-    body: file,
+    body: blob,
   });
 
   if (!res.ok) {
