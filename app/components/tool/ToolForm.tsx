@@ -92,17 +92,23 @@ export function ToolForm({ defaultValues, id }: Props) {
 
   const onSubmit = async (data: FormValues) => {
     setLoading(true);
-    const fields: any = {
-      title: data.title,
+
+    const safeTitle = data.title.trim() || "無題ツール";
+    const safeUrl = data.url?.trim() || null;
+
+    const fields: Partial<Contents> = {
+      title: safeTitle,
       document: data.document,
       type: "TOOL",
       category: data.category,
       tags: data.tags ? data.tags.split(/\s*,\s*/) : [],
-      description: data.description,
+      description: data.description || null,
       deliveryType: data.deliveryType,
-      url: data.url,
-      isPublished: data.isPublished,
+      url: safeUrl,
+      isPublished: data.isPublished ?? false,
       authorId: data.authorId,
+      starRating: 0,
+      downloadCount: 0,
     };
 
     const formData = new FormData();
@@ -121,6 +127,7 @@ export function ToolForm({ defaultValues, id }: Props) {
       router.push("/tool");
     } else {
       alert("送信に失敗しました");
+      console.error("送信失敗");
     }
   };
 

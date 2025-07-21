@@ -1,11 +1,23 @@
+import { createClient } from "@supabase/supabase-js";
+import { Contents } from "@/types/contents";
+
+// ------------------------------
+// 環境変数
+// ------------------------------
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const SUPABASE_BUCKET = process.env.NEXT_PUBLIC_SUPABASE_BUCKET ?? "public";
 
-import { randomUUID } from "crypto";
+// ------------------------------
+// Supabase クライアント
+// ------------------------------
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+export const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 
-import { Contents } from "@/types/contents";
-
+// ------------------------------
+// DB操作系
+// ------------------------------
 async function supabaseFetch<T>(path: string, params: string) {
   const url = `${SUPABASE_URL}/rest/v1/${path}?${params}`;
   const res = await fetch(url, {
@@ -102,48 +114,41 @@ export async function deleteContent(id: number): Promise<void> {
   await supabaseRequest("DELETE", "Contents", params);
 }
 
+// ------------------------------
+// ファイル操作系（Storage）
+// ------------------------------
+
+//ファイル新規作成
 export async function uploadFile(
   file: ArrayBuffer,
   filename: string,
   contentType: string
 ): Promise<string> {
-  const uniqueName = `${randomUUID()}-${filename}`;
-  const url = `${SUPABASE_URL}/storage/v1/object/${SUPABASE_BUCKET}/${uniqueName}`;
+  const { error } = await supabase.storage
+    .from("contents")
+    .upload(filename, file, {
+      contentType,
+      upsert: true,
+    });
 
-  const blob = new Blob([file], { type: contentType });
-
-  const res = await fetch(url, {
-    method: "PUT",
-    headers: {
-      apikey: SUPABASE_SERVICE_ROLE_KEY,
-      Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
-      "Content-Type": contentType,
-      "x-upsert": "true",
-    },
-    body: blob,
-  });
-
-  if (!res.ok) {
-    throw new Error(`Supabase file upload failed: ${res.status}`);
+  if (error) {
+    throw new Error(`Supabase file upload failed: ${error.message}`);
   }
 
-  return `${SUPABASE_URL}/storage/v1/object/public/${SUPABASE_BUCKET}/${uniqueName}`;
+  return `${SUPABASE_URL}/storage/v1/object/public/contents/${filename}`;
 }
 
+//ファイル削除
 export async function deleteFile(fileUrl: string): Promise<void> {
   if (!fileUrl) return;
+
   const prefix = `${SUPABASE_URL}/storage/v1/object/public/${SUPABASE_BUCKET}/`;
   if (!fileUrl.startsWith(prefix)) return;
+
   const path = fileUrl.slice(prefix.length);
-  const url = `${SUPABASE_URL}/storage/v1/object/${SUPABASE_BUCKET}/${path}`;
-  const res = await fetch(url, {
-    method: "DELETE",
-    headers: {
-      apikey: SUPABASE_SERVICE_ROLE_KEY,
-      Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
-    },
-  });
-  if (!res.ok && res.status !== 404) {
-    throw new Error(`Supabase file delete failed: ${res.status}`);
+  const { error } = await supabase.storage.from(SUPABASE_BUCKET).remove([path]);
+
+  if (error) {
+    throw new Error(`Supabase file delete failed: ${error.message}`);
   }
 }

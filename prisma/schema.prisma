@@ -26,7 +26,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  contentss Contents[] // ユーザーが投稿したツール
+  contents Contents[] // ユーザーが投稿したツール
 }
 
 model Contents {
@@ -35,11 +35,11 @@ model Contents {
   document      String
   type          ContentsType
   deliveryType  DeliveryType
-  url           String?
-  filePath      String?
-  description   String?
+  url           String?      @db.Text
+  filePath      String?      @db.Text
+  description   String?      @db.Text
   category      String
-  tags          String[]
+  tags          String[] // PostgreSQL の text[] 型
   starRating    Int          @default(0)
   downloadCount Int          @default(0)
   isPublished   Boolean      @default(false)
