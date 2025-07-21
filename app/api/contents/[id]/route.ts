@@ -4,6 +4,7 @@ import {
   updateContent,
   deleteContent,
   uploadFile,
+  deleteFile,
 } from '@/lib/supabase';
 import { getPageContentByTitle } from '@/lib/notion';
 
@@ -26,6 +27,10 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   const id = parseInt(params.id, 10);
+  const original = await getContentById(id);
+  if (!original) {
+    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  }
   const form = await request.formData();
   const json = form.get('data');
   if (typeof json !== 'string') {
@@ -38,6 +43,16 @@ export async function PUT(
     const buffer = Buffer.from(await file.arrayBuffer());
     const url = await uploadFile(buffer, file.name, file.type);
     fields.filePath = url;
+    if (original.filePath) {
+      await deleteFile(original.filePath);
+    }
+  } else if (
+    fields.deliveryType === 'URL' &&
+    original.deliveryType === 'FILE' &&
+    original.filePath
+  ) {
+    await deleteFile(original.filePath);
+    fields.filePath = null;
   }
 
   const updated = await updateContent(id, fields);
@@ -49,6 +64,13 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   const id = parseInt(params.id, 10);
+  const content = await getContentById(id);
+  if (!content) {
+    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  }
+  if (content.filePath) {
+    await deleteFile(content.filePath);
+  }
   await deleteContent(id);
   return NextResponse.json({ success: true });
 }

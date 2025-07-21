@@ -6,21 +6,21 @@ import { tagColors } from "@/lib/utils/tag_color";
 
 export function ToolCard({ tool }: { tool: Tool }) {
   return (
-    <Link
-      href={`/tool/${tool.slug}`}
-      className="block rounded-xl shadow bg-white overflow-hidden hover:shadow-md transition"
-    >
-      <Image
-        src={tool.imageUrl}
-        alt={tool.title}
-        width={600}
-        height={400}
-        className="w-full h-48 object-cover"
-      />
+    <div className="rounded-xl shadow bg-white overflow-hidden hover:shadow-md transition">
+      <Link href={`/tool/${tool.slug}`}> 
+        <Image
+          src={tool.imageUrl}
+          alt={tool.title}
+          width={600}
+          height={400}
+          className="w-full h-48 object-cover"
+        />
+      </Link>
       <div className="p-4 space-y-2">
-        <h3 className="text-lg font-semibold">
+        <Link href={`/tool/${tool.slug}`}
+          className="text-lg font-semibold hover:underline block">
           {tool.title}（{tool.category}）
-        </h3>
+        </Link>
         <p className="text-sm text-gray-600">{tool.description}</p>
         <div className="flex justify-between text-xs text-gray-500">
           <span>{tool.date}</span>
@@ -38,10 +38,31 @@ export function ToolCard({ tool }: { tool: Tool }) {
             </span>
           ))}
         </div>
-        <span className="inline-block mt-2 text-sm text-blue-600 hover:underline">
-          詳細はこちら
-        </span>
+        <div className="flex justify-between items-center mt-2">
+          <Link href={`/tool/${tool.slug}`} className="text-sm text-blue-600 hover:underline">
+            詳細はこちら
+          </Link>
+          {tool.buttonType === 'download' && tool.buttonUrl ? (
+            <a
+              href={tool.buttonUrl}
+              download
+              className="text-sm text-blue-600 hover:underline"
+            >
+              ダウンロード
+            </a>
+          ) : null}
+          {tool.buttonType === 'link' && tool.buttonUrl ? (
+            <a
+              href={tool.buttonUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-blue-600 hover:underline"
+            >
+              外部リンク
+            </a>
+          ) : null}
+        </div>
       </div>
-    </Link>
+    </div>
   );
 }
