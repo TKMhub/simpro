@@ -113,7 +113,7 @@ export async function uploadFile(
   const blob = new Blob([file], { type: contentType });
 
   const res = await fetch(url, {
-    method: "PUT",
+    method: "POST",
     headers: {
       apikey: SUPABASE_SERVICE_ROLE_KEY,
       Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
