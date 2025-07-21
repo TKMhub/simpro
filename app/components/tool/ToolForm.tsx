@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -78,6 +78,12 @@ export function ToolForm({ defaultValues, id }: Props) {
     },
   });
 
+  useEffect(() => {
+    if (!defaultValues?.document) {
+      form.setValue("document", `tool-${crypto.randomUUID()}`);
+    }
+  }, [defaultValues?.document, form]);
+
   const onSubmit = async (data: FormValues) => {
     setLoading(true);
     const fields: any = {
@@ -114,7 +120,7 @@ export function ToolForm({ defaultValues, id }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 max-w-md mx-auto">
         <FormField
           control={form.control}
           name="title"
@@ -122,7 +128,7 @@ export function ToolForm({ defaultValues, id }: Props) {
             <FormItem>
               <FormLabel>タイトル</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} className="max-w-md" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -135,7 +141,7 @@ export function ToolForm({ defaultValues, id }: Props) {
             <FormItem>
               <FormLabel>ドキュメントID</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} className="max-w-md" readOnly />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -148,7 +154,7 @@ export function ToolForm({ defaultValues, id }: Props) {
             <FormItem>
               <FormLabel>カテゴリー</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} className="max-w-md" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -161,7 +167,7 @@ export function ToolForm({ defaultValues, id }: Props) {
             <FormItem>
               <FormLabel>タグ（カンマ区切り）</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} className="max-w-md" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -174,7 +180,7 @@ export function ToolForm({ defaultValues, id }: Props) {
             <FormItem>
               <FormLabel>説明</FormLabel>
               <FormControl>
-                <Textarea rows={5} {...field} />
+                <Textarea rows={5} {...field} className="max-w-md" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -188,7 +194,7 @@ export function ToolForm({ defaultValues, id }: Props) {
               <FormLabel>配布方法</FormLabel>
               <FormControl>
                 <Select value={field.value} onValueChange={field.onChange}>
-                  <SelectTrigger>
+                  <SelectTrigger className="max-w-md bg-white hover:bg-gray-50">
                     <SelectValue placeholder="選択" />
                   </SelectTrigger>
                   <SelectContent>
@@ -209,7 +215,7 @@ export function ToolForm({ defaultValues, id }: Props) {
               <FormItem>
                 <FormLabel>URL</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} className="max-w-md" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -223,7 +229,11 @@ export function ToolForm({ defaultValues, id }: Props) {
               <FormItem>
                 <FormLabel>ファイル</FormLabel>
                 <FormControl>
-                  <Input type="file" onChange={(e) => field.onChange(e.target.files?.[0])} />
+                  <Input
+                    type="file"
+                    onChange={(e) => field.onChange(e.target.files?.[0])}
+                    className="max-w-md"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -249,14 +259,18 @@ export function ToolForm({ defaultValues, id }: Props) {
             <FormItem>
               <FormLabel>作者ID</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} className="max-w-md" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <div className="pt-4">
-          <Button type="submit" disabled={loading}>
+          <Button
+            type="submit"
+            disabled={loading}
+            className="bg-blue-600 text-white hover:bg-blue-700"
+          >
             {loading ? "送信中..." : "保存"}
           </Button>
         </div>
