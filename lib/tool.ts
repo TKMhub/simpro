@@ -14,7 +14,10 @@ function mapContentsToTool(item: Contents): Tool {
     tags: item.tags,
     slug: item.id.toString(),
     buttonType: item.deliveryType === 'FILE' ? 'download' : 'link',
-    buttonUrl: item.url ?? '',
+    buttonUrl:
+      item.deliveryType === 'FILE'
+        ? item.filePath ?? ''
+        : item.url ?? '',
   };
 }
 

@@ -118,3 +118,21 @@ export async function uploadFile(
 
   return `${SUPABASE_URL}/storage/v1/object/public/${SUPABASE_BUCKET}/${uniqueName}`;
 }
+
+export async function deleteFile(fileUrl: string): Promise<void> {
+  if (!fileUrl) return;
+  const prefix = `${SUPABASE_URL}/storage/v1/object/public/${SUPABASE_BUCKET}/`;
+  if (!fileUrl.startsWith(prefix)) return;
+  const path = fileUrl.slice(prefix.length);
+  const url = `${SUPABASE_URL}/storage/v1/object/${SUPABASE_BUCKET}/${path}`;
+  const res = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      apikey: SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+    },
+  });
+  if (!res.ok && res.status !== 404) {
+    throw new Error(`Supabase file delete failed: ${res.status}`);
+  }
+}
