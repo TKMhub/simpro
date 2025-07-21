@@ -2,8 +2,13 @@ import { notFound } from "next/navigation";
 import { ToolForm } from "@/app/components/tool/ToolForm";
 import { getContentById } from "@/lib/supabase";
 
-export default async function EditToolPage({ params }: { params: { slug: string } }) {
-  const id = Number(params.slug);
+export default async function EditToolPage({
+  params,
+}: {
+  params: Promise<{ slug: string }> | { slug: string };
+}) {
+  const { slug } = await params;
+  const id = Number(slug);
   const content = await getContentById(id);
 
   if (!content || content.type !== "TOOL") {

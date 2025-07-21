@@ -10,9 +10,10 @@ import { getPageContentByTitle } from '@/lib/notion';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> | { id: string } }
 ) {
-  const id = parseInt(params.id, 10);
+  const { id: raw } = await params;
+  const id = parseInt(raw, 10);
   const content = await getContentById(id);
   if (!content) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
@@ -24,9 +25,10 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> | { id: string } }
 ) {
-  const id = parseInt(params.id, 10);
+  const { id: raw } = await params;
+  const id = parseInt(raw, 10);
   const original = await getContentById(id);
   if (!original) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
@@ -61,9 +63,10 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> | { id: string } }
 ) {
-  const id = parseInt(params.id, 10);
+  const { id: raw } = await params;
+  const id = parseInt(raw, 10);
   const content = await getContentById(id);
   if (!content) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
