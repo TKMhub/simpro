@@ -101,7 +101,10 @@ export function ToolForm({ defaultValues, id }: Props) {
       document: data.document,
       type: "TOOL",
       category: data.category,
-      tags: data.tags,
+      tags: `{${(data.tags ?? "")
+        .split(/\s*,\s*/)
+        .map((tag) => `"${tag}"`)
+        .join(",")}}`,
       description: data.description || null,
       deliveryType: data.deliveryType,
       url: safeUrl,

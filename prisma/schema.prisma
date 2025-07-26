@@ -39,12 +39,12 @@ model Contents {
   filePath      String?      @db.Text
   description   String?      @db.Text
   category      String
-  tags          String[] // PostgreSQL の text[] 型
+  tags          String[]     @db.Text // PostgreSQL の text[] 型として扱う
   starRating    Int          @default(0)
   downloadCount Int          @default(0)
   isPublished   Boolean      @default(false)
   createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  updatedAt     DateTime     @default(now()) // ← REST API から明示的に送信が必要
 
   author   User   @relation(fields: [authorId], references: [id])
   authorId String
