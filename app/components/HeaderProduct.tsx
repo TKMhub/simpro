@@ -10,9 +10,9 @@ import SimproSvg from "@/public/Simplo_gray_main_sub.svg";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
-const categories = ["Webツール", "Gas", "Excel VBA", "Executable File"];
-
-export function HeaderTool() {
+const toolCategories = ["Webツール", "Gas", "Excel VBA", "Executable File"];
+const templateCategories = ["Webサイトテンプレート", "Webアプリテンプレート"];
+export function HeaderProduct() {
   const [hideHeader, setHideHeader] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,7 +39,7 @@ export function HeaderTool() {
             <Link href="/" className="text-xl font-bold">
               <Image src={SimproSvg} alt="Simpro Logo" width={100} height={40} priority />
             </Link>
-            <p className="text-black text-xl"> - Tools</p>
+            <p className="text-black text-xl"> - Products</p>
           </div>
           <NavigationMenu className="hidden md:block">
             <NavigationMenuList className="space-x-6">
@@ -91,18 +91,38 @@ export function HeaderTool() {
         </div>
       </div>
       <nav className="bg-neutral-800 py-3">
-        <ul className="flex justify-center gap-8">
-          {categories.map((category) => (
-            <li key={category}>
-              <Link
-                href={`/tool/category/${encodeURIComponent(category)}`}
-                className="text-white text-lg tracking-wide hover:underline transition"
-              >
-                {category}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="flex justify-center gap-12">
+          <div>
+            <p className="text-white text-sm mb-1">tool</p>
+            <ul className="flex gap-4">
+              {toolCategories.map((category) => (
+                <li key={category}>
+                  <Link
+                    href={`/product/category/${encodeURIComponent(category)}`}
+                    className="text-white text-lg hover:underline transition"
+                  >
+                    {category}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-white text-sm mb-1">template</p>
+            <ul className="flex gap-4">
+              {templateCategories.map((category) => (
+                <li key={category}>
+                  <Link
+                    href={`/product/category/${encodeURIComponent(category)}`}
+                    className="text-white text-lg hover:underline transition"
+                  >
+                    {category}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </nav>
     </header>
   );

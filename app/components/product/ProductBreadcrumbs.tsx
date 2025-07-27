@@ -19,16 +19,16 @@ type Crumb = {
   href?: string;
 };
 
-export function ToolBreadcrumbs({ category, title }: BreadcrumbsProps) {
+export function ProductBreadcrumbs({ category, title }: BreadcrumbsProps) {
   const items: Crumb[] = [
     { name: "Home", href: "/" },
-    { name: "Tools", href: "/tool" },
+    { name: "Products", href: "/product" },
   ];
 
   if (category) {
     items.push({
       name: category,
-      href: `/tool/category/${encodeURIComponent(category)}`,
+      href: `/product/category/${encodeURIComponent(category)}`,
     });
   }
 

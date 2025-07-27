@@ -1,4 +1,4 @@
-export type Contents = {
+export type ProductRecord = {
   id: number;
   title: string;
   document: string;

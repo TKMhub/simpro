@@ -9,7 +9,7 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-enum ContentsType {
+enum ProductType {
   TOOL
   TEMPLATE
 }
@@ -26,14 +26,14 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  contents Contents[] // ユーザーが投稿したツール
+  products Products[] // ユーザーが投稿したツール
 }
 
-model Contents {
+model Products {
   id            Int          @id @default(autoincrement())
   title         String
   document      String
-  type          ContentsType
+  type          ProductType
   deliveryType  DeliveryType
   url           String?      @db.Text
   filePath      String?      @db.Text

@@ -1,18 +1,18 @@
 import { NextResponse } from "next/server";
 import {
-  getPublishedContents,
-  createContent,
+  fetchPublishedProducts,
+  createProduct,
   uploadFile,
 } from "@/lib/supabase";
 
-type FormFields = Omit<Parameters<typeof createContent>[0], "filePath"> & {
+type FormFields = Omit<Parameters<typeof createProduct>[0], "filePath"> & {
   file?: File | null;
   filePath?: string;
 };
 
 export async function GET() {
-  const contents = await getPublishedContents();
-  return NextResponse.json(contents);
+  const products = await fetchPublishedProducts();
+  return NextResponse.json(products);
 }
 
 export async function POST(request: Request) {
@@ -32,6 +32,6 @@ export async function POST(request: Request) {
 
   console.log("fields", fields);
 
-  const created = await createContent(fields);
+  const created = await createProduct(fields);
   return NextResponse.json(created, { status: 201 });
 }

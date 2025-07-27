@@ -6,7 +6,7 @@ import { Wrench } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-type Tool = {
+type Product = {
   title: string;
   description: string;
   date: string;
@@ -14,7 +14,7 @@ type Tool = {
   slug: string;
 };
 
-const tools: Tool[] = [
+const products: Product[] = [
   {
     title: "Excel業務自動化マクロ集",
     description: "日報・勤怠・メール送信など、定型業務を一括自動化。",
@@ -59,7 +59,7 @@ const tools: Tool[] = [
   },
 ];
 
-export function ToolIntroSection() {
+export function ProductIntroSection() {
   const [visibleCount, setVisibleCount] = useState(6);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export function ToolIntroSection() {
 
   return (
     <section
-      id="toolIntro"
+      id="productIntro"
       className="relative min-h-[calc(100vh-64px)] py-[64px] px-4 bg-gradient-to-b from-gray-50 via-white to-gray-50"
     >
       <motion.div
@@ -88,7 +88,7 @@ export function ToolIntroSection() {
         <div className="flex justify-center items-center gap-2 text-green-600">
           <Wrench size={28} />
           <span className="text-sm font-medium tracking-wide uppercase">
-            自動化ツール配布
+            プロダクト配布
           </span>
         </div>
 
@@ -97,13 +97,13 @@ export function ToolIntroSection() {
         </h2>
 
         <p className="text-gray-600 max-w-xl mx-auto">
-          ExcelマクロやVBA、自作ツールなどを無料・一部有料で提供。
-          作業効率を劇的に改善する仕組みを体験できます。
+          ツールやテンプレートを無料・一部有料で提供。
+          作業効率を劇的に改善するアイテムを体験できます。
         </p>
 
         {/* カード一覧 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tools.slice(0, visibleCount).map((tool, i) => (
+          {products.slice(0, visibleCount).map((tool, i) => (
             <motion.div
               key={i}
               className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition"

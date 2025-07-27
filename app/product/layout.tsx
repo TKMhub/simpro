@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { HeaderTool } from "../components/HeaderTool";
+import { HeaderProduct } from "../components/HeaderProduct";
 import { Footer } from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Tools",
-  description: "Tool distribution",
+  title: "Products",
+  description: "Product distribution",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <HeaderTool />
+      <HeaderProduct />
       <main className="mt-[130px]">{children}</main>
       <Footer />
     </div>

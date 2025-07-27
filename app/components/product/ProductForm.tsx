@@ -26,7 +26,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import type { Contents } from "@/types/contents";
+import type { ProductRecord } from "@/types/productRecord";
 
 const schema = z
   .object({
@@ -64,7 +64,7 @@ type Props = {
   id?: number;
 };
 
-export function ToolForm({ defaultValues, id }: Props) {
+export function ProductForm({ defaultValues, id }: Props) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -93,10 +93,10 @@ export function ToolForm({ defaultValues, id }: Props) {
   const onSubmit = async (data: FormValues) => {
     setLoading(true);
 
-    const safeTitle = data.title.trim() || "無題ツール";
+    const safeTitle = data.title.trim() || "無題プロダクト";
     const safeUrl = data.url?.trim() || null;
 
-    const fields: Partial<Contents> = {
+    const fields: Partial<ProductRecord> = {
       title: safeTitle,
       document: data.document,
       type: "TOOL",
@@ -120,14 +120,14 @@ export function ToolForm({ defaultValues, id }: Props) {
       formData.append("file", data.file);
     }
 
-    const res = await fetch(id ? `/api/contents/${id}` : "/api/contents", {
+    const res = await fetch(id ? `/api/products/${id}` : "/api/products", {
       method: id ? "PUT" : "POST",
       body: formData,
     });
 
     setLoading(false);
     if (res.ok) {
-      router.push("/tool");
+      router.push("/product");
     } else {
       alert("送信に失敗しました");
     }
