@@ -32,6 +32,7 @@ const schema = z
   .object({
     title: z.string().min(1, "必須項目です"),
     document: z.string().min(1, "必須項目です"),
+    type: z.enum(["TOOL", "TEMPLATE"]),
     category: z.string().min(1, "必須項目です"),
     tags: z.string().optional(),
     description: z.string().optional(),
@@ -73,6 +74,7 @@ export function ProductForm({ defaultValues, id }: Props) {
     defaultValues: {
       title: defaultValues?.title ?? "",
       document: defaultValues?.document ?? "",
+      type: (defaultValues?.type as "TOOL" | "TEMPLATE") ?? "TOOL",
       category: defaultValues?.category ?? "",
       tags: defaultValues?.tags ?? "",
       description: defaultValues?.description ?? "",
@@ -99,7 +101,7 @@ export function ProductForm({ defaultValues, id }: Props) {
     const fields: Partial<ProductRecord> = {
       title: safeTitle,
       document: data.document,
-      type: "TOOL",
+      type: data.type,
       category: data.category,
       tags: `{${(data.tags ?? "")
         .split(/\s*,\s*/)
@@ -160,6 +162,27 @@ export function ProductForm({ defaultValues, id }: Props) {
               <FormLabel>ドキュメントID</FormLabel>
               <FormControl>
                 <Input {...field} className="max-w-md" readOnly />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="type"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>種類</FormLabel>
+              <FormControl>
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger className="max-w-md bg-white hover:bg-gray-50">
+                    <SelectValue placeholder="選択" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="TOOL">tool</SelectItem>
+                    <SelectItem value="TEMPLATE">template</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>
