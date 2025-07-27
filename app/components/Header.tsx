@@ -24,11 +24,13 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 bg-white transition-all duration-300 shadow ${
-        scrolled ? "py-2" : "py-4"
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 backdrop-blur-md shadow-md border-b"
+          : "bg-transparent"
+      } ${scrolled ? "py-2" : "py-4"}`}
     >
-      <div className="container mx-auto flex items-center justify-between px-4">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4">
         <Link href="/" className="text-xl font-bold">
           <Image
             src={SimproSvg}
@@ -41,7 +43,7 @@ export function Header() {
 
         {/* Desktopメニュー */}
         <NavigationMenu className="hidden md:block">
-          <NavigationMenuList className="space-x-6">
+          <NavigationMenuList className="space-x-8 font-medium tracking-wide">
             <NavigationMenuItem>
               <Link href="#services" className="hover:underline">
                 サービス
@@ -90,7 +92,7 @@ export function Header() {
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
           menuOpen ? "max-h-60 opacity-100 py-4" : "max-h-0 opacity-0 py-0"
-        } bg-white px-6`}
+        } bg-white/90 backdrop-blur-md px-6`}
       >
         <ul className="space-y-4 text-base">
           <li>

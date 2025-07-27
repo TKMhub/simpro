@@ -25,7 +25,9 @@ export default async function ProductsPage() {
       <div className="flex items-center justify-between py-4 mt-8">
         <h1 className="text-2xl text-gray-800">プロダクト一覧</h1>
         <Link href="/product/new">
-          <Button size="sm">新規登録</Button>
+          <Button size="sm" className="bg-blue-600 text-white hover:bg-blue-700">
+            新規登録
+          </Button>
         </Link>
       </div>
       <div className="py-2">
