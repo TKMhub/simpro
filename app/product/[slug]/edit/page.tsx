@@ -1,15 +1,15 @@
 import { notFound } from "next/navigation";
-import { ToolForm } from "@/app/components/tool/ToolForm";
-import { getContentById } from "@/lib/supabase";
+import { ProductForm } from "@/app/components/product/ProductForm";
+import { fetchProductById } from "@/lib/supabase";
 
-export default async function EditToolPage({
+export default async function EditProductPage({
   params,
 }: {
   params: Promise<{ slug: string }> | { slug: string };
 }) {
   const { slug } = await params;
   const id = Number(slug);
-  const content = await getContentById(id);
+  const content = await fetchProductById(id);
 
   if (!content || content.type !== "TOOL") {
     notFound();
@@ -17,8 +17,8 @@ export default async function EditToolPage({
 
   return (
     <section className="p-4">
-      <h1 className="text-xl font-bold mb-4">ツール編集</h1>
-      <ToolForm
+      <h1 className="text-xl font-bold mb-4">プロダクト編集</h1>
+      <ProductForm
         id={content.id}
         defaultValues={{
           title: content.title,

@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { Contents } from "@/types/contents";
+import { ProductRecord } from "@/types/productRecord";
 
 // ------------------------------
 // 環境変数
@@ -33,22 +33,22 @@ async function supabaseFetch<T>(path: string, params: string) {
   return (await res.json()) as T;
 }
 
-export async function getPublishedContents(): Promise<Contents[]> {
+export async function fetchPublishedProducts(): Promise<ProductRecord[]> {
   const params = new URLSearchParams({
     select: "*",
     isPublished: "eq.true",
   }).toString();
-  return supabaseFetch<Contents[]>("Contents", params);
+  return supabaseFetch<ProductRecord[]>("Products", params);
 }
 
-export async function getContentById(
+export async function fetchProductById(
   id: number
-): Promise<Contents | undefined> {
+): Promise<ProductRecord | undefined> {
   const params = new URLSearchParams({
     select: "*",
     id: `eq.${id}`,
   }).toString();
-  const data = await supabaseFetch<Contents[]>("Contents", params);
+  const data = await supabaseFetch<ProductRecord[]>("Products", params);
   return data[0];
 }
 
@@ -86,32 +86,32 @@ async function supabaseRequest<T>(
   return body ? ((await res.json()) as T) : (undefined as T);
 }
 
-export async function createContent(
-  data: Partial<Contents>
-): Promise<Contents> {
-  const result = await supabaseRequest<Contents[]>("POST", "Contents", "", [
+export async function createProduct(
+  data: Partial<ProductRecord>
+): Promise<ProductRecord> {
+  const result = await supabaseRequest<ProductRecord[]>("POST", "Products", "", [
     data,
   ]);
   return result[0];
 }
 
-export async function updateContent(
+export async function updateProduct(
   id: number,
-  data: Partial<Contents>
-): Promise<Contents> {
+  data: Partial<ProductRecord>
+): Promise<ProductRecord> {
   const params = new URLSearchParams({ id: `eq.${id}` }).toString();
-  const result = await supabaseRequest<Contents[]>(
+  const result = await supabaseRequest<ProductRecord[]>(
     "PATCH",
-    "Contents",
+    "Products",
     params,
     data
   );
   return result[0];
 }
 
-export async function deleteContent(id: number): Promise<void> {
+export async function deleteProduct(id: number): Promise<void> {
   const params = new URLSearchParams({ id: `eq.${id}` }).toString();
-  await supabaseRequest("DELETE", "Contents", params);
+  await supabaseRequest("DELETE", "Products", params);
 }
 
 // ------------------------------
@@ -125,7 +125,7 @@ export async function uploadFile(
   contentType: string
 ): Promise<string> {
   const { error } = await supabase.storage
-    .from("contents")
+    .from("products")
     .upload(filename, file, {
       contentType,
       upsert: true,
@@ -135,7 +135,7 @@ export async function uploadFile(
     throw new Error(`Supabase file upload failed: ${error.message}`);
   }
 
-  return `${SUPABASE_URL}/storage/v1/object/public/contents/${filename}`;
+  return `${SUPABASE_URL}/storage/v1/object/public/products/${filename}`;
 }
 
 //ファイル削除

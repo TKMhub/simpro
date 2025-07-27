@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import {
-  getContentById,
-  updateContent,
-  deleteContent,
+  fetchProductById,
+  updateProduct,
+  deleteProduct,
   uploadFile,
   deleteFile,
 } from '@/lib/supabase';
@@ -14,7 +14,7 @@ export async function GET(
 ) {
   const { id: raw } = await params;
   const id = parseInt(raw, 10);
-  const content = await getContentById(id);
+  const content = await fetchProductById(id);
   if (!content) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
@@ -29,7 +29,7 @@ export async function PUT(
 ) {
   const { id: raw } = await params;
   const id = parseInt(raw, 10);
-  const original = await getContentById(id);
+  const original = await fetchProductById(id);
   if (!original) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
@@ -57,7 +57,7 @@ export async function PUT(
     fields.filePath = null;
   }
 
-  const updated = await updateContent(id, fields);
+  const updated = await updateProduct(id, fields);
   return NextResponse.json(updated);
 }
 
@@ -67,13 +67,13 @@ export async function DELETE(
 ) {
   const { id: raw } = await params;
   const id = parseInt(raw, 10);
-  const content = await getContentById(id);
+  const content = await fetchProductById(id);
   if (!content) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
   if (content.filePath) {
     await deleteFile(content.filePath);
   }
-  await deleteContent(id);
+  await deleteProduct(id);
   return NextResponse.json({ success: true });
 }

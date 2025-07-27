@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { Tool } from "@/types/tool";
+import { Product } from "@/types/product";
 import { tagColors } from "@/lib/utils/tag_color";
 
-export function ToolCard({ tool }: { tool: Tool }) {
+export function ProductCard({ tool }: { tool: Product }) {
   return (
     <div className="rounded-xl shadow bg-white overflow-hidden hover:shadow-md transition">
-      <Link href={`/tool/${tool.slug}`}>
+      <Link href={`/product/${tool.slug}`}>
         <Image
           src={tool.imageUrl}
           alt={tool.title}
@@ -18,7 +18,7 @@ export function ToolCard({ tool }: { tool: Tool }) {
       </Link>
       <div className="p-4 space-y-2">
         <Link
-          href={`/tool/${tool.slug}`}
+          href={`/product/${tool.slug}`}
           className="text-lg font-semibold hover:underline block"
         >
           {tool.title}（{tool.category}）
@@ -42,7 +42,7 @@ export function ToolCard({ tool }: { tool: Tool }) {
         </div>
         <div className="flex justify-between items-center mt-2">
           <Link
-            href={`/tool/${tool.slug}`}
+          href={`/product/${tool.slug}`}
             className="text-sm text-blue-600 hover:underline"
           >
             詳細はこちら
