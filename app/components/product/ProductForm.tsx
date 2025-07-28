@@ -167,27 +167,50 @@ export function ProductForm({ defaultValues, id }: Props) {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>種類</FormLabel>
-              <FormControl>
-                <Select value={field.value} onValueChange={field.onChange}>
-                  <SelectTrigger className="max-w-md bg-white hover:bg-gray-50">
-                    <SelectValue placeholder="選択" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="TOOL">tool</SelectItem>
-                    <SelectItem value="TEMPLATE">template</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex flex-col sm:flex-row gap-4">
+          <FormField
+            control={form.control}
+            name="type"
+            render={({ field }) => (
+              <FormItem className="w-full sm:w-1/2">
+                <FormLabel>種類</FormLabel>
+                <FormControl>
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger className="w-full bg-white hover:bg-gray-50">
+                      <SelectValue placeholder="選択" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="TOOL">tool</SelectItem>
+                      <SelectItem value="TEMPLATE">template</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="deliveryType"
+            render={({ field }) => (
+              <FormItem className="w-full sm:w-1/2">
+                <FormLabel>配布方法</FormLabel>
+                <FormControl>
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger className="w-full bg-white hover:bg-gray-50">
+                      <SelectValue placeholder="選択" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="FILE">FILE</SelectItem>
+                      <SelectItem value="URL">URL</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <FormField
           control={form.control}
           name="category"
@@ -222,27 +245,6 @@ export function ProductForm({ defaultValues, id }: Props) {
               <FormLabel>説明</FormLabel>
               <FormControl>
                 <Textarea rows={5} {...field} className="max-w-md" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="deliveryType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>配布方法</FormLabel>
-              <FormControl>
-                <Select value={field.value} onValueChange={field.onChange}>
-                  <SelectTrigger className="max-w-md bg-white hover:bg-gray-50">
-                    <SelectValue placeholder="選択" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="FILE">FILE</SelectItem>
-                    <SelectItem value="URL">URL</SelectItem>
-                  </SelectContent>
-                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>
