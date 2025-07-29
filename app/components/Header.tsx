@@ -30,7 +30,7 @@ export function Header() {
         hideHeader ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <div className="border-b bg-white shadow-sm">
+      <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold">
             <Image
