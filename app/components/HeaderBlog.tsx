@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -16,6 +17,7 @@ export function HeaderBlog() {
   const [hideHeader, setHideHeader] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,10 +36,10 @@ export function HeaderBlog() {
       }`}
     >
       {/* 上段: 白背景（ロゴ + メニュー） */}
-      <div className="bg-white shadow">
-        <div className="container mx-auto flex items-center justify-between px-4 py-4">
+      <div className="border-b bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-2">
-            <Link href="/" className="text-xl font-bold">
+            <Link href="/" className="flex items-center gap-2 text-lg font-bold">
               <Image
                 src={SimproSvg}
                 alt="Simpro Logo"
@@ -46,14 +48,19 @@ export function HeaderBlog() {
                 priority
               />
             </Link>
-            <p className="text-black text-xl"> - Blog</p>
+            <span className="text-blue-600 text-lg">- Blog</span>
           </div>
 
           {/* Desktopメニュー */}
           <NavigationMenu className="hidden md:block">
-            <NavigationMenuList className="space-x-6">
+            <NavigationMenuList className="space-x-6 text-sm font-medium">
               <NavigationMenuItem>
-                <Link href="#top" className="hover:underline">
+                <Link
+                  href="#top"
+                  className={
+                    pathname.startsWith("/blog") ? "text-blue-600" : "hover:underline"
+                  }
+                >
                   TOP
                 </Link>
               </NavigationMenuItem>
@@ -89,18 +96,22 @@ export function HeaderBlog() {
         >
           <ul className="space-y-4 text-base">
             <li>
-              <Link href="#top" onClick={() => setMenuOpen(false)}>
-                サービス
+              <Link
+                href="#top"
+                onClick={() => setMenuOpen(false)}
+                className={pathname.startsWith("/blog") ? "text-blue-600" : ""}
+              >
+                TOP
               </Link>
             </li>
             <li>
-              <Link href="#projects" onClick={() => setMenuOpen(false)}>
-                実績
+              <Link href="#category" onClick={() => setMenuOpen(false)}>
+                カテゴリ
               </Link>
             </li>
             <li>
-              <Link href="#contact" onClick={() => setMenuOpen(false)}>
-                お問い合わせ
+              <Link href="#login" onClick={() => setMenuOpen(false)}>
+                ログイン
               </Link>
             </li>
           </ul>
