@@ -46,25 +46,31 @@ export function HeaderProduct() {
           </nav>
         </div>
         <div className="bg-zinc-800 text-white">
-          <div className="max-w-7xl mx-auto px-4 py-2">
+          <div className="max-w-7xl mx-auto px-4 py-3">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-2">
-                <TabsTrigger value="tool" className="capitalize">
+              <TabsList className="mb-3 justify-start gap-2">
+                <TabsTrigger
+                  value="tool"
+                  className="capitalize data-[state=active]:bg-white data-[state=active]:text-zinc-800"
+                >
                   tool
                 </TabsTrigger>
-                <TabsTrigger value="template" className="capitalize">
+                <TabsTrigger
+                  value="template"
+                  className="capitalize data-[state=active]:bg-white data-[state=active]:text-zinc-800"
+                >
                   template
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="tool">
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {toolCategories.map((c) => (
                     <CategoryButton key={c} label={c} />
                   ))}
                 </div>
               </TabsContent>
               <TabsContent value="template">
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {templateCategories.map((c) => (
                     <CategoryButton key={c} label={c} />
                   ))}
