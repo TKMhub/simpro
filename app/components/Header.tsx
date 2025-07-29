@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -11,12 +12,13 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
+  const [hideHeader, setHideHeader] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setHideHeader(window.scrollY > 80);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -24,14 +26,13 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/80 backdrop-blur-md shadow-md border-b"
-          : "bg-transparent"
-      } ${scrolled ? "py-2" : "py-4"}`}
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
+        hideHeader ? "-translate-y-full" : "translate-y-0"
+      }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4">
-        <Link href="/" className="text-xl font-bold">
+      <div className="border-b bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+        <Link href="/" className="flex items-center gap-2 text-lg font-bold">
           <Image
             src={SimproSvg}
             alt="Simpro Logo"
@@ -60,14 +61,28 @@ export function Header() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/blog" className="hover:underline">
+              <Link
+                href="/blog"
+                className={
+                  pathname.startsWith("/blog")
+                    ? "text-blue-600"
+                    : "hover:underline"
+                }
+              >
                 Blog
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-            <Link href="/product" className="hover:underline">
-              Product
-            </Link>
+              <Link
+                href="/product"
+                className={
+                  pathname.startsWith("/product")
+                    ? "text-blue-600"
+                    : "hover:underline"
+                }
+              >
+                Product
+              </Link>
             </NavigationMenuItem>
             {/* <NavigationMenuItem>
               <Link href="/template" className="hover:underline">
@@ -111,12 +126,20 @@ export function Header() {
             </Link>
           </li>
           <li>
-            <Link href="/blog" onClick={() => setMenuOpen(false)}>
+            <Link
+              href="/blog"
+              onClick={() => setMenuOpen(false)}
+              className={pathname.startsWith("/blog") ? "text-blue-600" : ""}
+            >
               Blog
             </Link>
           </li>
           <li>
-            <Link href="/product" onClick={() => setMenuOpen(false)}>
+            <Link
+              href="/product"
+              onClick={() => setMenuOpen(false)}
+              className={pathname.startsWith("/product") ? "text-blue-600" : ""}
+            >
               Product
             </Link>
           </li>
@@ -126,6 +149,7 @@ export function Header() {
             </Link>
           </li> */}
         </ul>
+      </div>
       </div>
     </header>
   );

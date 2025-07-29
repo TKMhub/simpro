@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import SimproSvg from "@/public/Simplo_gray_main_sub.svg";
@@ -12,6 +13,7 @@ const templateCategories = ["Webサイトテンプレート", "Webアプリテ�
 export function HeaderProduct() {
   const [hideHeader, setHideHeader] = useState(false);
   const [activeTab, setActiveTab] = useState("tool");
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,17 +32,25 @@ export function HeaderProduct() {
         <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold">
             <Image src={SimproSvg} alt="Simpro Logo" width={100} height={40} priority />
-            <span className="text-black">- Products</span>
+            <span className="text-blue-600">- Products</span>
           </Link>
           <div className="flex-1 mx-4 hidden md:block" />
           <nav className="flex gap-6 text-sm font-medium">
-            <Link href="/" className="hover:underline">
+            <Link
+              href="/"
+              className={pathname === "/" ? "text-blue-600" : "hover:underline"}
+            >
               TOP
             </Link>
             <Link href="#category" className="hover:underline">
               カテゴリ
             </Link>
-            <Link href="/login" className="hover:underline">
+            <Link
+              href="/login"
+              className={
+                pathname.startsWith("/login") ? "text-blue-600" : "hover:underline"
+              }
+            >
               ログイン
             </Link>
           </nav>
