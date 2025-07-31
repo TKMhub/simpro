@@ -1,4 +1,4 @@
-import { Header } from "@/app/components/Header";
+import { Header } from "@/components/navigation/Header";
 import { HeroSection } from "@/app/components/HeroSection";
 import { ServicesSection } from "@/app/components/ServicesSection";
 import { ProjectsSlider } from "@/app/components/ProjectsSlider";
