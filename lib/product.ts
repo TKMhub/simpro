@@ -46,3 +46,13 @@ export async function getProductsByCategory(category: string): Promise<Product[]
   const products = await getPublishedProducts();
   return products.filter((c) => c.category === category).map(mapRecordToProduct);
 }
+
+export async function getProductsByTypeAndCategory(
+  type: string,
+  category: string
+): Promise<Product[]> {
+  const records = await fetchPublishedProducts();
+  return records
+    .filter((r) => r.type === type && r.category === category)
+    .map(mapRecordToProduct);
+}
