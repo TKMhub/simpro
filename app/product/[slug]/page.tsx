@@ -25,14 +25,21 @@ export default async function ProductDetailPage({
   const breadcrumbItems = [
     { name: "Home", url: `${baseUrl}/` },
     { name: "Products", url: `${baseUrl}/product` },
-    { name: product.category, url: `${baseUrl}/product/category/${encodeURIComponent(product.category)}` },
+    {
+      name: product.category,
+      url: `${baseUrl}/product/${product.type}/${encodeURIComponent(product.category)}`,
+    },
     { name: product.title },
   ];
   const jsonLd = generateBreadcrumbJsonLd(breadcrumbItems);
 
   return (
     <div className="px-20 py-4 mt-8">
-      <ProductBreadcrumbs category={product.category} title={product.title} />
+      <ProductBreadcrumbs
+        type={product.type}
+        category={product.category}
+        title={product.title}
+      />
       <div className="max-w-3xl mx-auto py-12">
         <Script id="breadcrumb-product-jsonld" type="application/ld+json">
           {JSON.stringify(jsonLd)}

@@ -12,6 +12,7 @@ import {
 interface BreadcrumbsProps {
   category?: string;
   title?: string;
+  type?: "tool" | "template";
 }
 
 type Crumb = {
@@ -19,16 +20,17 @@ type Crumb = {
   href?: string;
 };
 
-export function ProductBreadcrumbs({ category, title }: BreadcrumbsProps) {
+export function ProductBreadcrumbs({ category, title, type }: BreadcrumbsProps) {
   const items: Crumb[] = [
     { name: "Home", href: "/" },
     { name: "Products", href: "/product" },
   ];
 
   if (category) {
+    const base = type ? `/product/${type}` : "/product/category";
     items.push({
       name: category,
-      href: `/product/category/${encodeURIComponent(category)}`,
+      href: `${base}/${encodeURIComponent(category)}`,
     });
   }
 
