@@ -77,14 +77,14 @@ export function HeaderProduct() {
                   <TabsContent value="tool" className="sm:mt-0 mt-2">
                     <div className="flex flex-wrap gap-3">
                       {toolCategories.map((c) => (
-                        <CategoryButton key={c} label={c} type="tool" />
+                        <CategoryButton key={c} label={c} />
                       ))}
                     </div>
                   </TabsContent>
                   <TabsContent value="template" className="sm:mt-0 mt-2">
                     <div className="flex flex-wrap gap-3">
                       {templateCategories.map((c) => (
-                        <CategoryButton key={c} label={c} type="template" />
+                        <CategoryButton key={c} label={c} />
                       ))}
                     </div>
                   </TabsContent>

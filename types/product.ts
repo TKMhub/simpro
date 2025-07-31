@@ -1,5 +1,4 @@
 export type Product = {
-  type: "tool" | "template";
   title: string;
   category: string;
   description: string;

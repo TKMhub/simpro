@@ -15,7 +15,6 @@ function mapRecordToProduct(item: ProductRecord): Product {
     : '/Simplo_gray_main_sub.jpg';
 
   return {
-    type: item.type.toLowerCase() as 'tool' | 'template',
     title: item.title,
     category: item.category,
     description: item.description ?? '',
@@ -45,7 +44,7 @@ export async function getProductBySlug(slug: string): Promise<Product | undefine
 
 export async function getProductsByCategory(category: string): Promise<Product[]> {
   const products = await getPublishedProducts();
-  return products.filter((c) => c.category === category);
+  return products.filter((c) => c.category === category).map(mapRecordToProduct);
 }
 
 export async function getProductsByTypeAndCategory(
