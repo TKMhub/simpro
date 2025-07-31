@@ -2,7 +2,13 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function CategoryButton({ label }: { label: string }) {
+export function CategoryButton({
+  label,
+  type,
+}: {
+  label: string;
+  type: string;
+}) {
   return (
     <Button
       asChild
@@ -10,7 +16,7 @@ export function CategoryButton({ label }: { label: string }) {
       size="sm"
       className="bg-white text-zinc-800 hover:bg-zinc-100 shadow"
     >
-      <Link href={`/product/category/${encodeURIComponent(label)}`}>{label}</Link>
+      <Link href={`/product/${type}/${encodeURIComponent(label)}`}>{label}</Link>
     </Button>
   );
 }
