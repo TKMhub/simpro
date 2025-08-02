@@ -35,7 +35,6 @@ export function HeaderProduct() {
     router.push(`/${activeTab}/${encodeURIComponent(label)}`);
   };
 
-  const categories = activeTab === "tool" ? toolCategories : templateCategories;
 
   return (
     <div

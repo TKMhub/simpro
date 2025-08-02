@@ -14,7 +14,7 @@ export default function ProductDetailPage({
   }
 
   return (
-    <div className="px-4 py-8">
+    <div className="px-20 py-4 mt-8">
       <h1 className="text-3xl font-bold mb-4">{item.title}</h1>
       <p className="text-gray-700">{item.description}</p>
     </div>
