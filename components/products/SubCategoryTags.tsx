@@ -9,7 +9,7 @@ const templateCategories = ['web', 'app']
 export function SubCategoryTags({ type }: { type: string }) {
   const pathname = usePathname()
   const segments = pathname.split('/')
-  const current = segments[3] || ''
+  const current = segments[4] || ''
   const categories = type === 'template' ? templateCategories : toolCategories
 
   return (
@@ -24,7 +24,7 @@ export function SubCategoryTags({ type }: { type: string }) {
             size="sm"
             className={active ? 'bg-blue-600 text-white border-blue-600' : ''}
           >
-            <Link href={`/products/${type}/${c}`}>{c}</Link>
+            <Link href={`/products/categories/${type}/${c}`}>{c}</Link>
           </Button>
         )
       })}

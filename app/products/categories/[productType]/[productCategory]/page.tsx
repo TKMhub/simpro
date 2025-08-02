@@ -5,11 +5,11 @@ import { productDummy } from "@/data/products_dummy";
 export default function ProductCategoryPage({
   params,
 }: {
-  params: { type: string; category: string };
+  params: { productType: string; productCategory: string };
 }) {
-  const { type, category } = params;
-  const decoded = decodeURIComponent(category);
-  const items = productDummy[type]?.[decoded];
+  const { productType, productCategory } = params;
+  const decoded = decodeURIComponent(productCategory);
+  const items = productDummy[productType]?.[decoded];
   if (!items) {
     notFound();
   }
@@ -23,7 +23,7 @@ export default function ProductCategoryPage({
             <h2 className="text-lg font-semibold mb-2">{item.title}</h2>
             <p className="text-sm text-gray-600 mb-2">{item.description}</p>
             <Link
-              href={`/products/${type}/${encodeURIComponent(decoded)}/${item.slug}`}
+              href={`/products/categories/${productType}/${encodeURIComponent(decoded)}/${item.slug}`}
               className="text-blue-600 hover:underline"
             >
               詳細を見る

@@ -28,7 +28,6 @@ export function ProductBreadcrumbs({ category, title }: BreadcrumbsProps) {
   if (category) {
     items.push({
       name: category,
-      href: `/products/category/${encodeURIComponent(category)}`,
     });
   }
 

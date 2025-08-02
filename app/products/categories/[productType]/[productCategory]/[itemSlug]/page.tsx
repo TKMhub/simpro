@@ -4,11 +4,11 @@ import { productDummy } from "@/data/products_dummy";
 export default function ProductDetailPage({
   params,
 }: {
-  params: { type: string; category: string; slug: string };
+  params: { productType: string; productCategory: string; itemSlug: string };
 }) {
-  const { type, category, slug } = params;
-  const decoded = decodeURIComponent(category);
-  const item = productDummy[type]?.[decoded]?.find((p) => p.slug === slug);
+  const { productType, productCategory, itemSlug } = params;
+  const decoded = decodeURIComponent(productCategory);
+  const item = productDummy[productType]?.[decoded]?.find((p) => p.slug === itemSlug);
   if (!item) {
     notFound();
   }
