@@ -90,11 +90,6 @@ export function Header() {
                   Products
                 </Link>
               </NavigationMenuItem>
-              {/* <NavigationMenuItem>
-              <Link href="/template" className="hover:underline">
-                Template
-              </Link>
-            </NavigationMenuItem> */}
             </NavigationMenuList>
           </NavigationMenu>
 
