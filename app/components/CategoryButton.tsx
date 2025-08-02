@@ -16,7 +16,7 @@ export function CategoryButton({
       size="sm"
       className="bg-white text-zinc-800 hover:bg-zinc-100 shadow"
     >
-      <Link href={`/products/${type}/${encodeURIComponent(label)}`}>{label}</Link>
+      <Link href={`/products/categories/${type}/${encodeURIComponent(label)}`}>{label}</Link>
     </Button>
   );
 }

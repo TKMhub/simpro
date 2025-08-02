@@ -23,8 +23,8 @@ export const navigation: NavItem[] = [
     title: 'Products',
     href: '/products',
     children: [
-      { title: 'Tool', href: '/products/tool/webtool' },
-      { title: 'Template', href: '/products/template/web' }
+      { title: 'Tool', href: '/products/categories/tool/webtool' },
+      { title: 'Template', href: '/products/categories/template/web' }
     ]
   }
 ]

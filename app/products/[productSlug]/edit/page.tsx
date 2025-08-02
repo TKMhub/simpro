@@ -5,10 +5,10 @@ import { fetchProductById } from "@/lib/supabase";
 export default async function EditProductPage({
   params,
 }: {
-  params: Promise<{ slug: string }> | { slug: string };
+  params: Promise<{ productSlug: string }> | { productSlug: string };
 }) {
-  const { slug } = await params;
-  const id = Number(slug);
+  const { productSlug } = await params;
+  const id = Number(productSlug);
   const content = await fetchProductById(id);
 
   if (!content || content.type !== "TOOL") {

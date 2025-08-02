@@ -8,12 +8,16 @@ import { CalendarIcon, UserCircleIcon } from "lucide-react";
 import { BlockObjectResponse } from "@notionhq/client";
 import Script from "next/script";
 
-export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
-  const { slug: raw } = await params;
-  const slug = decodeURIComponent(raw);
+export default async function BlogDetailPage({
+  params,
+}: {
+  params: Promise<{ blogSlug: string }> | { blogSlug: string };
+}) {
+  const { blogSlug: raw } = await params;
+  const blogSlug = decodeURIComponent(raw);
 
   const posts = await getPublishedArticles();
-  const post = posts.find((p) => p.title === slug);
+  const post = posts.find((p) => p.title === blogSlug);
 
   if (!post) throw new Error("システムエラーです。");
 

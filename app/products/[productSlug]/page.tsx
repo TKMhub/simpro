@@ -11,11 +11,11 @@ import { notFound } from "next/navigation";
 export default async function ProductDetailPage({
   params,
 }: {
-  params: Promise<{ slug: string }> | { slug: string };
+  params: Promise<{ productSlug: string }> | { productSlug: string };
 }) {
-  const { slug: raw } = await params;
-  const slug = decodeURIComponent(raw);
-  const product = await getProductBySlug(slug);
+  const { productSlug: raw } = await params;
+  const productSlug = decodeURIComponent(raw);
+  const product = await getProductBySlug(productSlug);
 
   if (!product) {
     notFound();
@@ -25,7 +25,7 @@ export default async function ProductDetailPage({
   const breadcrumbItems = [
     { name: "Home", url: `${baseUrl}/` },
     { name: "Products", url: `${baseUrl}/products` },
-    { name: product.category, url: `${baseUrl}/products/category/${encodeURIComponent(product.category)}` },
+    { name: product.category },
     { name: product.title },
   ];
   const jsonLd = generateBreadcrumbJsonLd(breadcrumbItems);
