@@ -40,14 +40,14 @@ export function HeaderProduct() {
   return (
     <div
       className={clsx(
-        "fixed top-16 w-full z-40 transition-transform duration-300",
+        "fixed w-full z-40 transition-transform duration-300",
         hideHeader ? "-translate-y-full" : "translate-y-0",
         "bg-zinc-800 text-white"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 py-3">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-start gap-4 w-full">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-start w-full">
             {/* タブ切り替え */}
             <TabsList className="flex gap-2">
               <TabsTrigger

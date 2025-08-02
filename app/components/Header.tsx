@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import {
@@ -10,6 +11,8 @@ import Link from "next/link";
 import SimproSvg from "@/public/Simplo_gray_main_sub.svg";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { HeaderBlog } from "./HeaderBlog";
+import { HeaderProduct } from "./HeaderProduct";
 
 export function Header() {
   const [hideHeader, setHideHeader] = useState(false);
@@ -149,6 +152,10 @@ export function Header() {
           </ul>
         </div>
       </div>
+
+      {/* ↓↓↓ 条件付きで表示するセクションヘッダー */}
+      {pathname.startsWith("/blog") && <HeaderBlog />}
+      {pathname.startsWith("/products") && <HeaderProduct />}
     </header>
   );
 }

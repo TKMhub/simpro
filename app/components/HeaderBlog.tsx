@@ -27,9 +27,9 @@ export function HeaderBlog() {
 
   return (
     <nav
-      className={`fixed top-16 z-40 w-full transition-transform duration-300 ${
+      className={`fixed z-40 w-full transition-transform duration-300 ${
         hideHeader ? "-translate-y-full" : "translate-y-0"
-      } bg-neutral-800 py-3`}
+      } bg-neutral-800`}
     >
       <ul className="flex justify-center gap-8">
         {categories.map((category) => (

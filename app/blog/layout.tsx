@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { HeaderBlog } from "../components/HeaderBlog";
 import { Footer } from "../components/Footer";
 
 export const metadata: Metadata = {
@@ -14,7 +13,6 @@ export default function RootLayout({
 }>) {
   return (
     <div>
-      <HeaderBlog />
       <main className="mt-6">{children}</main>
       <Footer />
     </div>
