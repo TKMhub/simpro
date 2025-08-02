@@ -4,7 +4,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import SimproSvg from '@/public/Simplo_gray_main_sub.svg'
-import { DropdownNav } from './DropdownNav'
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+  navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu'
 import { navigation } from '@/data/navigation'
 
 export function Header() {
@@ -30,9 +38,37 @@ export function Header() {
           <Link href="/" className="flex items-center gap-2 text-lg font-bold">
             <Image src={SimproSvg} alt="Simpro Logo" width={100} height={40} priority />
           </Link>
-          <div className="hidden md:block">
-            <DropdownNav items={navigation} />
-          </div>
+          <NavigationMenu viewport={false} className="hidden md:block">
+            <NavigationMenuList className="space-x-8 font-medium tracking-wide">
+              {navigation.map((item) =>
+                item.children ? (
+                  <NavigationMenuItem key={item.title}>
+                    <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[200px] gap-4 p-4">
+                        <li className="flex flex-col gap-2">
+                          {item.children.map((child) => (
+                            <NavigationMenuLink asChild key={child.href}>
+                              <Link href={child.href}>{child.title}</Link>
+                            </NavigationMenuLink>
+                          ))}
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                ) : (
+                  <NavigationMenuItem key={item.title}>
+                    <NavigationMenuLink
+                      asChild
+                      className={navigationMenuTriggerStyle()}
+                    >
+                      <Link href={item.href}>{item.title}</Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                )
+              )}
+            </NavigationMenuList>
+          </NavigationMenu>
           <div className="md:hidden">
             <button onClick={() => setMenuOpen(!menuOpen)} className="transition-transform duration-200">
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
