@@ -5,7 +5,7 @@ export type NavItem = {
 };
 
 export const navigation: NavItem[] = [
-  { title: "サービス", href: "#services" },
+  { title: "サービス", href: "/#services" },
   { title: "実績", href: "/#projects" },
   { title: "お問い合わせ", href: "/#contact" },
   {

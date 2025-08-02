@@ -2,15 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
+import SimproSvg from "@/public/Simplo_gray_main_sub.svg";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
-import Link from "next/link";
-import SimproSvg from "@/public/Simplo_gray_main_sub.svg";
-import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { navigation } from "@/data/navigation";
 import { HeaderBlog } from "./HeaderBlog";
 import { HeaderProduct } from "./HeaderProduct";
 
@@ -51,61 +55,46 @@ export function Header() {
             )}
           </Link>
 
-          {/* Desktopメニュー */}
           <NavigationMenu className="hidden md:block">
-            <NavigationMenuList className="space-x-8 font-medium tracking-wide">
-              <NavigationMenuItem>
-                <Link
-                  href="http://localhost:3000/#services"
-                  className="hover:underline"
-                >
-                  サービス
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link
-                  href="http://localhost:3000/#projects"
-                  className="hover:underline"
-                >
-                  実績
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link
-                  href="http://localhost:3000/#contact"
-                  className="hover:underline"
-                >
-                  お問い合わせ
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link
-                  href="/blog"
-                  className={
-                    pathname.startsWith("/blog")
-                      ? "text-blue-600"
-                      : "hover:underline"
-                  }
-                >
-                  Blog
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link
-                  href="/products"
-                  className={
-                    pathname.startsWith("/products")
-                      ? "text-blue-600"
-                      : "hover:underline"
-                  }
-                >
-                  Products
-                </Link>
-              </NavigationMenuItem>
+            <NavigationMenuList className="space-x-6 font-medium tracking-wide">
+              {navigation.map((item) => (
+                <NavigationMenuItem key={item.title}>
+                  {item.children && item.children.length > 0 ? (
+                    <>
+                      <NavigationMenuTrigger>
+                        {item.title}
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <ul className="grid gap-2 w-[250px] p-4">
+                          {item.children.map((child) => (
+                            <li key={child.title}>
+                              <NavigationMenuLink asChild>
+                                <Link href={child.href}>{child.title}</Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </>
+                  ) : (
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href={item.href}
+                        className={
+                          pathname.startsWith(item.href)
+                            ? "text-blue-600"
+                            : "hover:underline"
+                        }
+                      >
+                        {item.title}
+                      </Link>
+                    </NavigationMenuLink>
+                  )}
+                </NavigationMenuItem>
+              ))}
             </NavigationMenuList>
           </NavigationMenu>
 
-          {/* モバイル用ハンバーガー */}
           <div className="md:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -116,53 +105,43 @@ export function Header() {
           </div>
         </div>
 
-        {/* モバイルメニュー with アニメーション */}
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             menuOpen ? "max-h-60 opacity-100 py-4" : "max-h-0 opacity-0 py-0"
           } bg-white/90 backdrop-blur-md px-6`}
         >
           <ul className="space-y-4 text-base">
-            <li>
-              <Link href="#services" onClick={() => setMenuOpen(false)}>
-                サービス
-              </Link>
-            </li>
-            <li>
-              <Link href="#projects" onClick={() => setMenuOpen(false)}>
-                実績
-              </Link>
-            </li>
-            <li>
-              <Link href="#contact" onClick={() => setMenuOpen(false)}>
-                お問い合わせ
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/blog"
-                onClick={() => setMenuOpen(false)}
-                className={pathname.startsWith("/blog") ? "text-blue-600" : ""}
-              >
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/products"
-                onClick={() => setMenuOpen(false)}
-                className={
-                  pathname.startsWith("/products") ? "text-blue-600" : ""
-                }
-              >
-                Products
-              </Link>
-            </li>
+            {navigation.map((item) => (
+              <li key={item.title}>
+                <Link
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={
+                    pathname.startsWith(item.href) ? "text-blue-600" : ""
+                  }
+                >
+                  {item.title}
+                </Link>
+                {item.children && item.children.length > 0 && (
+                  <ul className="pl-4 pt-1 space-y-2 text-sm">
+                    {item.children.map((child) => (
+                      <li key={child.title}>
+                        <Link
+                          href={child.href}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          - {child.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
 
-      {/* ↓↓↓ 条件付きで表示するセクションヘッダー */}
       {pathname.startsWith("/blog") && <HeaderBlog />}
       {pathname.startsWith("/products") && <HeaderProduct />}
     </header>
