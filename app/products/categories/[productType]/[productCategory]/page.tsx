@@ -2,12 +2,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { productDummy } from "@/data/products_dummy";
 
-export default function ProductCategoryPage({
+export default async function ProductCategoryPage({
   params,
 }: {
-  params: { productType: string; productCategory: string };
+  params: Promise<{ productType: string; productCategory: string }>;
 }) {
-  const { productType, productCategory } = params;
+  const { productType, productCategory } = await params;
   const decoded = decodeURIComponent(productCategory);
   const items = productDummy[productType]?.[decoded];
   if (!items) {
@@ -24,7 +24,9 @@ export default function ProductCategoryPage({
               <h2 className="text-lg font-semibold mb-2">{item.title}</h2>
               <p className="text-sm text-gray-600 mb-2">{item.description}</p>
               <Link
-                href={`/products/categories/${productType}/${encodeURIComponent(decoded)}/${item.slug}`}
+                href={`/products/categories/${productType}/${encodeURIComponent(
+                  decoded
+                )}/${item.slug}`}
                 className="text-blue-600 hover:underline"
               >
                 詳細を見る

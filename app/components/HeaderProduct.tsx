@@ -32,9 +32,10 @@ export function HeaderProduct() {
 
   // 遷移処理
   const handleCategoryClick = (label: string) => {
-    router.push(`/${activeTab}/${encodeURIComponent(label)}`);
+    router.push(
+      `/products/categories/${activeTab}/${encodeURIComponent(label)}`
+    );
   };
-
 
   return (
     <div
