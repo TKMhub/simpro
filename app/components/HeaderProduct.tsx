@@ -37,7 +37,6 @@ export function HeaderProduct() {
     );
   };
 
-  const categories = activeTab === "tool" ? toolCategories : templateCategories;
 
   return (
     <div
