@@ -1,31 +1,32 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { Menu, X } from "lucide-react"
+import SimproSvg from "@/public/Simplo_gray_main_sub.svg"
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
+  NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import Link from "next/link";
-import SimproSvg from "@/public/Simplo_gray_main_sub.svg";
-import Image from "next/image";
-import { Menu, X } from "lucide-react";
-import { HeaderBlog } from "./HeaderBlog";
-import { HeaderProduct } from "./HeaderProduct";
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
+import { navigation } from "@/data/navigation"
 
 export function Header() {
-  const [hideHeader, setHideHeader] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const [hideHeader, setHideHeader] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setHideHeader(window.scrollY > 80);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+      setHideHeader(window.scrollY > 80)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
     <header
@@ -36,67 +37,39 @@ export function Header() {
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold">
-            <Image
-              src={SimproSvg}
-              alt="Simpro Logo"
-              width={100}
-              height={40}
-              priority
-            />
-            {pathname.startsWith("/blog") && (
-              <span className="text-blue-600">- Blog</span>
-            )}
-            {pathname.startsWith("/products") && (
-              <span className="text-blue-600">- Products</span>
-            )}
+            <Image src={SimproSvg} alt="Simpro Logo" width={100} height={40} priority />
           </Link>
-
-          {/* Desktopメニュー */}
-          <NavigationMenu className="hidden md:block">
+          <NavigationMenu viewport={false} className="hidden md:block">
             <NavigationMenuList className="space-x-8 font-medium tracking-wide">
-              <NavigationMenuItem>
-                <Link href="#services" className="hover:underline">
-                  サービス
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="#projects" className="hover:underline">
-                  実績
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="#contact" className="hover:underline">
-                  お問い合わせ
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link
-                  href="/blog"
-                  className={
-                    pathname.startsWith("/blog")
-                      ? "text-blue-600"
-                      : "hover:underline"
-                  }
-                >
-                  Blog
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link
-                  href="/products"
-                  className={
-                    pathname.startsWith("/products")
-                      ? "text-blue-600"
-                      : "hover:underline"
-                  }
-                >
-                  Products
-                </Link>
-              </NavigationMenuItem>
+              {navigation.map((item) =>
+                item.children ? (
+                  <NavigationMenuItem key={item.title}>
+                    <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[300px] gap-4 p-4">
+                        <li className="flex flex-col gap-2">
+                          {item.children.map((child) => (
+                            <NavigationMenuLink asChild key={child.href}>
+                              <Link href={child.href}>{child.title}</Link>
+                            </NavigationMenuLink>
+                          ))}
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                ) : (
+                  <NavigationMenuItem key={item.title}>
+                    <NavigationMenuLink
+                      asChild
+                      className={navigationMenuTriggerStyle()}
+                    >
+                      <Link href={item.href}>{item.title}</Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                )
+              )}
             </NavigationMenuList>
           </NavigationMenu>
-
-          {/* モバイル用ハンバーガー */}
           <div className="md:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -106,56 +79,38 @@ export function Header() {
             </button>
           </div>
         </div>
-
-        {/* モバイルメニュー with アニメーション */}
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             menuOpen ? "max-h-60 opacity-100 py-4" : "max-h-0 opacity-0 py-0"
           } bg-white/90 backdrop-blur-md px-6`}
         >
           <ul className="space-y-4 text-base">
-            <li>
-              <Link href="#services" onClick={() => setMenuOpen(false)}>
-                サービス
-              </Link>
-            </li>
-            <li>
-              <Link href="#projects" onClick={() => setMenuOpen(false)}>
-                実績
-              </Link>
-            </li>
-            <li>
-              <Link href="#contact" onClick={() => setMenuOpen(false)}>
-                お問い合わせ
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/blog"
-                onClick={() => setMenuOpen(false)}
-                className={pathname.startsWith("/blog") ? "text-blue-600" : ""}
-              >
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/products"
-                onClick={() => setMenuOpen(false)}
-                className={
-                  pathname.startsWith("/products") ? "text-blue-600" : ""
-                }
-              >
-                Products
-              </Link>
-            </li>
+            {navigation.map((item) => (
+              <li key={item.title} className="space-y-2">
+                {item.children ? (
+                  <details>
+                    <summary className="cursor-pointer">{item.title}</summary>
+                    <ul className="mt-2 pl-4 space-y-1">
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <Link href={child.href} onClick={() => setMenuOpen(false)}>
+                            {child.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                ) : (
+                  <Link href={item.href} onClick={() => setMenuOpen(false)}>
+                    {item.title}
+                  </Link>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
-
-      {/* ↓↓↓ 条件付きで表示するセクションヘッダー */}
-      {pathname.startsWith("/blog") && <HeaderBlog />}
-      {pathname.startsWith("/products") && <HeaderProduct />}
     </header>
-  );
+  )
 }
+
