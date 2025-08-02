@@ -22,13 +22,13 @@ type Crumb = {
 export function ProductBreadcrumbs({ category, title }: BreadcrumbsProps) {
   const items: Crumb[] = [
     { name: "Home", href: "/" },
-    { name: "Products", href: "/product" },
+    { name: "Products", href: "/products" },
   ];
 
   if (category) {
     items.push({
       name: category,
-      href: `/product/category/${encodeURIComponent(category)}`,
+      href: `/products/category/${encodeURIComponent(category)}`,
     });
   }
 

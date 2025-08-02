@@ -11,7 +11,7 @@ export default async function ProductsPage() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
   const breadcrumbItems = [
     { name: "Home", url: `${baseUrl}/` },
-    { name: "Products", url: `${baseUrl}/product` },
+    { name: "Products", url: `${baseUrl}/products` },
   ];
   const jsonLd = generateBreadcrumbJsonLd(breadcrumbItems);
 
@@ -24,7 +24,7 @@ export default async function ProductsPage() {
       <ProductBreadcrumbs />
       <div className="flex items-center justify-between py-4 mt-8">
         <h1 className="text-2xl text-gray-800">プロダクト一覧</h1>
-        <Link href="/product/new">
+        <Link href="/products/new">
           <Button size="sm" className="bg-blue-600 text-white hover:bg-blue-700">
             新規登録
           </Button>

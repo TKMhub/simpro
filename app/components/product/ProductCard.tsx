@@ -7,7 +7,7 @@ import { tagColors } from "@/lib/utils/tag_color";
 export function ProductCard({ tool }: { tool: Product }) {
   return (
     <div className="rounded-xl shadow bg-white overflow-hidden hover:shadow-md transition">
-      <Link href={`/product/${tool.slug}`}>
+      <Link href={`/products/${tool.slug}`}>
         <Image
           src={tool.imageUrl}
           alt={tool.title}
@@ -18,7 +18,7 @@ export function ProductCard({ tool }: { tool: Product }) {
       </Link>
       <div className="p-4 space-y-2">
         <Link
-          href={`/product/${tool.slug}`}
+          href={`/products/${tool.slug}`}
           className="text-lg font-semibold hover:underline block"
         >
           {tool.title}（{tool.category}）
@@ -42,7 +42,7 @@ export function ProductCard({ tool }: { tool: Product }) {
         </div>
         <div className="flex justify-between items-center mt-2">
           <Link
-          href={`/product/${tool.slug}`}
+            href={`/products/${tool.slug}`}
             className="text-sm text-blue-600 hover:underline"
           >
             詳細はこちら

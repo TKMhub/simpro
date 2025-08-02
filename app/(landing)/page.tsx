@@ -1,4 +1,3 @@
-import { Header } from "@/components/navigation/Header";
 import { HeroSection } from "@/app/components/HeroSection";
 import { ServicesSection } from "@/app/components/ServicesSection";
 import { ProjectsSlider } from "@/app/components/ProjectsSlider";
@@ -10,8 +9,6 @@ import { ProductIntroSection } from "../components/ProductIntroSection";
 export default function Home() {
   return (
     <main className="flex flex-col min-h-screen">
-      {/* 固定ヘッダー */}
-      <Header />
       {/* ヒーローセクション */}
       <HeroSection />
       {/* サービス紹介 */}
