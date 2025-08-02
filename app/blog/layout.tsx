@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <div>
       <HeaderBlog />
-      <main className="mt-[130px]">{children}</main>
+      <main className="mt-6">{children}</main>
       <Footer />
     </div>
   );

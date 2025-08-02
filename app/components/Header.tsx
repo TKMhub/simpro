@@ -40,6 +40,12 @@ export function Header() {
               height={40}
               priority
             />
+            {pathname.startsWith("/blog") && (
+              <span className="text-blue-600">- Blog</span>
+            )}
+            {pathname.startsWith("/products") && (
+              <span className="text-blue-600">- Products</span>
+            )}
           </Link>
 
           {/* Desktopメニュー */}
@@ -74,14 +80,14 @@ export function Header() {
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <Link
-                  href="/product"
+                  href="/products"
                   className={
-                    pathname.startsWith("/product")
+                    pathname.startsWith("/products")
                       ? "text-blue-600"
                       : "hover:underline"
                   }
                 >
-                  Product
+                  Products
                 </Link>
               </NavigationMenuItem>
               {/* <NavigationMenuItem>
@@ -136,13 +142,13 @@ export function Header() {
             </li>
             <li>
               <Link
-                href="/product"
+                href="/products"
                 onClick={() => setMenuOpen(false)}
                 className={
-                  pathname.startsWith("/product") ? "text-blue-600" : ""
+                  pathname.startsWith("/products") ? "text-blue-600" : ""
                 }
               >
-                Product
+                Products
               </Link>
             </li>
           </ul>

@@ -129,7 +129,7 @@ export function ProductForm({ defaultValues, id }: Props) {
 
     setLoading(false);
     if (res.ok) {
-      router.push("/product");
+      router.push("/products");
     } else {
       alert("送信に失敗しました");
     }

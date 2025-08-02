@@ -24,8 +24,8 @@ export default async function ProductDetailPage({
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
   const breadcrumbItems = [
     { name: "Home", url: `${baseUrl}/` },
-    { name: "Products", url: `${baseUrl}/product` },
-    { name: product.category, url: `${baseUrl}/product/category/${encodeURIComponent(product.category)}` },
+    { name: "Products", url: `${baseUrl}/products` },
+    { name: product.category, url: `${baseUrl}/products/category/${encodeURIComponent(product.category)}` },
     { name: product.title },
   ];
   const jsonLd = generateBreadcrumbJsonLd(breadcrumbItems);
