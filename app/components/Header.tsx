@@ -55,17 +55,26 @@ export function Header() {
           <NavigationMenu className="hidden md:block">
             <NavigationMenuList className="space-x-8 font-medium tracking-wide">
               <NavigationMenuItem>
-                <Link href="#services" className="hover:underline">
+                <Link
+                  href="http://localhost:3000/#services"
+                  className="hover:underline"
+                >
                   サービス
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="#projects" className="hover:underline">
+                <Link
+                  href="http://localhost:3000/#projects"
+                  className="hover:underline"
+                >
                   実績
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="#contact" className="hover:underline">
+                <Link
+                  href="http://localhost:3000/#contact"
+                  className="hover:underline"
+                >
                   お問い合わせ
                 </Link>
               </NavigationMenuItem>
