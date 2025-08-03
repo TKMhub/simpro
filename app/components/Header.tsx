@@ -10,8 +10,9 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuContent,
+  // NavigationMenuContent,
   NavigationMenuLink,
+  NavigationMenuContentForSimpro,
 } from "@/components/ui/navigation-menu";
 import { navigation } from "@/data/navigation";
 import { HeaderBlog } from "./HeaderBlog";
@@ -19,6 +20,7 @@ import { HeaderProduct } from "./HeaderProduct";
 
 export function Header() {
   const [hideHeader, setHideHeader] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -56,41 +58,41 @@ export function Header() {
 
           <NavigationMenu>
             <NavigationMenuList className="space-x-6 font-medium tracking-wide">
-              {navigation.map((item) => (
-                <NavigationMenuItem key={item.title}>
-                  {item.children && item.children.length > 0 ? (
-                    <>
-                      <NavigationMenuTrigger>
-                        <Link href={item.href}>{item.title}</Link>
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="bg-white">
-                        <ul className="w-[150px]">
-                          {item.children.map((child) => (
-                            <li key={child.title}>
-                              <NavigationMenuLink asChild>
-                                <Link href={child.href}>{child.title}</Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </>
-                  ) : (
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href={item.href}
-                        className={
-                          pathname.startsWith(item.href)
-                            ? "text-blue-600"
-                            : "hover:underline"
-                        }
-                      >
-                        {item.title}
-                      </Link>
-                    </NavigationMenuLink>
-                  )}
-                </NavigationMenuItem>
-              ))}
+              {navigation.map((item) => {
+                return (
+                  <NavigationMenuItem
+                    key={item.title}
+                    className="relative"
+                    onMouseEnter={() => setOpenDropdown(item.title)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    {item.children && item.children.length > 0 ? (
+                      <>
+                        <NavigationMenuTrigger>
+                          <span className="cursor-pointer">{item.title}</span>
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContentForSimpro
+                          children={item.children}
+                          isOpen={openDropdown === item.title}
+                        />
+                      </>
+                    ) : (
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href={item.href}
+                          className={
+                            pathname.startsWith(item.href)
+                              ? "text-blue-600"
+                              : "hover:underline"
+                          }
+                        >
+                          {item.title}
+                        </Link>
+                      </NavigationMenuLink>
+                    )}
+                  </NavigationMenuItem>
+                );
+              })}
             </NavigationMenuList>
           </NavigationMenu>
 
