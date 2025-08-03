@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -62,7 +61,7 @@ export function Header() {
                   {item.children && item.children.length > 0 ? (
                     <>
                       <NavigationMenuTrigger>
-                        {item.title}
+                        <Link href={item.href}>{item.title}</Link>
                       </NavigationMenuTrigger>
                       <NavigationMenuContent className="bg-white">
                         <ul className="w-[150px]">
