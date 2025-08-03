@@ -55,7 +55,7 @@ export function Header() {
             )}
           </Link>
 
-          <NavigationMenu className="hidden md:block">
+          <NavigationMenu>
             <NavigationMenuList className="space-x-6 font-medium tracking-wide">
               {navigation.map((item) => (
                 <NavigationMenuItem key={item.title}>
@@ -64,8 +64,8 @@ export function Header() {
                       <NavigationMenuTrigger>
                         {item.title}
                       </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid gap-2 w-[250px] p-4">
+                      <NavigationMenuContent className="bg-white">
+                        <ul className="w-[150px]">
                           {item.children.map((child) => (
                             <li key={child.title}>
                               <NavigationMenuLink asChild>
