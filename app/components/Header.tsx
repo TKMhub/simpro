@@ -69,7 +69,9 @@ export function Header() {
                     {item.children && item.children.length > 0 ? (
                       <>
                         <NavigationMenuTrigger>
-                          <span className="cursor-pointer">{item.title}</span>
+                          <span className="cursor-pointer">
+                            <Link href={item.href}>{item.title}</Link>
+                          </span>
                         </NavigationMenuTrigger>
                         <NavigationMenuContentForSimpro
                           children={item.children}
