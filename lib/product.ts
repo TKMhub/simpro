@@ -1,6 +1,6 @@
-import { ProductRecord } from '@/types/productRecord';
-import { fetchPublishedProducts, fetchProductById } from '@/lib/supabase';
-import { Product } from '@/types/product';
+import { ProductRecord } from "@/types/productRecord";
+import { fetchPublishedProducts, fetchProductById } from "@/lib/supabase";
+import { Product } from "@/types/product";
 
 // Check if file path points to an image
 function isImageFile(path: string | null | undefined): boolean {
@@ -12,22 +12,20 @@ function isImageFile(path: string | null | undefined): boolean {
 function mapRecordToProduct(item: ProductRecord): Product {
   const imageUrl = isImageFile(item.filePath)
     ? (item.filePath as string)
-    : '/Simplo_gray_main_sub.jpg';
+    : "/Simplo_gray_main_sub.jpg";
 
   return {
     title: item.title,
     category: item.category,
-    description: item.description ?? '',
+    description: item.description ?? "",
     date: item.createdAt,
     imageUrl,
     author: item.authorId,
     tags: item.tags,
     slug: item.id.toString(),
-    buttonType: item.deliveryType === 'FILE' ? 'download' : 'link',
+    buttonType: item.deliveryType === "FILE" ? "download" : "link",
     buttonUrl:
-      item.deliveryType === 'FILE'
-        ? item.filePath ?? ''
-        : item.url ?? '',
+      item.deliveryType === "FILE" ? item.filePath ?? "" : item.url ?? "",
   };
 }
 
@@ -36,15 +34,21 @@ export async function getPublishedProducts(): Promise<Product[]> {
   return products.map(mapRecordToProduct);
 }
 
-export async function getProductBySlug(slug: string): Promise<Product | undefined> {
+export async function getProductBySlug(
+  slug: string
+): Promise<Product | undefined> {
   const id = Number(slug);
   const record = await fetchProductById(id);
   return record ? mapRecordToProduct(record) : undefined;
 }
 
-export async function getProductsByCategory(category: string): Promise<Product[]> {
+export async function getProductsByCategory(
+  category: string
+): Promise<Product[]> {
   const products = await getPublishedProducts();
-  return products.filter((c) => c.category === category).map(mapRecordToProduct);
+  return products
+    .filter((c) => c.category === category)
+    .map(mapRecordToProduct);
 }
 
 export async function getProductsByTypeAndCategory(

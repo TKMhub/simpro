@@ -8,7 +8,7 @@ export type ProductRecord = {
   filePath?: string | null;
   description?: string | null;
   category: string;
-  tags: string;
+  tags: string[];
   starRating: number;
   downloadCount: number;
   isPublished: boolean;

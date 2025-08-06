@@ -7,6 +7,6 @@ export type Product = {
   author: string;
   tags: string[];
   slug: string;
-  buttonType: "download" | "link" | ""; // 空も許容
+  buttonType: "download" | "link" | "";
   buttonUrl: string;
 };
