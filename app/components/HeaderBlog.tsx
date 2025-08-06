@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { blogCategories } from "@/data/navigation";
 
-const categories = ["Skill", "Book", "Job", "Life", "Design"];
+const categories = blogCategories;
 
 export function HeaderBlog() {
   const [hideHeader, setHideHeader] = useState(false);

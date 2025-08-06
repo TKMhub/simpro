@@ -4,9 +4,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import clsx from "clsx";
+import {
+  productTemplateCategories,
+  productToolCategories,
+} from "@/data/navigation";
 
-const toolCategories = ["Webツール", "GAS", "Excel VBA", "Executable File"];
-const templateCategories = ["Webサイトテンプレート", "Webアプリテンプレート"];
+const toolCategories = productToolCategories;
+const templateCategories = productTemplateCategories;
 
 export function HeaderProduct() {
   const [activeTab, setActiveTab] = useState("tool");

@@ -28,3 +28,17 @@ export const navigation: NavItem[] = [
     ],
   },
 ];
+
+export const blogCategories = ["Skill", "Book", "Job", "Life", "Design"];
+
+export const productToolCategories = [
+  "Webツール",
+  "GAS",
+  "Excel VBA",
+  "Executable File",
+];
+
+export const productTemplateCategories = [
+  "Webサイトテンプレート",
+  "Webアプリテンプレート",
+];
