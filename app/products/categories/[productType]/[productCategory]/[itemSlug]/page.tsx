@@ -1,14 +1,13 @@
 import { notFound } from "next/navigation";
-import { productDummy } from "@/data/products_dummy";
+import { getProductBySlug } from "@/lib/product";
 
-export default function ProductDetailPage({
+export default async function ProductDetailPage({
   params,
 }: {
-  params: { productType: string; productCategory: string; itemSlug: string };
+  params: Promise<{ productType: string; productCategory: string; itemSlug: string }>;
 }) {
-  const { productType, productCategory, itemSlug } = params;
-  const decoded = decodeURIComponent(productCategory);
-  const item = productDummy[productType]?.[decoded]?.find((p) => p.slug === itemSlug);
+  const { itemSlug } = await params;
+  const item = await getProductBySlug(itemSlug);
   if (!item) {
     notFound();
   }

@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import clsx from "clsx";
-
-const toolCategories = ["Webツール", "GAS", "Excel VBA", "Executable File"];
-const templateCategories = ["Webサイトテンプレート", "Webアプリテンプレート"];
+import { ProductRecord } from "@/types/productRecord";
 
 export function HeaderProduct() {
   const [activeTab, setActiveTab] = useState("tool");
   const [hideHeader, setHideHeader] = useState(false);
+  const [toolCategories, setToolCategories] = useState<string[]>([]);
+  const [templateCategories, setTemplateCategories] = useState<string[]>([]);
   const router = useRouter();
 
   // スクロール検知
@@ -28,6 +28,23 @@ export function HeaderProduct() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // カテゴリ取得
+  useEffect(() => {
+    async function load() {
+      const res = await fetch("/api/products");
+      const data: ProductRecord[] = await res.json();
+      const tool = new Set<string>();
+      const template = new Set<string>();
+      data.forEach((p) => {
+        if (p.type === "TOOL") tool.add(p.category);
+        if (p.type === "TEMPLATE") template.add(p.category);
+      });
+      setToolCategories(Array.from(tool));
+      setTemplateCategories(Array.from(template));
+    }
+    load();
   }, []);
 
   // 遷移処理

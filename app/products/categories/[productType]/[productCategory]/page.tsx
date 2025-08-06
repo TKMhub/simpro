@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { productDummy } from "@/data/products_dummy";
+import { getProductsByTypeAndCategory } from "@/lib/product";
 
 export default async function ProductCategoryPage({
   params,
@@ -9,8 +9,11 @@ export default async function ProductCategoryPage({
 }) {
   const { productType, productCategory } = await params;
   const decoded = decodeURIComponent(productCategory);
-  const items = productDummy[productType]?.[decoded];
-  if (!items) {
+  const items = await getProductsByTypeAndCategory(
+    productType.toUpperCase(),
+    decoded
+  );
+  if (items.length === 0) {
     notFound();
   }
 

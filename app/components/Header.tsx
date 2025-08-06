@@ -74,9 +74,10 @@ export function Header() {
                           </span>
                         </NavigationMenuTrigger>
                         <NavigationMenuContentForSimpro
-                          children={item.children}
                           isOpen={openDropdown === item.title}
-                        />
+                        >
+                          {item.children}
+                        </NavigationMenuContentForSimpro>
                       </>
                     ) : (
                       <NavigationMenuLink asChild>
