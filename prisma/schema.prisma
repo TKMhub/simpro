@@ -37,14 +37,15 @@ model Products {
   deliveryType  DeliveryType
   url           String?      @db.Text
   filePath      String?      @db.Text
+  imagePath     String?      @db.Text
   description   String?      @db.Text
   category      String
-  tags          String[]     @db.Text // PostgreSQL の text[] 型として扱う
+  tags          String[]     @db.Text
   starRating    Int          @default(0)
   downloadCount Int          @default(0)
   isPublished   Boolean      @default(false)
   createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @default(now()) // ← REST API から明示的に送信が必要
+  updatedAt     DateTime     @updatedAt
 
   author   User   @relation(fields: [authorId], references: [id])
   authorId String
