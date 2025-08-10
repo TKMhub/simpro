@@ -34,7 +34,7 @@ export const blogCategories = ["Skill", "Book", "Job", "Life", "Design"];
 export const productToolCategories = [
   "Webツール",
   "GAS",
-  "Excel VBA",
+  "VBA",
   "Executable File",
 ];
 

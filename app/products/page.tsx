@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 export default async function ProductsPage() {
   const products = await getPublishedProducts();
 
+  console.log(products);
+
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
   const breadcrumbItems = [
     { name: "Home", url: `${baseUrl}/` },

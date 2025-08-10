@@ -16,11 +16,11 @@ function mapRecordToProduct(item: ProductRecord): Product {
 
   return {
     title: item.title,
+    document: item.document,
     category: item.category,
     description: item.description ?? "",
-    date: item.createdAt,
-    imageUrl,
-    author: item.authorId,
+    imageUrl: imageUrl,
+    author: item.authorId, // 必要ならitem.author.nameなどにする
     tags: item.tags,
     slug: item.id.toString(),
     buttonType: item.deliveryType === "FILE" ? "download" : "link",

@@ -25,11 +25,11 @@ export const productDummy: Record<string, Record<string, ProductItem[]>> = {
         description: "GASスクリプトのダミー",
       },
     ],
-    "Excel VBA": [
+    "VBA": [
       {
         slug: "vba-1",
         title: "VBA Macro",
-        description: "Excel VBAのダミー",
+        description: "VBAのダミー",
       },
     ],
     "Executable File": [
