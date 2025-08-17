@@ -1,6 +1,10 @@
-import { ProductRecord } from "@/types/productRecord";
-import { fetchPublishedProducts, fetchProductById } from "@/lib/supabase";
-import { Product } from "@/types/product";
+import {
+  fetchPublishedProducts,
+  fetchProductById,
+  resolveDeliveryUrl,
+  resolveImageUrl,
+} from "@/lib/supabase";
+import { Product, ProductRecord } from "@/types/product";
 
 // Check if file path points to an image
 function isImageFile(path: string | null | undefined): boolean {
@@ -8,24 +12,53 @@ function isImageFile(path: string | null | undefined): boolean {
   return /\.(png|jpe?g|gif|svg|webp)$/i.test(path);
 }
 
-// Convert ProductRecord to Product type
-function mapRecordToProduct(item: ProductRecord): Product {
-  const imageUrl = isImageFile(item.filePath)
-    ? (item.filePath as string)
-    : "/Simplo_gray_main_sub.jpg";
+// ISO文字列 → YYYY-MM-DD
+function toYmd(iso: string): string {
+  try {
+    const d = new Date(iso);
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  } catch {
+    return "";
+  }
+}
 
+// Convert ProductRecord to Product type
+export function mapRecordToProduct(item: ProductRecord): Product {
   return {
+    // 必須
+    id: item.id,
+    slug: String(item.id),
     title: item.title,
     document: item.document,
+    type: item.type,
     category: item.category,
+
+    // 表示用整形
     description: item.description ?? "",
-    imageUrl: imageUrl,
-    author: item.authorId, // 必要ならitem.author.nameなどにする
-    tags: item.tags,
-    slug: item.id.toString(),
-    buttonType: item.deliveryType === "FILE" ? "download" : "link",
-    buttonUrl:
-      item.deliveryType === "FILE" ? item.filePath ?? "" : item.url ?? "",
+    tags: item.tags ?? [],
+    date: toYmd(item.createdAt),
+
+    // 画像: imagePath優先 → 公開URL解決 → フォールバック
+    imageUrl: resolveImageUrl(item.imagePath, item.filePath),
+
+    // 著者: まずはID（将来ユーザー名に差し替え）
+    author: item.authorId,
+
+    // 配布導線: deliveryType/URL解決
+    buttonType:
+      item.deliveryType === "FILE"
+        ? "download"
+        : item.deliveryType === "URL"
+        ? "link"
+        : "",
+    buttonUrl: resolveDeliveryUrl({
+      deliveryType: item.deliveryType,
+      filePath: item.filePath,
+      url: item.url,
+    }),
   };
 }
 
@@ -46,17 +79,13 @@ export async function getProductsByCategory(
   category: string
 ): Promise<Product[]> {
   const products = await getPublishedProducts();
-  return products
-    .filter((c) => c.category === category)
-    .map(mapRecordToProduct);
+  return products.filter((p) => p.category === category);
 }
 
 export async function getProductsByTypeAndCategory(
-  type: string,
+  type: "TOOL" | "TEMPLATE",
   category: string
 ): Promise<Product[]> {
-  const records = await fetchPublishedProducts();
-  return records
-    .filter((r) => r.type === type && r.category === category)
-    .map(mapRecordToProduct);
+  const products = await getPublishedProducts();
+  return products.filter((p) => p.type === type && p.category === category);
 }

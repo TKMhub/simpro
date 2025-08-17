@@ -25,8 +25,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-import type { ProductRecord } from "@/types/productRecord";
+import { ProductRecord } from "@/types/product";
 
 const schema = z
   .object({

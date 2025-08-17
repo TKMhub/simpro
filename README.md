@@ -1,48 +1,24 @@
-Simpro（トップページ）
-├── Hero Section（ファーストビュー）
-│ └─ キャッチコピー、背景アニメーション or スライド（シンプル × プログラミング）
-│
-├── About
-│ ├── About This Site（Simpro とは？）
-│ │ └─ サービスの目的・コンセプト（「誰でもわかる IT を」など）
-│ └── About Me（作者紹介）
-│ └─ あなたの簡単な自己紹介（経歴、スキル、開発の背景）
-│
-├── Features（機能紹介）
-│ ├── VBA ツール生成機能（CodeParts）
-│ │ └─ テキスト入力 →VBA 自動生成 → ファイル DL
-│ ├── 設計書出力テンプレート機能（準備中）
-│ ├── Web マクロ管理機能（準備中）
-│ └── ...今後追加予定の機能
-│
-├── Showcase（制作実績・導入例）
-│ └─ Simpro で作成した成果物・ツール例
-│ ├─ 工程管理テンプレート（Excel マクロ）
-│ ├─ Word 自動生成ツール
-│ ├─ PowerPoint 自動構成マクロ
-│ └─ CodeParts 実行例（コード生成例）
-│
-├── Knowledge（知識・スキルセット）
-│ └─ スキル・技術スタック紹介
-│ ├─ フロントエンド（Next.js, TailwindCSS, ShadCN）
-│ ├─ バックエンド（Supabase, Prisma）
-│ ├─ ツール・マクロ（Excel VBA, Word API）
-│ └─ 補足：オブジェクト指向、設計力など
-│
-├── Blog（別ページに遷移）
-│ └─ 記事一覧（カテゴリ分け）
-│ ├─ キャリア論
-│ ├─ 上流工程 Tips
-│ ├─ プロジェクト管理/ツール紹介
-│ ├─ プログラミング入門
-│ └─ PC スキル（ショートカット等）
-│
-├── Profile（別ページ）
-│ └─ 詳細プロフィール
-│ ├─ 経歴・職務内容
-│ ├─ 保有スキルと開発実績
-│ └─ 利用可能な技術・契約形態（副業対応可など）
-│
-├── Contact
-├── メールアドレス表示
-└── お問い合わせフォーム（業務相談・コラボ等）
+#SupabaseDB 関連
+
+##①SupabaseDB 接続確認
+psql "$DIRECT_URL" -c "select now();"
+
+##②.env ファイルの情報が環境に適応されているか確認
+echo $NEXT_PUBLIC_SUPABASE_URL
+echo $NEXT_PUBLIC_SUPABASE_ANON_KEY
+echo "$DIRECT_URL"
+echo "$DATABASE_URL"
+echo $SUPABASE_SERVICE_ROLE_KEY
+
+→ 表示されない場合
+% export $(grep -v '^#' .env.local | xargs)
+
+##③ カラム変更（schema.prisma からの反映）
+
+### Prisma のマイグレーション作成
+
+npx prisma migrate dev --name caram_update
+
+### Supabase にデプロイ（ローカルの変更を反映）
+
+npx prisma migrate deploy caram_update
