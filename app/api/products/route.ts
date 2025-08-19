@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   if (file) {
     const arrayBuffer = await file.arrayBuffer();
     const url = await uploadFile(arrayBuffer, file.name, file.type);
-    fields.filePath = url;
+    // fields.filePath = url;
   }
 
   console.log("fields", fields);

@@ -214,3 +214,29 @@ export async function deleteByPath(path: string): Promise<void> {
   const { error } = await supabase.storage.from(SUPABASE_BUCKET).remove([path]);
   if (error) throw new Error(`Supabase file delete failed: ${error.message}`);
 }
+
+// ==============================
+// 仮（モック）関数：Storage関連
+// ==============================
+
+// API 側が import している名前に合わせたダミー実装
+// 実際のアップロードは行わず、受け取ったファイル名から「ありそうな」URLを返すだけ
+export async function uploadFile(
+  _file: File | Blob | ArrayBuffer | Uint8Array,
+  filename: string,
+  contentType?: string
+): Promise<{ path: string; publicUrl: string }> {
+  // contentType は現状未使用（本番実装差し替え時に利用）
+  void contentType;
+
+  // 実際の通信をせず、見かけ上の公開URLを生成
+  const fakePublicUrl = `${SUPABASE_URL}/storage/v1/object/public/${SUPABASE_BUCKET}/${filename}`;
+  return { path: filename, publicUrl: fakePublicUrl };
+}
+
+// 削除も何もしない（常に成功した体で返す）
+export async function deleteFile(target: string): Promise<void> {
+  // publicURL / storage path どちらで来ても無視
+  void target;
+  return;
+}
