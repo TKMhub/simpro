@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import {
   fetchPublishedProducts,
   createProduct,
-  uploadFile,
+  // uploadFile,s
 } from "@/lib/supabase";
 
 type FormFields = Omit<Parameters<typeof createProduct>[0], "filePath"> & {
@@ -25,8 +25,8 @@ export async function POST(request: Request) {
   const file = form.get("file") as File | null;
 
   if (file) {
-    const arrayBuffer = await file.arrayBuffer();
-    const url = await uploadFile(arrayBuffer, file.name, file.type);
+    // const arrayBuffer = await file.arrayBuffer();
+    // const url = await uploadFile(arrayBuffer, file.name, file.type);
     // fields.filePath = url;
   }
 

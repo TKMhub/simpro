@@ -10,7 +10,7 @@ export type ProductRecord = {
   imagePath: string | null; // 表示用画像のStorageパス（例: products/123/cover.webp）
   description: string | null;
   category: string;
-  tags: string[]; // text[] を直接受ける
+  tags: string | string[]; // text[] を直接受ける
   starRating: number;
   downloadCount: number;
   isPublished: boolean;

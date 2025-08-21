@@ -102,10 +102,7 @@ export function ProductForm({ defaultValues, id }: Props) {
       document: data.document,
       type: data.type,
       category: data.category,
-      tags: `{${(data.tags ?? "")
-        .split(/\s*,\s*/)
-        .map((tag) => `"${tag}"`)
-        .join(",")}}`,
+      tags: data.tags ?? "",
       description: data.description || null,
       deliveryType: data.deliveryType,
       url: safeUrl,

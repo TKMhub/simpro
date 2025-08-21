@@ -8,11 +8,7 @@ import Image from "next/image";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 
-export default async function ProductDetailPage({
-  params,
-}: {
-  params: Promise<{ productSlug: string }> | { productSlug: string };
-}) {
+export default async function ProductDetailPage({ params }: { params: any }) {
   const { productSlug: raw } = await params;
   const productSlug = decodeURIComponent(raw);
   const product = await getProductBySlug(productSlug);
@@ -58,7 +54,9 @@ export default async function ProductDetailPage({
               {product.tags.map((tag) => (
                 <Badge
                   key={tag}
-                  className={`rounded-full px-3 py-1 text-xs font-medium ${tagColors[tag] || tagColors.default}`}
+                  className={`rounded-full px-3 py-1 text-xs font-medium ${
+                    tagColors[tag] || tagColors.default
+                  }`}
                 >
                   {tag}
                 </Badge>
@@ -67,9 +65,17 @@ export default async function ProductDetailPage({
           </div>
         </header>
         <div className="mb-8">
-          <Image src={product.imageUrl} alt={product.title} width={600} height={400} className="w-full h-64 object-cover" />
+          <Image
+            src={product.imageUrl}
+            alt={product.title}
+            width={600}
+            height={400}
+            className="w-full h-64 object-cover"
+          />
         </div>
-        <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{product.description}</p>
+        <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+          {product.description}
+        </p>
         <div className="mt-6 text-center">
           {product.buttonType === "download" ? (
             <a

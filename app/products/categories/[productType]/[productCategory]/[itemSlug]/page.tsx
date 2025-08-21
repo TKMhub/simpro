@@ -1,14 +1,12 @@
 import { notFound } from "next/navigation";
 import { productDummy } from "@/data/products_dummy";
 
-export default function ProductDetailPage({
-  params,
-}: {
-  params: { productType: string; productCategory: string; itemSlug: string };
-}) {
+export default function ProductDetailPage({ params }: { params: any }) {
   const { productType, productCategory, itemSlug } = params;
   const decoded = decodeURIComponent(productCategory);
-  const item = productDummy[productType]?.[decoded]?.find((p) => p.slug === itemSlug);
+  const item = productDummy[productType]?.[decoded]?.find(
+    (p) => p.slug === itemSlug
+  );
   if (!item) {
     notFound();
   }

@@ -15,7 +15,7 @@ import {
 import { ProductGrid } from "@/app/components/product/ProductGrid";
 
 type PageProps = {
-  params: { productType: string; productCategory: string };
+  params: any;
 };
 
 type LinkCrumb = { name: string; href: string };

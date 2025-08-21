@@ -2,11 +2,7 @@ import { notFound } from "next/navigation";
 import { ProductForm } from "@/app/components/product/ProductForm";
 import { fetchProductById } from "@/lib/supabase";
 
-export default async function EditProductPage({
-  params,
-}: {
-  params: Promise<{ productSlug: string }> | { productSlug: string };
-}) {
+export default async function EditProductPage({ params }: { params: any }) {
   const { productSlug } = await params;
   const id = Number(productSlug);
   const content = await fetchProductById(id);

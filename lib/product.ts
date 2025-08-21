@@ -7,10 +7,10 @@ import {
 import { Product, ProductRecord } from "@/types/product";
 
 // Check if file path points to an image
-function isImageFile(path: string | null | undefined): boolean {
-  if (!path) return false;
-  return /\.(png|jpe?g|gif|svg|webp)$/i.test(path);
-}
+// function isImageFile(path: string | null | undefined): boolean {
+//   if (!path) return false;
+//   return /\.(png|jpe?g|gif|svg|webp)$/i.test(path);
+// }
 
 // ISO文字列 → YYYY-MM-DD
 function toYmd(iso: string): string {

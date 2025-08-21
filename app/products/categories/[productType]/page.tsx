@@ -15,9 +15,9 @@ import {
 import { ProductGrid } from "@/app/components/product/ProductGrid";
 import { getPublishedProducts } from "@/lib/product";
 
-type PageProps = {
-  params: { productType: string };
-};
+// type PageProps = {
+//   params: { productType: string };
+// };
 
 type LinkCrumb = { name: string; href: string };
 type CurrentCrumb = { name: string; current: true };
@@ -30,7 +30,7 @@ function normalizeTypeParam(param: string): "TOOL" | "TEMPLATE" | null {
   return null;
 }
 
-export default async function ProductTypePage({ params }: PageProps) {
+export default async function ProductTypePage({ params }: any) {
   // 1) URLパラメータを正規化
   const normalized = normalizeTypeParam(decodeURIComponent(params.productType));
   if (!normalized) {
