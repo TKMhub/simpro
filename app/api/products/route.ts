@@ -30,8 +30,6 @@ export async function POST(request: Request) {
     // fields.filePath = url;
   }
 
-  console.log("fields", fields);
-
   const created = await createProduct(fields);
   return NextResponse.json(created, { status: 201 });
 }
