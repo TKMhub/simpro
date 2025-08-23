@@ -63,7 +63,7 @@ export default async function ProductCategoryPage({ params }: PageProps) {
   ];
 
   return (
-    <section className="px-4 sm:px-8 md:px-16 lg:px-20 py-4 mt-8">
+    <section className="px-4 md:px-16 lg:px-20 py-4 mt-8">
       {/* パンくず */}
       <Breadcrumb className="mb-6 px-0 text-sm text-muted-foreground">
         <BreadcrumbList className="flex flex-wrap items-center gap-x-1 gap-y-1 sm:gap-x-2">
