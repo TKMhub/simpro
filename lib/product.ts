@@ -25,6 +25,32 @@ function toYmd(iso: string): string {
   }
 }
 
+// string | string[] | null → string[]（UI用に必ず配列化）
+function normalizeTagsToArray(
+  input: string[] | string | null | undefined
+): string[] {
+  if (Array.isArray(input)) {
+    return input
+      .filter(Boolean)
+      .map((t) => String(t).trim())
+      .filter(Boolean);
+  }
+  if (typeof input === "string") {
+    return input
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
+  }
+  return [];
+}
+
+// string | string[] | null → "a, b, c"（フォーム初期値など文字列で欲しいとき）
+export function normalizeTagsToString(
+  input: string[] | string | null | undefined
+): string {
+  return normalizeTagsToArray(input).join(", ");
+}
+
 // Convert ProductRecord to Product type
 export function mapRecordToProduct(item: ProductRecord): Product {
   return {
@@ -38,7 +64,7 @@ export function mapRecordToProduct(item: ProductRecord): Product {
 
     // 表示用整形
     description: item.description ?? "",
-    tags: item.tags ?? [],
+    tags: normalizeTagsToArray(item.tags),
     date: toYmd(item.createdAt),
 
     // 画像: imagePath優先 → 公開URL解決 → フォールバック

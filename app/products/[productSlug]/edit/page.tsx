@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { ProductForm } from "@/app/components/product/ProductForm";
 import { fetchProductById } from "@/lib/supabase";
+import { normalizeTagsToString } from "@/lib/product";
 
 export default async function EditProductPage({ params }: { params: any }) {
   const { productSlug } = await params;
@@ -20,7 +21,7 @@ export default async function EditProductPage({ params }: { params: any }) {
           title: content.title,
           document: content.document,
           category: content.category,
-          tags: content.tags.join(", "),
+          tags: normalizeTagsToString(content.tags),
           description: content.description ?? "",
           deliveryType: content.deliveryType,
           url: content.url ?? "",
