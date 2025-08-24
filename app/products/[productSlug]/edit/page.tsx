@@ -13,7 +13,7 @@ export default async function EditProductPage({ params }: { params: any }) {
   }
 
   return (
-    <section className="px-4 md:px-16 lg:px-20">
+    <section className="px-8 md:px-16 lg:px-20">
       <h1 className="text-xl font-bold mb-4">プロダクト編集</h1>
       <ProductForm
         id={content.id}

@@ -45,7 +45,7 @@ export default async function BlogDetailPage({ params }: { params: any }) {
   const jsonLd = generateBreadcrumbJsonLd(breadcrumbItems);
 
   return (
-    <div className="px-20 py-4 mt-8">
+    <div className="px-8 md:px-16 lg:px-20 py-4 mt-8">
       <Breadcrumbs category={post.category} title={post.title} />
       <div className="max-w-3xl mx-auto py-12">
         <Script id="breadcrumb-jsonld" type="application/ld+json">
