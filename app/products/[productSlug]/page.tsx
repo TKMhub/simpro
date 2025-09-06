@@ -28,7 +28,7 @@ export default async function ProductDetailPage({ params }: { params: any }) {
   const jsonLd = generateBreadcrumbJsonLd(breadcrumbItems);
 
   return (
-    <div className="px-20 py-4 mt-8">
+    <section className="px-8 md:px-16 lg:px-20 py-4 mt-8">
       <ProductBreadcrumbs category={product.category} title={product.title} />
 
       <div className="max-w-3xl mx-auto py-12">
@@ -100,6 +100,6 @@ export default async function ProductDetailPage({ params }: { params: any }) {
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
