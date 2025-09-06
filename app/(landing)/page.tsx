@@ -2,7 +2,6 @@ import { HeroSection } from "@/app/components/HeroSection";
 import { ServicesSection } from "@/app/components/ServicesSection";
 import { ProjectsSlider } from "@/app/components/ProjectsSlider";
 import { ContactForm } from "@/app/components/ContactForm";
-import { Footer } from "@/app/components/Footer";
 import { BlogIntroSection } from "../components/BlogIntroSection";
 import { ProductIntroSection } from "../components/ProductIntroSection";
 
@@ -21,8 +20,6 @@ export default function Home() {
       <ProductIntroSection />
       {/* お問い合わせフォーム */}
       <ContactForm />
-      {/* フッター */}
-      <Footer />
     </main>
   );
 }

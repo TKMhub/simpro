@@ -28,7 +28,7 @@ export function HeaderBlog() {
 
   return (
     <nav
-      className={`fixed z-40 w-full transition-transform duration-300 ${
+      className={`py-2 fixed z-40 w-full transition-transform duration-300 ${
         hideHeader ? "-translate-y-full" : "translate-y-0"
       } bg-neutral-800`}
     >

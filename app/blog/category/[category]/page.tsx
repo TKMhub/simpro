@@ -1,21 +1,22 @@
 import { BlogGrid } from "@/app/components/blog/BlogGrid";
 import { getPublishedArticles } from "@/lib/notion";
 import { BlogPost } from "@/types/blog";
-import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/app/components/blog/Breadcrumbs";
 import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
 import Script from "next/script";
 
-export default async function CategoryPage({ params }: any) {
+export default async function CategoryPage({
+  params,
+}: {
+  params: { category: string };
+}) {
   const allPosts: BlogPost[] = await getPublishedArticles();
-  const { category: raw } = await params;
+
+  // params は await 不要
+  const raw = params?.category ?? "";
   const category = decodeURIComponent(raw);
 
   const filtered = allPosts.filter((post) => post.category === category);
-
-  if (filtered.length === 0) {
-    notFound();
-  }
 
   const blogs = filtered.map((post) => ({
     title: post.title,
@@ -40,13 +41,23 @@ export default async function CategoryPage({ params }: any) {
         {JSON.stringify(jsonLd)}
       </Script>
 
-      <Breadcrumbs category={category} title={""} />
+      <Breadcrumbs category={category} title="" />
       <h1 className="py-4 mt-4 text-2xl text-gray-800">
         記事一覧<span>（{category}）</span>
       </h1>
-      <div className="py-2">
-        <BlogGrid blogs={blogs} />
-      </div>
+
+      {blogs.length === 0 ? (
+        <div
+          className="py-10 text-sm text-muted-foreground border rounded-lg bg-muted/30 flex items-center justify-center"
+          aria-live="polite"
+        >
+          現在、このカテゴリーに表示できる公開記事はありません。
+        </div>
+      ) : (
+        <div className="py-2">
+          <BlogGrid blogs={blogs} />
+        </div>
+      )}
     </section>
   );
 }
