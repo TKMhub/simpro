@@ -14,6 +14,7 @@ import {
 // 参考と同じカード配置を再利用
 import { ProductGrid } from "@/app/components/product/ProductGrid";
 import { getPublishedProducts } from "@/lib/product";
+import { NoContents } from "@/app/components/common/NoContents";
 
 // type PageProps = {
 //   params: { productType: string };
@@ -131,11 +132,7 @@ export default async function ProductTypePage({ params }: any) {
         ))}
 
         {/* 0件時の表示（任意） */}
-        {Object.keys(grouped).length === 0 && (
-          <div className="text-sm text-muted-foreground py-10">
-            まだ {productTypeLabel} に該当する公開プロダクトはありません。
-          </div>
-        )}
+        {Object.keys(grouped).length === 0 && <NoContents />}
       </div>
     </section>
   );

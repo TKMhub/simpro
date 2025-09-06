@@ -4,6 +4,7 @@ import { BlogPost } from "@/types/blog";
 import { Breadcrumbs } from "@/app/components/blog/Breadcrumbs";
 import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
 import Script from "next/script";
+import { NoContents } from "@/app/components/common/NoContents";
 
 export default async function CategoryPage({
   params,
@@ -47,12 +48,7 @@ export default async function CategoryPage({
       </h1>
 
       {blogs.length === 0 ? (
-        <div
-          className="py-10 text-sm text-muted-foreground border rounded-lg bg-muted/30 flex items-center justify-center"
-          aria-live="polite"
-        >
-          現在、このカテゴリーに表示できる公開記事はありません。
-        </div>
+        <NoContents />
       ) : (
         <div className="py-2">
           <BlogGrid blogs={blogs} />
