@@ -25,6 +25,7 @@ export type Product = {
   id: number;
   slug: string; // id の文字列化
   title: string;
+  notionTitle?: string; // Notion 側のタイトル（無ければ title を使用）
   document: string;
   type: "TOOL" | "TEMPLATE";
   category: string;

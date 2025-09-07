@@ -1,8 +1,9 @@
+// app/products/[productSlug]/page.tsx
 import { ProductBreadcrumbs } from "@/app/components/product/ProductBreadcrumbs";
 import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
-import { getProductBySlug } from "@/lib/product"; // コメント: Supabaseから取得
-import { getPageBlocksByTitle } from "@/lib/notion"; // コメント: 下のlib/notion.tsの新関数
-import { renderBlock } from "@/app/components/blog/NotionRenderer"; // コメント: 既存レンダラを利用
+import { getProductBySlug } from "@/lib/product";
+import { getProductsDocumentByTitle } from "@/lib/notion"; // ← 関数名をこれに統一
+import { renderBlock } from "@/app/components/blog/NotionRenderer";
 import { Badge } from "@/components/ui/badge";
 import { tagColors } from "@/lib/utils/tag_color";
 import { CalendarIcon, UserCircleIcon } from "lucide-react";
@@ -11,19 +12,18 @@ import Script from "next/script";
 import { notFound } from "next/navigation";
 
 type PageProps = {
-  params: { productSlug: string };
+  params: Promise<{ productSlug: string }>; // ← Next.js 15: Promise で受ける
 };
 
 export default async function ProductDetailPage({ params }: PageProps) {
-  // コメント: スラッグ確定
-  const productSlug = decodeURIComponent(params.productSlug);
+  const { productSlug } = await params; // ← 必ず await
+  const slug = decodeURIComponent(productSlug);
 
-  // コメント: Supabase → ヘッダー取得
-  const product = await getProductBySlug(productSlug);
-
+  // Supabase → ヘッダー
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  // コメント: パンくず生成
+  // パンくず
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
   const breadcrumbItems = [
     { name: "Home", url: `${baseUrl}/` },
@@ -33,10 +33,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
   ];
   const jsonLd = generateBreadcrumbJsonLd(breadcrumbItems);
 
-  // コメント: Notion本文取得。キーはSupabaseの「記事名」(product.title想定)。
-  // コメント: 別カラムを使う場合は product.notionTitle に差し替え。
-  const notionTitle = product.title;
-  const notionBlocks = await getPageBlocksByTitle(notionTitle);
+  // Notion本文（タイトル対応で取得）
+  const notionTitle = product.notionTitle ?? product.title;
+  const notionBlocks = await getProductsDocumentByTitle(notionTitle);
 
   return (
     <section className="px-8 md:px-16 lg:px-20 py-4 mt-8">
@@ -47,7 +46,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
           {JSON.stringify(jsonLd)}
         </Script>
 
-        {/* ヘッダー表示 */}
+        {/* ヘッダー */}
         <header className="mb-8 border-b pb-6">
           <div className="flex justify-between">
             <h1 className="text-3xl font-bold text-gray-900">
@@ -82,7 +81,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
           </div>
         </header>
 
-        {/* メイン画像 */}
+        {/* 画像 */}
         {product.imageUrl && (
           <div className="mb-8">
             <Image
@@ -110,7 +109,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </div>
           )}
           {Array.isArray(notionBlocks) &&
-            notionBlocks.map((block) => <div key={block.id}>{renderBlock(block)}</div>)}
+            notionBlocks.map((block) => (
+              <div key={block.id}>{renderBlock(block)}</div>
+            ))}
         </article>
 
         {/* CTA */}

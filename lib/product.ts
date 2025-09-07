@@ -58,6 +58,7 @@ export function mapRecordToProduct(item: ProductRecord): Product {
     id: item.id,
     slug: String(item.id),
     title: item.title,
+    notionTitle: item.title,
     document: item.document,
     type: item.type,
     category: item.category,
