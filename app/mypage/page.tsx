@@ -13,7 +13,7 @@ export default async function HomePage() {
     category: post.category,
     date: post.publishedAt,
     author: post.author,
-    imageUrl: undefined,
+    imageUrl: post.imageUrl,
     tags: post.tags,
   }));
 

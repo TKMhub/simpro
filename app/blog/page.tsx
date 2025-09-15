@@ -12,8 +12,8 @@ export default async function HomePage() {
     title: post.title,
     category: post.category,
     date: post.publishedAt,
+    imageUrl: post.imageUrl,
     author: post.author,
-    imageUrl: undefined,
     tags: post.tags,
   }));
 

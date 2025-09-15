@@ -2,12 +2,14 @@ import { NextResponse } from "next/server";
 import {
   fetchPublishedProducts,
   createProduct,
-  // uploadFile,s
+  uploadFile,
 } from "@/lib/supabase";
 
 type FormFields = Omit<Parameters<typeof createProduct>[0], "filePath"> & {
   file?: File | null;
   filePath?: string;
+  image?: File | null;
+  imagePath?: string | null;
 };
 
 export async function GET() {
@@ -23,11 +25,20 @@ export async function POST(request: Request) {
   }
   const fields: FormFields = JSON.parse(json);
   const file = form.get("file") as File | null;
+  const image = form.get("image") as File | null;
 
+  // 配布ファイル（FILEのとき）
   if (file) {
-    // const arrayBuffer = await file.arrayBuffer();
-    // const url = await uploadFile(arrayBuffer, file.name, file.type);
-    // fields.filePath = url;
+    const arrayBuffer = await file.arrayBuffer();
+    const { path } = await uploadFile(arrayBuffer, file.name, file.type);
+    fields.filePath = path;
+  }
+
+  // 表示用画像（任意）
+  if (image) {
+    const arrayBuffer = await image.arrayBuffer();
+    const { path } = await uploadFile(arrayBuffer, image.name, image.type);
+    fields.imagePath = path;
   }
 
   const created = await createProduct(fields);

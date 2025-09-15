@@ -30,6 +30,7 @@ export async function getPublishedArticles(): Promise<BlogPost[]> {
       slug: page.properties.slug?.rich_text?.[0]?.plain_text ?? "",
       category: page.properties.category?.select?.name ?? "Uncategorized",
       tags: page.properties.tags?.multi_select?.map((t: any) => t.name) ?? [],
+      imageUrl: page.properties.imageUrl?.url ?? "",
       author: page.properties.author?.rich_text?.[0]?.plain_text ?? "anonymous",
       publishedAt: page.properties.publishedAt?.date?.start ?? "",
     };

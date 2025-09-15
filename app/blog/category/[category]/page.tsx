@@ -24,7 +24,7 @@ export default async function CategoryPage({
     category: post.category,
     date: post.publishedAt,
     author: post.author,
-    imageUrl: undefined,
+    imageUrl: post.imageUrl,
     tags: post.tags,
   }));
 

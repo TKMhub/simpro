@@ -36,11 +36,12 @@ export async function PUT(request: Request, { params }: any) {
   const fields = JSON.parse(json) as any;
   fields.tags = normalizeTags(fields.tags);
   const file = form.get("file") as File | null;
+  const image = form.get("image") as File | null;
 
   if (file) {
     const arrayBuffer = await file.arrayBuffer();
-    const url = await uploadFile(arrayBuffer, file.name, file.type);
-    fields.filePath = url;
+    const { path } = await uploadFile(arrayBuffer, file.name, file.type);
+    fields.filePath = path;
     if (original.filePath) {
       await deleteFile(original.filePath);
     }
@@ -51,6 +52,16 @@ export async function PUT(request: Request, { params }: any) {
   ) {
     await deleteFile(original.filePath);
     fields.filePath = null;
+  }
+
+  // 画像アップロード（任意）
+  if (image) {
+    const arrayBuffer = await image.arrayBuffer();
+    const { path } = await uploadFile(arrayBuffer, image.name, image.type);
+    fields.imagePath = path;
+    if (original.imagePath) {
+      await deleteFile(original.imagePath);
+    }
   }
 
   const updated = await updateProduct(id, fields);

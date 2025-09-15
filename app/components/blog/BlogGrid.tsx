@@ -8,7 +8,7 @@ type Blog = {
   category: string;
   date: string;
   author: string;
-  imageUrl?: string;
+  imageUrl: string;
   tags?: string[];
 };
 

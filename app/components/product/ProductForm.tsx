@@ -38,6 +38,7 @@ const schema = z
     deliveryType: z.enum(["FILE", "URL"]),
     url: z.string().optional(),
     file: z.any().optional(),
+    image: z.any().optional(),
     isPublished: z.boolean().optional(),
     authorId: z.string().min(1, "必須項目です"),
   })
@@ -80,6 +81,7 @@ export function ProductForm({ defaultValues, id }: Props) {
       deliveryType: (defaultValues?.deliveryType as "FILE" | "URL") ?? "FILE",
       url: defaultValues?.url ?? "",
       file: undefined,
+      image: undefined,
       isPublished: defaultValues?.isPublished ?? false,
       authorId: defaultValues?.authorId ?? "",
     },
@@ -114,9 +116,8 @@ export function ProductForm({ defaultValues, id }: Props) {
 
     const formData = new FormData();
     formData.append("data", JSON.stringify(fields));
-    if (data.file instanceof File) {
-      formData.append("file", data.file);
-    }
+    if (data.file instanceof File) formData.append("file", data.file);
+    if (data.image instanceof File) formData.append("image", data.image);
 
     const res = await fetch(id ? `/api/products/${id}` : "/api/products", {
       method: id ? "PUT" : "POST",
@@ -279,6 +280,25 @@ export function ProductForm({ defaultValues, id }: Props) {
             )}
           />
         )}
+        {/* 表示用画像（任意） */}
+        <FormField
+          control={form.control}
+          name="image"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>プレビュー画像（任意）</FormLabel>
+              <FormControl>
+                <Input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => field.onChange(e.target.files?.[0])}
+                  className="max-w-md"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="isPublished"

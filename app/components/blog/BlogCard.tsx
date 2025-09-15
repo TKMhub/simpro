@@ -6,7 +6,7 @@ type BlogCardProps = {
   title: string;
   date: string;
   author: string;
-  imageUrl?: string;
+  imageUrl: string;
   tags?: string[];
 };
 
@@ -14,13 +14,13 @@ export function BlogCard({
   title,
   date,
   author,
-  imageUrl = "/",
+  imageUrl,
   tags = [],
 }: BlogCardProps) {
   return (
     <div className="bg-white shadow-md rounded-sm overflow-hidden">
       <div className="relative h-50 w-full bg-gray-300">
-        <Image src={imageUrl} alt={title} fill className="object-cover" />
+        <Image src={imageUrl || "/next.svg"} alt={title} fill className="object-cover" />
       </div>
       <div className="px-4 py-3">
         <h3 className="text-base font-semibold truncate">{title}</h3>
